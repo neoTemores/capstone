@@ -21,6 +21,9 @@ const AllRecords = () => {
         dispatch(setShowModal(true))
     }
 
+    const getImg = (symbol) => `https://assets.coincap.io/assets/icons/${symbol.toLowerCase()}@2x.png`;
+
+
     return (
         <div className='allRecordsContainer'>
             <Pagination />
@@ -28,7 +31,8 @@ const AllRecords = () => {
             <div className="allRecordsDisplay">
                 {recordsToDisplay.map(elem => (
                     <div className='recordCard' key={elem.id} id={elem.id} onClick={handleRecordClicked}>
-                        <h3 className="recordTitle">{elem.title}</h3>
+                        <h3 className="recordTitle">{elem.name}</h3>
+                        <img src={getImg(elem.symbol)} height="64" />
                         <p className="recordBody">{elem.body}</p>
                         <div className="cardDataInfo">Record id: {elem.id}</div>
                     </div>

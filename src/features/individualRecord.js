@@ -7,6 +7,7 @@ export const fetchIndividualRecord = createAsyncThunk(
     async (id) => {
         const res = await fetch(URL.FETCH_ONE + id);
         const data = await res.json();
+        console.log(data)
         return data;
     }
 )

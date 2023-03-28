@@ -6,8 +6,8 @@ export const fetchAllRecords = createAsyncThunk(
     async () => {
         const res = await fetch(URL.FETCH_ALL)
         const data = await res.json();
-        // console.log(data)
-        return data[URL.LIST_NAME].reverse();
+        console.log(data)
+        return data[URL.LIST_NAME];
     }
 );
 

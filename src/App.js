@@ -12,9 +12,9 @@ import NewRecordModal from './Components/NewRecordModal'
 import Login from './Components/Login'
 
 export const URL = {
-  "LIST_NAME": "recordList",
-  "FETCH_ALL": "http://localhost:8080/api/records",
-  "FETCH_ONE": "http://localhost:8080/api/records/",
+  "LIST_NAME": "coinList",
+  "FETCH_ALL": "http://localhost:8080/api/get-coins",
+  "FETCH_ONE": "http://localhost:8080/api/coin/",
   "POST": "http://localhost:8080/api/records/add",
   "PATCH": "http://localhost:8080/api/records/update/",
   "DELETE": "http://localhost:8080/api/records/delete/"
