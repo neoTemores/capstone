@@ -9,6 +9,7 @@ import EditModal from './Components/EditModal'
 import { useDispatch, useSelector } from 'react-redux'
 import { setRecordsToDisplay } from './features/recordsToDisplay'
 import NewRecordModal from './Components/NewRecordModal'
+import Login from './Components/Login'
 
 export const URL = {
   "LIST_NAME": "recordList",
@@ -28,6 +29,7 @@ const App = () => {
   const showMsg = useSelector(state => state.showMsg.value)
   const msgText = useSelector(state => state.msgText.value)
   const showNewRecordModal = useSelector(state => state.showNewRecordModal.value)
+  const loggedIn = useSelector(state => state.loggedIn.value)
 
   useEffect(() => {
     updateRecordsDisplay();
@@ -36,6 +38,8 @@ const App = () => {
   const updateRecordsDisplay = () => {
     dispatch(setRecordsToDisplay(allRecords.slice(startIndex, endIndex)))
   }
+
+  if (!loggedIn) return <Login />
 
   return (
     <div className="appContainer">
