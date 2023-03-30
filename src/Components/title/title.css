@@ -3,6 +3,8 @@
     padding: 1rem;
     display: flex;
     justify-content: space-between;
+    /* flex-grow: 1;
+    flex-shrink: 0; */
 }
 
 .navTitle {

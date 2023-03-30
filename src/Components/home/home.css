@@ -1,0 +1,12 @@
+.allCoinsContainer {
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center; */
+}
+
+.individualCoin {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+}
