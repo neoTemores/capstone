@@ -9,12 +9,10 @@ const Wallet = () => {
     const allCoinData = useSelector(state => state.allCoinData.value)
 
     useEffect(() => {
-        // dispatch(setAllCoinData([]))
         dispatch(fetchAllSavedCoinsByUser(1))
     }, [])
 
     useEffect(() => {
-        console.log(allSavedCoins.length)
         if (allSavedCoins.length > 0)
             getCoinData()
     }, [allSavedCoins.length])
@@ -44,7 +42,9 @@ const Wallet = () => {
 
                     <div>${elem.priceUsd.toFixed(2)}</div>
 
-                    <div>{elem.changePercent24Hr.toFixed(2)}%</div>
+                    <div style={{ "color": elem.changePercent24Hr < 0 ? "red" : "green" }}>
+                        {elem.changePercent24Hr.toFixed(2)}%
+                    </div>
                     <div>${elem.marketCapUsd.toFixed(2)}</div>
                     <div>${elem.volumeUsd24Hr.toFixed(2)}</div>
                     <div>${elem.supply.toFixed(2)}</div>
