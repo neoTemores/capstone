@@ -1,0 +1,56 @@
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { WALLET_URL } from "../../App";
+
+export const fetchAllSavedCoinsByUser = createAsyncThunk(
+    "fetchAllSavedCoinsByUser",
+    async (userid = 0) => {
+        const res = await fetch(WALLET_URL.GET_ALL_BY_USER + userid)
+        const data = await res.json()
+        console.log(data)
+        return data[WALLET_URL.LIST_NAME]
+    }
+)
+
+export const addCoinToWallet = createAsyncThunk(
+    "addCoinToWallet",
+    async (coin) => {
+        let postReq = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(coin)
+        }
+
+        const res = await fetch(WALLET_URL.POST, postReq)
+        const data = await res.json()
+        console.log(data)
+        return {
+            "status": res.status,
+            "coin": data
+        }
+    }
+)
+
+
+export const savedCoinsSlice = createSlice({
+    name: "savedCoins",
+    initialState: { value: [] },
+    reducers: {
+        setSavedCoins: (state, action) => {
+            state.value = action.payload
+        }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchAllSavedCoinsByUser.fulfilled, (state, action) => {
+                state.value = action.payload
+            })
+            .addCase(addCoinToWallet.fulfilled, (state, action) => {
+                if (action.payload.status === 200) {
+                    state.value = [action.payload.coin, ...state.value]
+                }
+            })
+    }
+})
+
+export const { setSavedCoins } = savedCoinsSlice.actions;
+export default savedCoinsSlice.reducer

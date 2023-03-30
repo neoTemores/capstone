@@ -1,6 +1,5 @@
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
-import { useEffect } from 'react'
 import Navbar from './Components/title/Navbar'
 import Home from './Components/home/Home'
 import Forum from "./Components/forum/Forum"
@@ -11,6 +10,22 @@ export const COIN_URL = {
   "LIST_NAME": "coinList",
   "GET_ALL": "http://localhost:8080/api/get-coins",
   "GET_ONE": "http://localhost:8080/api/coin/"
+}
+
+export const POSTS_URL = {
+  "LIST_NAME": "posts",
+  "GET_ALL": "http://localhost:8080/api/posts",
+  "GET_ONE": "http://localhost:8080/api/posts/",
+  "POST": "http://localhost:8080/api/posts",
+  "PATCH": "http://localhost:8080/api/posts/",
+  "DELETE": "http://localhost:8080/api/posts/",
+}
+
+export const WALLET_URL = {
+  "LIST_NAME": "savedCoinsList",
+  "GET_ALL_BY_USER": "http://localhost:8080/api/saved-coins/user/",
+  "POST": "http://localhost:8080/api/saved-coins/add",
+  "DELETE": "http://localhost:8080/api/saved-coins/delete/"
 }
 
 const App = () => {

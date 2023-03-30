@@ -1,0 +1,11 @@
+.allPostsContainer {
+    padding: .5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+}
+
+.individualPostContainer {
+    padding: .25rem;
+    border: 1px solid #333
+}

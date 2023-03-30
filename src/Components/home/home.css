@@ -1,12 +1,15 @@
 .allCoinsContainer {
-    /* display: flex;
+    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-content: center; */
+    padding: .5rem;
 }
 
 .individualCoin {
     display: flex;
     gap: .5rem;
     align-items: center;
+}
+
+.imgSymbolCointainer {
+    display: flex;
 }
