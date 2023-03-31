@@ -4,6 +4,28 @@ import { useEffect } from 'react'
 import { addCoinToWallet } from "../../State/wallet/savedCoins"
 import "./home.css"
 
+export const parseMoneyValue = (num) => {
+    num = Math.round(num)
+    let stringNum = num.toString();
+    let letter;
+
+    if (stringNum.length >= 10) {
+        stringNum = (num /= 1000000000).toFixed(1)
+        letter = 'B'
+    }
+    else if (stringNum.length >= 7) {
+        stringNum = (num /= 1000000).toFixed(1)
+        letter = 'M'
+    }
+    else {
+        stringNum = (num /= 1000).toFixed(1)
+        letter = 'K'
+    }
+
+    let lastIndex = stringNum.length - 1
+    return `${stringNum.substring(0, lastIndex)}${stringNum[lastIndex]}${letter}`
+}
+
 const Home = () => {
     const dispatch = useDispatch();
 
@@ -21,38 +43,41 @@ const Home = () => {
         }
         dispatch(addCoinToWallet(coin))
     }
+
+    if (allCoins.length < 1)
+        return <h1>Loading...</h1>
+
+
     return (
         <div className="allCoinsContainer">
-            <div className="individualCoin">
-                <div>Currency</div>
-                <div>Price</div>
-                <div>Chart</div>
-                <div>Change</div>
-                <div>Market cap</div>
-                <div>Volume(24hr)</div>
-                <div>Supply</div>
-            </div>
+            <div className="gridHeader">Currency</div>
+            <div className="gridHeader">Price</div>
+            <div className="gridHeader">Change</div>
+            <div className="gridHeader">Market cap</div>
+            <div className="gridHeader">Volume(24hr)</div>
+            <div className="gridHeader">Supply</div>
+            <div className="gridHeader">Watching</div>
             {allCoins.map(elem =>
-                <div key={elem.id} className="individualCoin">
-
+                <>
                     <div className="imgSymbolCointainer">
                         <img src={getImg(elem.symbol)} height="32" />
                         <div>
                             <div>{elem.name}</div>
-                            <div>{elem.symbol}</div>
+                            <div className="symbol">{elem.symbol}</div>
                         </div>
                     </div>
 
                     <div>${elem.priceUsd.toFixed(2)}</div>
 
                     <div style={{ "color": elem.changePercent24Hr < 0 ? "red" : "green" }}>{elem.changePercent24Hr.toFixed(2)}%</div>
-                    <div>${elem.marketCapUsd.toFixed(2)}</div>
-                    <div>${elem.volumeUsd24Hr.toFixed(2)}</div>
-                    <div>${elem.supply.toFixed(2)}</div>
+                    <div>${parseMoneyValue(elem.marketCapUsd)}</div>
+                    <div>${parseMoneyValue(elem.volumeUsd24Hr)}</div>
+                    <div>${parseMoneyValue(elem.supply)}</div>
 
                     <button data-name={elem.id} onClick={handleAddToWallet}>Add to Wallet</button>
-                </div>)
-            }
+                </>
+
+            )}
         </div>
     )
 }

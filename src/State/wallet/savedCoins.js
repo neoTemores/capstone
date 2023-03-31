@@ -30,6 +30,20 @@ export const addCoinToWallet = createAsyncThunk(
     }
 )
 
+export const deleteFromWallet = createAsyncThunk(
+    "deleteFromWallet",
+    async (id) => {
+        let deleteReq = {
+            method: "DELETE"
+        }
+
+        const res = await fetch(WALLET_URL.DELETE + id, deleteReq)
+        return {
+            "status": res.status,
+            "id": id,
+        }
+    }
+)
 
 export const savedCoinsSlice = createSlice({
     name: "savedCoins",
@@ -48,6 +62,17 @@ export const savedCoinsSlice = createSlice({
                 if (action.payload.status === 200) {
                     state.value = [action.payload.coin, ...state.value]
                 }
+            })
+            .addCase(deleteFromWallet.fulfilled, (state, action) => {
+                console.log(action.payload.id)
+                console.log(action.payload.status)
+                if (action.payload.status === 202)
+                    state.value = state.value.filter(elem => elem.id != action.payload.id)
+                // state.value.forEach(elem => {
+                //     if (elem.id === action.payload.id)
+                //         console.log(action.payload.id)
+                // })
+
             })
     }
 })

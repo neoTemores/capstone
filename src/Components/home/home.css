@@ -1,15 +1,18 @@
 .allCoinsContainer {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
     padding: .5rem;
+    gap: 1rem;
 }
 
-.individualCoin {
-    display: flex;
-    gap: .5rem;
-    align-items: center;
+.gridHeader {
+    font-weight: bold;
 }
 
 .imgSymbolCointainer {
     display: flex;
+}
+
+.symbol {
+    font-size: .8rem;
 }
