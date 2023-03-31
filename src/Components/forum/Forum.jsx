@@ -1,41 +1,57 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { fetchAllPosts } from "../../State/posts/allPosts"
-import { fetchAllComments } from '../../State/comments/allComments'
+import { fetchAllComments, postNewComment } from '../../State/comments/allComments'
+import { showAllAddCommentBtns, hideCurrentCommentBtn, hideAllTextAreas, showCurrentTextArea } from './helperMethods'
 import "./Forum.css"
+import DisplayComments from './DisplayComments'
+import NewCommentContainer from './NewCommentContainer'
 
 const Forum = () => {
     const dispatch = useDispatch();
     const allPosts = useSelector(state => state.allPosts.value)
-    const allComments = useSelector(state => state.allComments.value)
-
-
+    const currentUser = useSelector(state => state.currentUser.value)
+    const [text, setText] = useState("")
 
     useEffect(() => {
         dispatch(fetchAllPosts())
         dispatch(fetchAllComments())
     }, [])
 
-    const handleViewComments = async (e) => {
-        let commentsList = document.querySelectorAll(".commentsContainer")
-
-        commentsList.forEach(item => {
-            if (item.dataset.postId == e.target.dataset.postId) {
-                item.classList.toggle("hide")
-                item.childNodes[0].focus()
-            }
-
+    const handleViewComments = (e) => {
+        document.querySelectorAll(".commentsContainer").forEach(item => {
+            if (item.dataset.postId == e.target.dataset.postId)
+                return item.classList.toggle("hide")
         })
     }
 
-    const handleAddcomment = async (e) => {
-        let newCommentContainerList = document.querySelectorAll(".newCommentContainer")
-        newCommentContainerList.forEach(item => {
-            if (item.dataset.postId == e.target.dataset.postId) {
-                item.classList.toggle("hide")
-                item.childNodes[0].focus()
-            }
-        })
+    const handleVewTextArea = (e) => {
+        setText("")
+        showAllAddCommentBtns()
+        hideCurrentCommentBtn(e)
+        hideAllTextAreas()
+        showCurrentTextArea(e)
+    }
+
+    const handlePostComment = (e) => {
+        if (text.trim().length < 1) return;
+
+        const newComment = {
+            "userId": currentUser.id,
+            "postId": e.target.dataset.postId,
+            "body": text
+        }
+        dispatch(postNewComment(newComment))
+
+        hideAllTextAreas()
+        showAllAddCommentBtns()
+        setText("")
+    }
+
+    const handleCancel = (e) => {
+        showAllAddCommentBtns()
+        hideAllTextAreas()
+        setText("")
     }
 
     return (
@@ -47,28 +63,29 @@ const Forum = () => {
                     <p>{elem.id}</p>
 
                     <div className='postBtnContainer'>
-                        <button onClick={handleViewComments} data-post-id={elem.id}>View Comments</button>
-                        <button onClick={handleAddcomment} data-post-id={elem.id}>Add Comment</button>
+                        <button onClick={handleViewComments} data-post-id={elem.id}>Toggle Comments</button>
+                        <button
+                            onClick={handleVewTextArea}
+                            data-post-id={elem.id}
+                            className="addCommentBtn">Add Comment
+                        </button>
                     </div>
 
                     <div className='newCommentContainer hide' data-post-id={elem.id}>
                         <textarea
+                            value={text}
+                            onChange={(e) => setText(e.target.value)}
                             data-post-id={elem.id}
                             className='newCommentTextArea' />
-                        <button>Add</button>
-                    </div>
+                        <div className='addCommentBtnContainer'>
+                            <button onClick={handlePostComment} data-post-id={elem.id}>Reply</button>
+                            <button onClick={handleCancel} data-post-id={elem.id}>Cancel</button>
+                        </div>
 
-
-                    <div className='commentsContainer hide' data-post-id={elem.id}>
-                        {allComments.map(comment => {
-                            if (comment.postId == elem.id)
-                                return (
-                                    <div key={comment.id} className='comment'>
-                                        <span>#{comment.id} </span>
-                                        <span>{comment.body} -user: {comment.userId}</span>
-                                    </div>)
-                        })}
                     </div>
+                    <NewCommentContainer elem={elem} />
+                    <DisplayComments elem={elem} />
+
                 </div>)}
 
         </div>

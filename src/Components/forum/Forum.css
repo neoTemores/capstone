@@ -10,9 +10,12 @@
     border: 1px solid #333
 }
 
-.postBtnContainer {
+.postBtnContainer,
+.commentBtnsContainer,
+.addCommentBtnContainer {
     display: flex;
     gap: .25rem;
+    max-height: 20px;
 }
 
 .newCommentTextArea {
@@ -27,6 +30,9 @@
 }
 
 .comment {
+    display: flex;
+    justify-content: space-between;
+    gap: .5rem;
     border-bottom: 1px solid #3335;
     padding: .25rem;
 }

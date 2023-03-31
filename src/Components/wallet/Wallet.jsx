@@ -8,9 +8,10 @@ const Wallet = () => {
     const dispatch = useDispatch()
     const allSavedCoins = useSelector(state => state.savedCoins.value)
     const allCoinData = useSelector(state => state.allCoinData.value)
+    const currentUser = useSelector(state => state.currentUser.value)
 
     useEffect(() => {
-        dispatch(fetchAllSavedCoinsByUser(1))
+        dispatch(fetchAllSavedCoinsByUser(currentUser.id))
     }, [])
 
     useEffect(() => {
