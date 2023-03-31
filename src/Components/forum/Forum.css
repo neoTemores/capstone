@@ -40,6 +40,10 @@
     padding: .25rem;
 }
 
+.editCommentTextArea {
+    width: 85%
+}
+
 .hide {
     display: none;
 }

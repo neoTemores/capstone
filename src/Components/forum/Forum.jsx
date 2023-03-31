@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { fetchAllPosts } from "../../State/posts/allPosts"
 import { fetchAllComments } from '../../State/comments/allComments'
-import { showAllAddCommentBtns, hideCurrentCommentBtn, hideAllTextAreas, showCurrentTextArea } from './helperMethods'
+import { showAllAddCommentBtns, hideCurrentCommentBtn, hideAllTextAreas, showAddCommentTextArea } from './helperMethods'
 import "./Forum.css"
 import DisplayComments from './DisplayComments'
 import NewCommentContainer from './NewCommentContainer'
@@ -29,7 +29,7 @@ const Forum = () => {
         showAllAddCommentBtns()
         hideCurrentCommentBtn(e)
         hideAllTextAreas()
-        showCurrentTextArea(e)
+        showAddCommentTextArea(e)
     }
 
     return (

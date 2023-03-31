@@ -29,6 +29,21 @@ export const postNewComment = createAsyncThunk(
     }
 )
 
+export const deleteComment = createAsyncThunk(
+    "deleteComment",
+    async (commentId) => {
+        let deleteReq = {
+            method: "DELETE"
+        }
+
+        const res = await fetch(COMMENTS_URL.DELETE + commentId, deleteReq)
+        return {
+            "status": res.status,
+            "id": commentId
+        }
+    }
+)
+
 export const allCommentsSlice = createSlice({
     name: "allCommentsSlice",
     initialState: { value: [] },
@@ -45,6 +60,10 @@ export const allCommentsSlice = createSlice({
             .addCase(postNewComment.fulfilled, (state, action) => {
                 if (action.payload.status === 200)
                     state.value = [action.payload.newComment, ...state.value]
+            })
+            .addCase(deleteComment.fulfilled, (state, action) => {
+                if (action.payload.status === 202)
+                    state.value = state.value.filter(elem => elem.id !== +action.payload.id)
             })
     }
 })
