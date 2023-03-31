@@ -40,15 +40,21 @@ const Wallet = () => {
 
     return (
         <div className="allCoinsContainer">
-            <div className="gridHeader">Currency</div>
-            <div className="gridHeader">Price</div>
-            <div className="gridHeader">Change</div>
-            <div className="gridHeader">Market cap</div>
-            <div className="gridHeader">Volume(24hr)</div>
-            <div className="gridHeader">Supply</div>
-            <div className="gridHeader">Watching</div>
+
+            <div className="coinGridHeaderContainer">
+                <div className="gridHeader">Currency</div>
+                <div className="gridHeader">Price</div>
+                <div className="gridHeader">Change</div>
+                <div className="gridHeader">Market cap</div>
+                <div className="gridHeader">Volume(24hr)</div>
+                <div className="gridHeader">Supply</div>
+                <div className="gridHeader">Watching</div>
+            </div>
+
             {allCoinData.map(elem =>
-                <>
+
+                <div className="individualCoinContainer" key={elem.id}>
+
                     <div className="imgSymbolCointainer">
                         <img src={getImg(elem.symbol)} height="32" />
                         <div>
@@ -59,14 +65,17 @@ const Wallet = () => {
 
                     <div>${elem.priceUsd.toFixed(2)}</div>
 
-                    <div style={{ "color": elem.changePercent24Hr < 0 ? "red" : "green" }}>{elem.changePercent24Hr.toFixed(2)}%</div>
+                    <div
+                        style={{ "color": elem.changePercent24Hr < 0 ? "red" : "green" }}>
+                        {elem.changePercent24Hr.toFixed(2)}%
+                    </div>
                     <div>${parseMoneyValue(elem.marketCapUsd)}</div>
                     <div>${parseMoneyValue(elem.volumeUsd24Hr)}</div>
                     <div>${parseMoneyValue(elem.supply)}</div>
 
                     <button data-name={elem.id} onClick={handleRemoveFromWallet}>Remove from Wallet</button>
-                </>
 
+                </div>
             )}
 
         </div>

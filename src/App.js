@@ -28,6 +28,11 @@ export const WALLET_URL = {
   "DELETE": "http://localhost:8080/api/saved-coins/delete/"
 }
 
+export const COMMENTS_URL = {
+  "LIST_NAME": "commentList",
+  "GET_ALL": "http://localhost:8080/api/comments",
+}
+
 const App = () => {
 
   return (

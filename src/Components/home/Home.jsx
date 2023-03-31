@@ -9,7 +9,11 @@ export const parseMoneyValue = (num) => {
     let stringNum = num.toString();
     let letter;
 
-    if (stringNum.length >= 10) {
+    if (stringNum.length >= 13) {
+        stringNum = (num /= 1000000000000).toFixed(1)
+        letter = 'T'
+    }
+    else if (stringNum.length >= 10) {
         stringNum = (num /= 1000000000).toFixed(1)
         letter = 'B'
     }
@@ -50,15 +54,19 @@ const Home = () => {
 
     return (
         <div className="allCoinsContainer">
-            <div className="gridHeader">Currency</div>
-            <div className="gridHeader">Price</div>
-            <div className="gridHeader">Change</div>
-            <div className="gridHeader">Market cap</div>
-            <div className="gridHeader">Volume(24hr)</div>
-            <div className="gridHeader">Supply</div>
-            <div className="gridHeader">Watching</div>
+
+            <div className="coinGridHeaderContainer">
+                <div className="gridHeader">Currency</div>
+                <div className="gridHeader">Price</div>
+                <div className="gridHeader">Change</div>
+                <div className="gridHeader">Market cap</div>
+                <div className="gridHeader">Volume(24hr)</div>
+                <div className="gridHeader">Supply</div>
+                <div className="gridHeader">Watching</div>
+            </div>
+
             {allCoins.map(elem =>
-                <>
+                <div className="individualCoinContainer" key={elem.id}>
                     <div className="imgSymbolCointainer">
                         <img src={getImg(elem.symbol)} height="32" />
                         <div>
@@ -75,7 +83,7 @@ const Home = () => {
                     <div>${parseMoneyValue(elem.supply)}</div>
 
                     <button data-name={elem.id} onClick={handleAddToWallet}>Add to Wallet</button>
-                </>
+                </div>
 
             )}
         </div>

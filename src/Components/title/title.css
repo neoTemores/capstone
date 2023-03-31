@@ -1,8 +1,11 @@
 .navbarContainer {
-    border: 1px solid red;
+    background-color: darkblue;
+    color: #eee;
     padding: 1rem;
     display: flex;
     justify-content: space-between;
+    position: sticky;
+    top: 0;
     /* flex-grow: 1;
     flex-shrink: 0; */
 }
@@ -19,6 +22,7 @@
 
 .navLink {
     border: 1px solid green;
+    color: #eee
 }
 
 .loginSignupContainer {

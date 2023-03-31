@@ -9,3 +9,28 @@
     padding: .25rem;
     border: 1px solid #333
 }
+
+.postBtnContainer {
+    display: flex;
+    gap: .25rem;
+}
+
+.newCommentTextArea {
+    margin-top: .25rem;
+    padding: .25rem;
+    width: 100%;
+}
+
+.commentsContainer {
+    margin-top: .25rem;
+    padding: .5rem;
+}
+
+.comment {
+    border-bottom: 1px solid #3335;
+    padding: .25rem;
+}
+
+.hide {
+    display: none;
+}

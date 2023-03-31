@@ -64,15 +64,8 @@ export const savedCoinsSlice = createSlice({
                 }
             })
             .addCase(deleteFromWallet.fulfilled, (state, action) => {
-                console.log(action.payload.id)
-                console.log(action.payload.status)
                 if (action.payload.status === 202)
                     state.value = state.value.filter(elem => elem.id != action.payload.id)
-                // state.value.forEach(elem => {
-                //     if (elem.id === action.payload.id)
-                //         console.log(action.payload.id)
-                // })
-
             })
     }
 })

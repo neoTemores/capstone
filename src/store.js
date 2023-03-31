@@ -4,6 +4,7 @@ import allCoinsReducer from "./State/coins/allCoins"
 import allPostsReducer from "./State/posts/allPosts"
 import savedCoinsReducer from "./State/wallet/savedCoins"
 import allCoinDataReducer from "./State/wallet/allCoinData"
+import allCommentsReducer from "./State/comments/allComments";
 
 
 export const store = configureStore({
@@ -13,5 +14,6 @@ export const store = configureStore({
         allPosts: allPostsReducer,
         savedCoins: savedCoinsReducer,
         allCoinData: allCoinDataReducer,
+        allComments: allCommentsReducer,
     },
 });

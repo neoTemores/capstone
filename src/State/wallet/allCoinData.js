@@ -7,7 +7,6 @@ export const fetchIndividualCoinData = createAsyncThunk(
     async (coinId) => {
         const res = await fetch(COIN_URL.GET_ONE + coinId)
         const data = await res.json()
-        // console.log(data.coin)
         return data.coin
     }
 )
