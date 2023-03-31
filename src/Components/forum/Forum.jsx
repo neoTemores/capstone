@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { fetchAllPosts } from "../../State/posts/allPosts"
-import { fetchAllComments, postNewComment } from '../../State/comments/allComments'
+import { fetchAllComments } from '../../State/comments/allComments'
 import { showAllAddCommentBtns, hideCurrentCommentBtn, hideAllTextAreas, showCurrentTextArea } from './helperMethods'
 import "./Forum.css"
 import DisplayComments from './DisplayComments'
@@ -10,7 +10,6 @@ import NewCommentContainer from './NewCommentContainer'
 const Forum = () => {
     const dispatch = useDispatch();
     const allPosts = useSelector(state => state.allPosts.value)
-    const currentUser = useSelector(state => state.currentUser.value)
     const [text, setText] = useState("")
 
     useEffect(() => {
@@ -33,27 +32,6 @@ const Forum = () => {
         showCurrentTextArea(e)
     }
 
-    const handlePostComment = (e) => {
-        if (text.trim().length < 1) return;
-
-        const newComment = {
-            "userId": currentUser.id,
-            "postId": e.target.dataset.postId,
-            "body": text
-        }
-        dispatch(postNewComment(newComment))
-
-        hideAllTextAreas()
-        showAllAddCommentBtns()
-        setText("")
-    }
-
-    const handleCancel = (e) => {
-        showAllAddCommentBtns()
-        hideAllTextAreas()
-        setText("")
-    }
-
     return (
         <div className='allPostsContainer'>
             {allPosts.map(elem =>
@@ -71,19 +49,7 @@ const Forum = () => {
                         </button>
                     </div>
 
-                    <div className='newCommentContainer hide' data-post-id={elem.id}>
-                        <textarea
-                            value={text}
-                            onChange={(e) => setText(e.target.value)}
-                            data-post-id={elem.id}
-                            className='newCommentTextArea' />
-                        <div className='addCommentBtnContainer'>
-                            <button onClick={handlePostComment} data-post-id={elem.id}>Reply</button>
-                            <button onClick={handleCancel} data-post-id={elem.id}>Cancel</button>
-                        </div>
-
-                    </div>
-                    <NewCommentContainer elem={elem} />
+                    <NewCommentContainer elem={elem} text={text} setText={setText} />
                     <DisplayComments elem={elem} />
 
                 </div>)}

@@ -2,12 +2,12 @@
     padding: .5rem;
     display: flex;
     flex-direction: column;
-    gap: .25rem;
+    gap: .5rem;
 }
 
 .individualPostContainer {
     padding: .25rem;
-    border: 1px solid #333
+    border: 1px solid #1115
 }
 
 .postBtnContainer,
@@ -27,13 +27,16 @@
 .commentsContainer {
     margin-top: .25rem;
     padding: .5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
 }
 
 .comment {
     display: flex;
     justify-content: space-between;
     gap: .5rem;
-    border-bottom: 1px solid #3335;
+    border: 1px solid rgba(0, 0, 139, 0.5);
     padding: .25rem;
 }
 
