@@ -26,7 +26,7 @@ const DisplayComments = ({ elem }) => {
         hideCommentEditDeleteBtns(e)
         showUpdateCancelEditBtns(e)
     }
-
+    //TODO: Connect Update and Cancel btns
 
     return (
         <div className='commentsContainer hide' data-post-id={elem.id}>
@@ -60,15 +60,18 @@ const DisplayComments = ({ elem }) => {
                                             className='commentEditDeleteBtn'
                                             data-comment-id={comment.id}
                                             onClick={(e) => handleEditComment(e, comment.body)}>
-                                            Edit</button>
+                                            Edit
+                                        </button>
 
                                         <button
                                             data-comment-id={comment.id}
-                                            className='commentUpdateCancelEditBtn hide'>Update
+                                            className='commentUpdateCancelEditBtn hide'>
+                                            Update
                                         </button>
                                         <button
                                             data-comment-id={comment.id}
-                                            className='commentUpdateCancelEditBtn hide'>Cancel
+                                            className='commentUpdateCancelEditBtn hide'>
+                                            Cancel
                                         </button>
                                     </div>
                                 }
