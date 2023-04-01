@@ -39,6 +39,8 @@ const DisplayComments = ({ elem }) => {
     }
 
     const handleUpdateComment = (e) => {
+        if (editText.trim().length < 1) return;
+
         let updatedComment = {
             "id": e.target.dataset.id,
             "body": editText,
@@ -65,6 +67,7 @@ const DisplayComments = ({ elem }) => {
                                     rows={4}
                                     value={editText}
                                     onChange={(e) => setEditText(e.target.value)}
+                                    placeholder='Comment can not be blank...'
                                     data-id={comment.id}
                                     className='editCommentTextArea hide' />
 
