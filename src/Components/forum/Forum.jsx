@@ -6,10 +6,12 @@ import { hideAll, showAll, hideSpecific, showSpecific } from './helperMethods'
 import "./Forum.css"
 import DisplayComments from './DisplayComments'
 import NewCommentContainer from './NewCommentContainer'
+import CreateNewPostModal from './CreateNewPostModal'
 
 const Forum = () => {
     const dispatch = useDispatch();
     const allPosts = useSelector(state => state.allPosts.value)
+    const showNewPostModal = useSelector(state => state.showNewPostModal.value)
     const [text, setText] = useState("")
 
     useEffect(() => {
@@ -35,6 +37,8 @@ const Forum = () => {
 
     return (
         <div className='allPostsContainer'>
+            {showNewPostModal && <CreateNewPostModal />}
+            <button className='createNewThreadBtn'>Start a new thread</button>
             {allPosts.map(elem =>
                 <div key={elem.id} className="individualPostContainer">
                     <h3>{elem.title}</h3>

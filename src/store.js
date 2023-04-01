@@ -6,7 +6,7 @@ import savedCoinsReducer from "./State/wallet/savedCoins"
 import allCoinDataReducer from "./State/wallet/allCoinData"
 import allCommentsReducer from "./State/comments/allComments";
 import currentUserReducer from "./State/user/currentUser";
-
+import showNewPostModalReducer from "./State/posts/showNewPostModal";
 
 export const store = configureStore({
     reducer: {
@@ -16,6 +16,7 @@ export const store = configureStore({
         savedCoins: savedCoinsReducer,
         allCoinData: allCoinDataReducer,
         allComments: allCommentsReducer,
-        currentUser: currentUserReducer
+        currentUser: currentUserReducer,
+        showNewPostModal: showNewPostModalReducer
     },
 });

@@ -5,6 +5,19 @@
     gap: .5rem;
 }
 
+.createNewThreadBtn {
+    font-size: inherit;
+    border: none;
+    min-height: 50px;
+    background-color: inherit;
+    border-bottom: 5px solid #777;
+}
+
+.createNewThreadBtn:hover {
+    font-weight: bold;
+    background-color: #9991;
+}
+
 .individualPostContainer {
     padding: .25rem;
     border: 1px solid #1115
