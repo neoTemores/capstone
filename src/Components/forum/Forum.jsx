@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { fetchAllPosts } from "../../State/posts/allPosts"
 import { fetchAllComments } from '../../State/comments/allComments'
-import { showAllAddCommentBtns, hideCurrentCommentBtn, hideAllTextAreas, showAddCommentTextArea } from './helperMethods'
+import { hideAll, showAll, hideSpecific, showSpecific } from './helperMethods'
 import "./Forum.css"
 import DisplayComments from './DisplayComments'
 import NewCommentContainer from './NewCommentContainer'
@@ -19,17 +19,18 @@ const Forum = () => {
 
     const handleViewComments = (e) => {
         document.querySelectorAll(".commentsContainer").forEach(item => {
-            if (item.dataset.postId == e.target.dataset.postId)
+            if (item.dataset.id == e.target.dataset.id)
                 return item.classList.toggle("hide")
         })
     }
 
     const handleVewTextArea = (e) => {
         setText("")
-        showAllAddCommentBtns()
-        hideCurrentCommentBtn(e)
-        hideAllTextAreas()
-        showAddCommentTextArea(e)
+        showAll(".addCommentBtn")
+        hideSpecific(".addCommentBtn", e.target.dataset.id)
+        hideAll(".newCommentContainer")
+        let elem = showSpecific(".newCommentContainer", e.target.dataset.id)
+        elem.childNodes[0].focus()
     }
 
     return (
@@ -41,10 +42,10 @@ const Forum = () => {
                     <p>{elem.id}</p>
 
                     <div className='postBtnContainer'>
-                        <button onClick={handleViewComments} data-post-id={elem.id}>Toggle Comments</button>
+                        <button onClick={handleViewComments} data-id={elem.id}>Toggle Comments</button>
                         <button
                             onClick={handleVewTextArea}
-                            data-post-id={elem.id}
+                            data-id={elem.id}
                             className="addCommentBtn">Add Comment
                         </button>
                     </div>

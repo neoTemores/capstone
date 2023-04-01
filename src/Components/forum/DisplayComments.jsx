@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { containsComment } from './helperMethods'
-import { deleteComment } from '../../State/comments/allComments'
-import { hideAllEditTextAreas, showEditCommentTextArea, showAllCommentBodies, hideCurrentCommentBody, hideCommentEditDeleteBtns, showUpdateCancelEditBtns } from './helperMethods'
+import { deleteComment, patchComment } from '../../State/comments/allComments'
+import { hideAll, showAll, hideSpecific, showSpecific, containsComment } from './helperMethods'
 import { useState } from 'react'
 
 const DisplayComments = ({ elem }) => {
@@ -11,25 +10,44 @@ const DisplayComments = ({ elem }) => {
     const [editText, setEditText] = useState("")
 
     const handleDeleteComment = (e) => {
-        dispatch(deleteComment(e.target.dataset.commentId))
+        dispatch(deleteComment(e.target.dataset.id))
     }
 
     const handleEditComment = (e, text) => {
+        let id = e.target.dataset.id
         setEditText(text)
 
-        hideAllEditTextAreas()
-        showEditCommentTextArea(e)
+        hideAll(".editCommentTextArea")
+        showSpecific(".editCommentTextArea", id)
 
-        showAllCommentBodies()
-        hideCurrentCommentBody(e)
+        showAll(".commentBody")
+        hideSpecific(".commentBody", id)
 
-        hideCommentEditDeleteBtns(e)
-        showUpdateCancelEditBtns(e)
+        showAll(".commentEditDeleteBtn")
+        hideSpecific(".commentEditDeleteBtn", id)
+
+        hideAll(".commentUpdateCancelEditBtn")
+        showSpecific(".commentUpdateCancelEditBtn", id)
     }
-    //TODO: Connect Update and Cancel btns
+
+    const handleCancelEdit = () => {
+        hideAll(".commentUpdateCancelEditBtn")
+        hideAll(".editCommentTextArea")
+        showAll(".commentBody")
+        showAll('.commentEditDeleteBtn')
+    }
+
+    const handleUpdateComment = (e) => {
+        let updatedComment = {
+            "id": e.target.dataset.id,
+            "body": editText,
+        }
+        dispatch(patchComment(updatedComment))
+        handleCancelEdit()
+    }
 
     return (
-        <div className='commentsContainer hide' data-post-id={elem.id}>
+        <div className='commentsContainer hide' data-id={elem.id}>
             {!containsComment(elem.id, allComments) ?
                 <div> No Comments...</div>
                 :
@@ -38,14 +56,14 @@ const DisplayComments = ({ elem }) => {
                         return (
                             <div key={comment.id} className='comment'>
                                 <p
-                                    data-comment-id={comment.id}
+                                    data-id={comment.id}
                                     className='commentBody'>
                                     @user# {comment.userId} - {comment.body}
                                 </p>
                                 <textarea
                                     value={editText}
                                     onChange={(e) => setEditText(e.target.value)}
-                                    data-comment-id={comment.id}
+                                    data-id={comment.id}
                                     className='editCommentTextArea hide' />
 
                                 {comment.userId == currentUser.id &&
@@ -53,30 +71,34 @@ const DisplayComments = ({ elem }) => {
                                         <button
                                             className='commentEditDeleteBtn'
                                             onClick={handleDeleteComment}
-                                            data-comment-id={comment.id}>
+                                            data-id={comment.id}>
                                             Delete
                                         </button>
                                         <button
                                             className='commentEditDeleteBtn'
-                                            data-comment-id={comment.id}
+                                            data-id={comment.id}
                                             onClick={(e) => handleEditComment(e, comment.body)}>
                                             Edit
                                         </button>
 
                                         <button
-                                            data-comment-id={comment.id}
+                                            onClick={handleUpdateComment}
+                                            data-id={comment.id}
                                             className='commentUpdateCancelEditBtn hide'>
                                             Update
                                         </button>
                                         <button
-                                            data-comment-id={comment.id}
+                                            onClick={handleCancelEdit}
+                                            data-id={comment.id}
                                             className='commentUpdateCancelEditBtn hide'>
                                             Cancel
                                         </button>
                                     </div>
                                 }
-                            </div>)
-                })}
+                            </div>
+                        )
+                }
+                )}
         </div>
     )
 }

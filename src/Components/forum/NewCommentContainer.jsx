@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { postNewComment } from '../../State/comments/allComments';
-import { hideAllTextAreas, showAllAddCommentBtns } from './helperMethods';
+import { hideAll, showAll } from './helperMethods';
 
 const NewCommentContainer = ({ elem, text, setText }) => {
     const dispatch = useDispatch()
@@ -12,32 +12,32 @@ const NewCommentContainer = ({ elem, text, setText }) => {
 
         const newComment = {
             "userId": currentUser.id,
-            "postId": e.target.dataset.postId,
+            "postId": e.target.dataset.id,
             "body": text
         }
         dispatch(postNewComment(newComment))
 
-        hideAllTextAreas()
-        showAllAddCommentBtns()
+        hideAll(".newCommentContainer")
+        showAll(".addCommentBtn")
         setText("")
     }
 
     const handleCancel = (e) => {
-        showAllAddCommentBtns()
-        hideAllTextAreas()
+        showAll(".addCommentBtn")
+        hideAll(".newCommentContainer")
         setText("")
     }
 
     return (
-        <div className='newCommentContainer hide' data-post-id={elem.id}>
+        <div className='newCommentContainer hide' data-id={elem.id}>
             <textarea
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                data-post-id={elem.id}
+                data-id={elem.id}
                 className='newCommentTextArea' />
             <div className='addCommentBtnContainer'>
-                <button onClick={handlePostComment} data-post-id={elem.id}>Reply</button>
-                <button onClick={handleCancel} data-post-id={elem.id}>Cancel</button>
+                <button onClick={handlePostComment} data-id={elem.id}>Reply</button>
+                <button onClick={handleCancel} data-id={elem.id}>Cancel</button>
             </div>
 
         </div>
