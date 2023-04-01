@@ -18,7 +18,8 @@ const DisplayComments = ({ elem }) => {
         setEditText(text)
 
         hideAll(".editCommentTextArea")
-        showSpecific(".editCommentTextArea", id)
+        let textbox = showSpecific(".editCommentTextArea", id)
+        textbox.focus()
 
         showAll(".commentBody")
         hideSpecific(".commentBody", id)
@@ -61,6 +62,7 @@ const DisplayComments = ({ elem }) => {
                                     @user# {comment.userId} - {comment.body}
                                 </p>
                                 <textarea
+                                    rows={4}
                                     value={editText}
                                     onChange={(e) => setEditText(e.target.value)}
                                     data-id={comment.id}

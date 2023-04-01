@@ -31,7 +31,9 @@ const NewCommentContainer = ({ elem, text, setText }) => {
     return (
         <div className='newCommentContainer hide' data-id={elem.id}>
             <textarea
+                rows={4}
                 value={text}
+                placeholder='What do you think...'
                 onChange={(e) => setText(e.target.value)}
                 data-id={elem.id}
                 className='newCommentTextArea' />
