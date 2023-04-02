@@ -64,11 +64,14 @@
     visibility: hidden;
 }
 
-.newPostTitleInput {
+.newPostTitleInput,
+.editPostTitleInput {
     font-size: inherit;
+    padding: .25rem;
+    width: 100%;
+    font-weight: bold;
+    color: #555
 }
-
-.newPostTextArea {}
 
 .allPostsContainer {
     padding: .5rem;
@@ -97,7 +100,9 @@
 
 .postBtnContainer,
 .commentBtnsContainer,
-.addCommentBtnContainer {
+.addCommentBtnContainer,
+.postToggleAddCommentBtns,
+.postEditDeleteUpdateCancelBtnContainer {
     display: flex;
     gap: .25rem;
     max-height: 20px;
@@ -107,7 +112,8 @@
     justify-content: space-between;
 }
 
-.newCommentTextArea {
+.newCommentTextArea,
+.editPostTextArea {
     margin-top: .25rem;
     width: 100%;
 }
@@ -134,7 +140,8 @@
 
 .newCommentTextArea,
 .editCommentTextArea,
-.newPostTextArea {
+.newPostTextArea,
+.editPostTextArea {
     resize: none;
     font-family: inherit;
     font-size: 1rem;

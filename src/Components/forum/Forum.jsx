@@ -14,7 +14,8 @@ const Forum = () => {
     const allPosts = useSelector(state => state.allPosts.value)
     const showNewPostModal = useSelector(state => state.showNewPostModal.value)
     const currentUser = useSelector(state => state.currentUser.value)
-    const [text, setText] = useState("")
+    const [newCommentText, setNewCommentText] = useState("")
+    const [editPostData, setEditPostData] = useState({ "title": "", "body": "" })
 
     useEffect(() => {
         dispatch(fetchAllPosts())
@@ -28,16 +29,14 @@ const Forum = () => {
         })
     }
 
-    const handleVewTextArea = (e) => {
-        setText("")
+    const handleVewNewCommentTextArea = (e) => {
+        setNewCommentText("")
         showAll(".addCommentBtn")
         hideSpecific(".addCommentBtn", e.target.dataset.id)
         hideAll(".newCommentContainer")
         let elem = showSpecific(".newCommentContainer", e.target.dataset.id)
         elem.childNodes[0].focus()
     }
-    //TODO: Dynamically render edit/delete post btns based on current logged in user
-    //Must delete all comments before sending delete post request
 
     const handleDeletePost = (e) => {
         let promise = Promise.resolve(dispatch(deleteAllCommentsByPostId(e.target.dataset.id)))
@@ -45,9 +44,45 @@ const Forum = () => {
         // promise.then(val => console.log(val))
 
     }
-    const viewEditPostTextArea = (e) => {
-        console.log(e.target.dataset.id)
+    const viewEditPostTextArea = (e, title, body) => {
+        setEditPostData({ title, body })
+        let id = e.target.dataset.id
+        hideAll(".editPostTitleInput")
+        hideAll(".editPostTextArea")
+        showSpecific(".editPostTitleInput", id)
+        showSpecific(".editPostTextArea", id)
 
+        showAll(".individualPostHeader")
+        showAll(".individualPostBody")
+        hideSpecific(".individualPostHeader", id)
+        hideSpecific(".individualPostBody", id)
+
+        showAll(".postEditDeleteBtn")
+        hideSpecific(".postEditDeleteBtn", id)
+
+        hideAll(".postUpdateCancelEditBtn")
+        showSpecific(".postUpdateCancelEditBtn", id)
+    }
+
+    const handleCancelPostEdit = (e) => {
+        let id = e.target.dataset.id
+        hideSpecific(".postUpdateCancelEditBtn", id)
+        showSpecific(".postEditDeleteBtn", id)
+
+        hideSpecific(".editPostTitleInput", id)
+        hideSpecific(".editPostTextArea", id)
+
+        showAll(".individualPostHeader")
+        showAll(".individualPostBody")
+    }
+
+    const handleUpdateEditPostData = (e) => {
+        setEditPostData(prevData => {
+            return {
+                ...prevData,
+                [e.target.name]: e.target.value
+            }
+        })
     }
 
     return (
@@ -56,19 +91,35 @@ const Forum = () => {
             <button className='createNewThreadBtn' onClick={() => dispatch(setShowNewPostModal(true))}>Start a new thread</button>
             {allPosts.map(elem =>
                 <div key={elem.id} className="individualPostContainer">
-                    <h3>{elem.title}</h3>
-                    <p>{elem.body}</p>
-                    <p>{elem.id}</p>
+                    <h3 className='individualPostHeader' data-id={elem.id}>{elem.title}</h3>
+                    <p className='individualPostBody' data-id={elem.id}>{elem.body}</p>
+                    {/* <p>{elem.id}</p> */}
+
+                    <input
+                        className='editPostTitleInput hide'
+                        name='title'
+                        value={editPostData.title}
+                        onChange={handleUpdateEditPostData}
+                        placeholder='Title can not be blank...'
+                        data-id={elem.id} />
+                    <textarea
+                        className='editPostTextArea hide'
+                        name='body'
+                        rows={4}
+                        value={editPostData.body}
+                        onChange={handleUpdateEditPostData}
+                        placeholder='Body can not be blank...'
+                        data-id={elem.id} />
 
                     <div className='postBtnContainer'>
-                        <div>
+                        <div className='postToggleAddCommentBtns'>
                             <button
                                 onClick={handleViewComments}
                                 data-id={elem.id}>
                                 Toggle Comments
                             </button>
                             <button
-                                onClick={handleVewTextArea}
+                                onClick={handleVewNewCommentTextArea}
                                 data-id={elem.id}
                                 className="addCommentBtn">
                                 Add Comment
@@ -76,22 +127,35 @@ const Forum = () => {
                         </div>
 
                         {elem.userID === currentUser.id &&
-                            <div>
+                            <div className='postEditDeleteUpdateCancelBtnContainer'>
                                 <button
-                                    onClick={viewEditPostTextArea}
+                                    className='postEditDeleteBtn'
+                                    onClick={(e) => viewEditPostTextArea(e, elem.title, elem.body)}
                                     data-id={elem.id}>
                                     Edit
                                 </button>
                                 <button
+                                    className='postEditDeleteBtn'
                                     onClick={handleDeletePost}
                                     data-id={elem.id}>
                                     Delete
+                                </button>
+
+                                <button
+                                    className='postUpdateCancelEditBtn hide'
+                                    data-id={elem.id}>
+                                    Update
+                                </button>
+                                <button
+                                    className='postUpdateCancelEditBtn hide'
+                                    onClick={handleCancelPostEdit} data-id={elem.id}>
+                                    Cancel
                                 </button>
                             </div>
                         }
                     </div>
 
-                    <NewCommentContainer elem={elem} text={text} setText={setText} />
+                    <NewCommentContainer elem={elem} newCommentText={newCommentText} setNewCommentText={setNewCommentText} />
                     <DisplayComments elem={elem} />
 
                 </div>)}

@@ -3,38 +3,38 @@ import { useSelector, useDispatch } from 'react-redux';
 import { postNewComment } from '../../State/comments/allComments';
 import { hideAll, showAll } from './helperMethods';
 
-const NewCommentContainer = ({ elem, text, setText }) => {
+const NewCommentContainer = ({ elem, newCommentText, setNewCommentText }) => {
     const dispatch = useDispatch()
     const currentUser = useSelector(state => state.currentUser.value)
 
     const handlePostComment = (e) => {
-        if (text.trim().length < 1) return;
+        if (newCommentText.trim().length < 1) return;
 
         const newComment = {
             "userId": currentUser.id,
             "postId": e.target.dataset.id,
-            "body": text
+            "body": newCommentText.trim()
         }
         dispatch(postNewComment(newComment))
 
         hideAll(".newCommentContainer")
         showAll(".addCommentBtn")
-        setText("")
+        setNewCommentText("")
     }
 
     const handleCancel = (e) => {
         showAll(".addCommentBtn")
         hideAll(".newCommentContainer")
-        setText("")
+        setNewCommentText("")
     }
 
     return (
         <div className='newCommentContainer hide' data-id={elem.id}>
             <textarea
                 rows={4}
-                value={text}
+                value={newCommentText}
                 placeholder='What do you think...'
-                onChange={(e) => setText(e.target.value)}
+                onChange={(e) => setNewCommentText(e.target.value)}
                 data-id={elem.id}
                 className='newCommentTextArea' />
             <div className='addCommentBtnContainer'>
