@@ -29,6 +29,20 @@ export const addNewPost = createAsyncThunk(
     }
 )
 
+export const deletePost = createAsyncThunk(
+    "deletePost",
+    async (postId) => {
+        let deleteReq = {
+            method: "DELETE"
+        }
+        const res = await fetch(POSTS_URL.DELETE + postId, deleteReq)
+        return {
+            "status": res.status,
+            "postId": postId
+        }
+    }
+)
+
 export const allPostsSlice = createSlice({
     name: "allPosts",
     initialState: { value: [] },
@@ -46,6 +60,10 @@ export const allPostsSlice = createSlice({
             .addCase(addNewPost.fulfilled, (state, action) => {
                 if (action.payload.status === 200)
                     state.value = [action.payload.newPost, ...state.value]
+            })
+            .addCase(deletePost.fulfilled, (state, action) => {
+                if (action.payload.status === 202)
+                    state.value = state.value.filter(elem => elem.id !== +action.payload.postId)
             })
     }
 })

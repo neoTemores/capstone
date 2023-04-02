@@ -34,7 +34,8 @@ export const COMMENTS_URL = {
   "GET_ALL_BY_POST_ID": "http://localhost:8080/api/comments/post/",
   "POST": "http://localhost:8080/api/comments/add",
   "PATCH": "http://localhost:8080/api/comments/edit/",
-  "DELETE": "http://localhost:8080/api/comments/delete/"
+  "DELETE": "http://localhost:8080/api/comments/delete/",
+  "DELETE_BY_POST_ID": "http://localhost:8080/api/comments/delete-all/post/"
 }
 
 const App = () => {

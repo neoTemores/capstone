@@ -103,6 +103,10 @@
     max-height: 20px;
 }
 
+.postBtnContainer {
+    justify-content: space-between;
+}
+
 .newCommentTextArea {
     margin-top: .25rem;
     width: 100%;

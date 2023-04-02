@@ -75,15 +75,15 @@ const DisplayComments = ({ elem }) => {
                                     <div className='commentBtnsContainer'>
                                         <button
                                             className='commentEditDeleteBtn'
-                                            onClick={handleDeleteComment}
-                                            data-id={comment.id}>
-                                            Delete
-                                        </button>
-                                        <button
-                                            className='commentEditDeleteBtn'
                                             data-id={comment.id}
                                             onClick={(e) => handleEditComment(e, comment.body)}>
                                             Edit
+                                        </button>
+                                        <button
+                                            className='commentEditDeleteBtn'
+                                            onClick={handleDeleteComment}
+                                            data-id={comment.id}>
+                                            Delete
                                         </button>
 
                                         <button
