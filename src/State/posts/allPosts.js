@@ -10,6 +10,25 @@ export const fetchAllPosts = createAsyncThunk(
     }
 )
 
+export const addNewPost = createAsyncThunk(
+    "addNewPost",
+    async (newPost) => {
+        let postReq = {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newPost)
+        }
+
+        const res = await fetch(POSTS_URL.POST, postReq)
+        const data = await res.json()
+
+        return {
+            "status": res.status,
+            "newPost": data
+        }
+    }
+)
+
 export const allPostsSlice = createSlice({
     name: "allPosts",
     initialState: { value: [] },
@@ -23,6 +42,10 @@ export const allPostsSlice = createSlice({
         builder
             .addCase(fetchAllPosts.fulfilled, (state, action) => {
                 state.value = action.payload;
+            })
+            .addCase(addNewPost.fulfilled, (state, action) => {
+                if (action.payload.status === 200)
+                    state.value = [action.payload.newPost, ...state.value]
             })
     }
 })

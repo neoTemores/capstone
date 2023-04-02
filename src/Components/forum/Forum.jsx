@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { fetchAllPosts } from "../../State/posts/allPosts"
 import { fetchAllComments } from '../../State/comments/allComments'
+import { setShowNewPostModal } from '../../State/posts/showNewPostModal'
 import { hideAll, showAll, hideSpecific, showSpecific } from './helperMethods'
 import "./Forum.css"
 import DisplayComments from './DisplayComments'
@@ -34,11 +35,14 @@ const Forum = () => {
         let elem = showSpecific(".newCommentContainer", e.target.dataset.id)
         elem.childNodes[0].focus()
     }
+    //TODO: Dynamically render edit/delete post btns based on current logged in user
+    //Must delete all comments before sending delete post request
+
 
     return (
         <div className='allPostsContainer'>
             {showNewPostModal && <CreateNewPostModal />}
-            <button className='createNewThreadBtn'>Start a new thread</button>
+            <button className='createNewThreadBtn' onClick={() => dispatch(setShowNewPostModal(true))}>Start a new thread</button>
             {allPosts.map(elem =>
                 <div key={elem.id} className="individualPostContainer">
                     <h3>{elem.title}</h3>

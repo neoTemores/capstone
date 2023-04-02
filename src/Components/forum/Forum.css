@@ -1,3 +1,75 @@
+.modalContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.modal {
+    min-width: 50%;
+    color: #333;
+    z-index: 10;
+    background-color: #eee;
+    /* text-align: right; */
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #111;
+    position: relative;
+    animation: animate 0.3s;
+    padding: .5rem 0.5rem;
+}
+
+.newPostModalHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.closeModalBtn {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    color: red;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    transition: all .2s ease-in-out;
+    opacity: .75;
+    background-color: transparent;
+}
+
+.closeModalBtn:hover {
+    cursor: pointer;
+    opacity: 1;
+    transform: scale(1.5);
+}
+
+.newPostForm {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    padding: .5rem;
+}
+
+.newPostError {
+    color: red;
+}
+
+.notVisible {
+    visibility: hidden;
+}
+
+.newPostTitleInput {
+    font-size: inherit;
+}
+
+.newPostTextArea {}
+
 .allPostsContainer {
     padding: .5rem;
     display: flex;
@@ -57,7 +129,8 @@
 }
 
 .newCommentTextArea,
-.editCommentTextArea {
+.editCommentTextArea,
+.newPostTextArea {
     resize: none;
     font-family: inherit;
     font-size: 1rem;
