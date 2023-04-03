@@ -29,6 +29,24 @@ export const addNewPost = createAsyncThunk(
     }
 )
 
+export const patchPost = createAsyncThunk(
+    "patchPost",
+    async (updatedPost) => {
+        let patchReq = {
+            method: "PATCH",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updatedPost)
+        }
+        const res = await fetch(POSTS_URL.PATCH + updatedPost.id, patchReq)
+        const data = await res.json()
+        return {
+            "status": res.status,
+            "updatedPost": data
+        }
+
+    }
+)
+
 export const deletePost = createAsyncThunk(
     "deletePost",
     async (postId) => {
@@ -64,6 +82,18 @@ export const allPostsSlice = createSlice({
             .addCase(deletePost.fulfilled, (state, action) => {
                 if (action.payload.status === 202)
                     state.value = state.value.filter(elem => elem.id !== +action.payload.postId)
+            })
+            .addCase(patchPost.fulfilled, (state, action) => {
+                if (action.payload.status === 200) {
+                    state.value.forEach(elem => {
+                        if (elem.id === +action.payload.updatedPost.id) {
+                            elem.title = action.payload.updatedPost.title
+                            elem.body = action.payload.updatedPost.body
+                            return
+                        }
+                    })
+                }
+
             })
     }
 })

@@ -94,6 +94,9 @@
 }
 
 .individualPostContainer {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
     padding: .25rem;
     border: 1px solid #1115
 }

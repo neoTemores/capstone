@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { fetchAllPosts, deletePost } from "../../State/posts/allPosts"
+import { fetchAllPosts, deletePost, patchPost } from "../../State/posts/allPosts"
 import { fetchAllComments, deleteAllCommentsByPostId } from '../../State/comments/allComments'
 import { setShowNewPostModal } from '../../State/posts/showNewPostModal'
 import { hideAll, showAll, hideSpecific, showSpecific } from './helperMethods'
@@ -76,7 +76,17 @@ const Forum = () => {
         showAll(".individualPostBody")
     }
 
-    const handleUpdateEditPostData = (e) => {
+    const handleSubmitPostUpdate = (e) => {
+        let updatedPostData = {
+            "id": e.target.dataset.id,
+            "title": editPostData.title,
+            "body": editPostData.body
+        }
+        dispatch(patchPost(updatedPostData))
+        handleCancelPostEdit(e)
+    }
+
+    const handleSetEditPostData = (e) => {
         setEditPostData(prevData => {
             return {
                 ...prevData,
@@ -99,7 +109,7 @@ const Forum = () => {
                         className='editPostTitleInput hide'
                         name='title'
                         value={editPostData.title}
-                        onChange={handleUpdateEditPostData}
+                        onChange={handleSetEditPostData}
                         placeholder='Title can not be blank...'
                         data-id={elem.id} />
                     <textarea
@@ -107,7 +117,7 @@ const Forum = () => {
                         name='body'
                         rows={4}
                         value={editPostData.body}
-                        onChange={handleUpdateEditPostData}
+                        onChange={handleSetEditPostData}
                         placeholder='Body can not be blank...'
                         data-id={elem.id} />
 
@@ -143,6 +153,7 @@ const Forum = () => {
 
                                 <button
                                     className='postUpdateCancelEditBtn hide'
+                                    onClick={handleSubmitPostUpdate}
                                     data-id={elem.id}>
                                     Update
                                 </button>
