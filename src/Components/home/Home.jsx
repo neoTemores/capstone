@@ -1,6 +1,6 @@
 import { fetchAllCoins } from "../../State/coins/allCoins"
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { addCoinToWallet } from "../../State/wallet/savedCoins"
 import "./home.css"
 
@@ -32,11 +32,16 @@ export const parseMoneyValue = (num) => {
 
 const Home = () => {
     const dispatch = useDispatch();
-
+    const [query, setQuery] = useState("")
     const allCoins = useSelector(state => state.allCoins.value)
+
+    const filteredCoins = allCoins.filter(item => {
+        return item.id.toLowerCase().includes(query.toLowerCase()) || item.symbol.toLowerCase().includes(query.toLowerCase())
+    })
 
     useEffect(() => {
         dispatch(fetchAllCoins())
+        console.log(allCoins)
     }, [])
     const getImg = (symbol) => `https://assets.coincap.io/assets/icons/${symbol.toLowerCase()}@2x.png`;
 
@@ -54,6 +59,12 @@ const Home = () => {
 
     return (
         <div className="allCoinsContainer">
+            <input
+                className="filterCoinsInput"
+                type="search"
+                value={query}
+                onChange={e => setQuery(e.target.value)}
+                placeholder="Search for a coin by name or symbol..." />
 
             <div className="coinGridHeaderContainer">
                 <div className="gridHeader">Currency</div>
@@ -65,7 +76,7 @@ const Home = () => {
                 <div className="gridHeader">Watching</div>
             </div>
 
-            {allCoins.map(elem =>
+            {filteredCoins.map(elem =>
                 <div className="individualCoinContainer" key={elem.id}>
                     <div className="imgSymbolCointainer">
                         <img src={getImg(elem.symbol)} height="32" />

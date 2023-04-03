@@ -18,10 +18,19 @@ export const showSpecific = (classToFind, target) => {
     document.querySelectorAll(classToFind).forEach(elem => {
         if (elem.dataset.id == target) {
             elem.classList.remove("hide")
-            return result = elem;
+            result = elem;
         }
     })
     return result;
+}
+
+export const focusElement = (classToFind, target) => {
+    document.querySelectorAll(classToFind).forEach(elem => {
+        if (elem.dataset.id == target) {
+            elem.focus()
+            return
+        }
+    })
 }
 
 export const containsComment = (id, allComments) => {

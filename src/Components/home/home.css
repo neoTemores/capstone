@@ -33,3 +33,10 @@
 .symbol {
     font-size: .8rem;
 }
+
+.filterCoinsInput {
+    font-size: inherit;
+    font-family: inherit;
+    color: inherit;
+    padding: .25rem;
+}
