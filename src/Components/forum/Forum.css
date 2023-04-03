@@ -82,15 +82,16 @@
 
 .createNewThreadBtn {
     font-size: inherit;
-    border: none;
+    /* border: none; */
     min-height: 50px;
-    background-color: inherit;
-    border-bottom: 5px solid #777;
+    background-color: white;
+    /* border-bottom: 5px solid #9995; */
+    /* box-shadow: 5px 5px 5px #555; */
 }
 
 .createNewThreadBtn:hover {
     font-weight: bold;
-    background-color: #9991;
+    /* background-color: #9991; */
 }
 
 .individualPostContainer {
@@ -98,7 +99,8 @@
     flex-direction: column;
     gap: .25rem;
     padding: .25rem;
-    border: 1px solid #1115
+    border: 1px solid #1115;
+    background-color: #fff;
 }
 
 .postBtnContainer,

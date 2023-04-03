@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react"
+import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { fetchAllSavedCoinsByUser, deleteFromWallet } from "../../State/wallet/savedCoins"
 import { fetchIndividualCoinData, setAllCoinData } from "../../State/wallet/allCoinData"
@@ -6,11 +7,15 @@ import { parseMoneyValue } from "../home/Home"
 
 const Wallet = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const allSavedCoins = useSelector(state => state.savedCoins.value)
     const allCoinData = useSelector(state => state.allCoinData.value)
     const currentUser = useSelector(state => state.currentUser.value)
+    const loggedIn = useSelector(state => state.loggedIn.value)
 
     useEffect(() => {
+        if (!loggedIn) return redirectToLogin()
+
         dispatch(fetchAllSavedCoinsByUser(currentUser.id))
     }, [])
 
@@ -18,6 +23,11 @@ const Wallet = () => {
         if (allSavedCoins.length > 0)
             getCoinData()
     }, [allSavedCoins.length])
+
+    const redirectToLogin = () => {
+        navigate("/")
+        navigate("/login")
+    }
 
     const getCoinData = () => {
         dispatch(setAllCoinData([]))

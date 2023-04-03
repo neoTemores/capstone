@@ -5,6 +5,8 @@ import Home from './Components/home/Home'
 import Forum from "./Components/forum/Forum"
 import Wallet from "./Components/wallet/Wallet"
 import Profile from "./Components/profile/Profile"
+import LoginPage from './Components/landing/LoginPage'
+import CreateAccountPage from './Components/landing/CreateAccountPage'
 
 export const COIN_URL = {
   "LIST_NAME": "coinList",
@@ -38,19 +40,23 @@ export const COMMENTS_URL = {
   "DELETE_BY_POST_ID": "http://localhost:8080/api/comments/delete-all/post/"
 }
 
+export const USER_PROFILE_URL = {
+  "GET": "http://localhost:8080/api/"
+}
+
 const App = () => {
 
   return (
     <div className="appContainer">
       <Navbar />
+
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/forum' element={<Forum />} />
         <Route path='/wallet' element={<Wallet />} />
         <Route path='/profile' element={<Profile />} />
-        <Route path='/login' element={<Profile />} />
-        <Route path='/profile' element={<Profile />} />
-
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/create-acc' element={<CreateAccountPage />} />
       </Routes>
     </div>
   );

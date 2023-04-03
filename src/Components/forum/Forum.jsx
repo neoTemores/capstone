@@ -82,12 +82,12 @@ const Forum = () => {
     return (
         <div className='allPostsContainer'>
             {showNewPostModal && <CreateNewPostModal />}
-            <button className='createNewThreadBtn' onClick={() => dispatch(setShowNewPostModal(true))}>Start a new thread</button>
+            <button className='createNewThreadBtn' onClick={() => dispatch(setShowNewPostModal(true))}>Create a new thread</button>
             {allPosts.map(elem =>
                 <div key={elem.id} className="individualPostContainer">
                     <h3 className='displayPostElem individualPostHeader' data-id={elem.id}>{elem.title}</h3>
                     <p className='displayPostElem individualPostBody' data-id={elem.id}>{elem.body}</p>
-                    {/* <p>{elem.id}</p> */}
+                    <p>{elem.id}</p>
 
                     <input
                         className='editPostElem editPostTitleInput hide'

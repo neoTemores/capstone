@@ -10,21 +10,38 @@
     flex-shrink: 0; */
 }
 
-.navTitle {
-    border: 1px solid green;
+.navTitle:hover {
+    cursor: pointer;
 }
 
 .navLinksContainer {
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     display: flex;
     gap: .5rem;
+    align-items: center;
 }
 
 .navLink {
-    border: 1px solid green;
-    color: #eee
+    /* border: 1px solid green; */
+    color: #eee;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.activeLink {
+    border-bottom: 2px solid #eee;
 }
 
 .loginSignupContainer {
-    border: 1px solid orange;
+    /* border: 1px solid orange; */
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    gap: .25rem;
+}
+
+.userNameLogOutBtnContainer {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
 }

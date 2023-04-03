@@ -12,10 +12,15 @@
 .individualCoinContainer {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+
+}
+
+.individualCoinContainer {
+    background-color: white;
 }
 
 .individualCoinContainer:hover {
-    background-color: #9995;
+    background-color: whitesmoke;
     cursor: default;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;

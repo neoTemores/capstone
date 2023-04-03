@@ -14,7 +14,8 @@ body {
   /* background-position: center; */
   /* background-repeat: no-repeat; */
   /* background-size: cover; */
-  color: #333
+  color: #333;
+  background-color: whitesmoke;
 }
 
 button:hover {

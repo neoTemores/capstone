@@ -41,8 +41,8 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(fetchAllCoins())
-        console.log(allCoins)
     }, [])
+
     const getImg = (symbol) => `https://assets.coincap.io/assets/icons/${symbol.toLowerCase()}@2x.png`;
 
     const handleAddToWallet = (e) => {
