@@ -7,6 +7,7 @@ import { setSavedCoins } from "../../State/wallet/savedCoins"
 import { fetchAllSavedCoinsByUser } from "../../State/wallet/savedCoins"
 import { FcSearch } from "react-icons/fc"
 import "./home.css"
+import Pagination from "../templates/Pagination"
 
 export const parseMoneyValue = (num) => {
     num = Math.round(num)
@@ -42,6 +43,8 @@ const Home = () => {
     const allSavedCoins = useSelector(state => state.savedCoins.value)
     const currentUser = useSelector(state => state.currentUser.value)
     const loggedIn = useSelector(state => state.loggedIn.value)
+    const [startIndex, setStartIndex] = useState(0)
+    const [lastIndex, setLastIndex] = useState(10)
 
     const filteredCoins = allCoins.filter(item => {
         return item.id.toLowerCase().includes(query.toLowerCase()) || item.symbol.toLowerCase().includes(query.toLowerCase())
@@ -78,6 +81,11 @@ const Home = () => {
         return found
     }
 
+    const updateIndex = (num) => {
+        setStartIndex(prev => prev + num)
+        setLastIndex(prev => prev + num)
+    }
+
     return (
         <div className="allCoinsContainer">
             <div className="filterCoinsContainer">
@@ -101,7 +109,7 @@ const Home = () => {
                 <div className="gridHeader">Watching</div>
             </div>
 
-            {filteredCoins.map(elem =>
+            {filteredCoins.slice(startIndex, lastIndex).map(elem =>
                 <div className="individualCoinContainer" key={elem.id}>
                     <div className="imgSymbolCointainer">
                         <img src={getImg(elem.symbol)} height="32" />
@@ -117,11 +125,18 @@ const Home = () => {
                     <div>${parseMoneyValue(elem.marketCapUsd)}</div>
                     <div>${parseMoneyValue(elem.volumeUsd24Hr)}</div>
                     <div>${parseMoneyValue(elem.supply)}</div>
-                    {(!loggedIn || !foundInWallet(elem.id)) && <button data-name={elem.id} onClick={handleAddToWallet}>Add to Wallet</button>}
+                    {(!loggedIn || !foundInWallet(elem.id)) ? <button data-name={elem.id} onClick={handleAddToWallet}>Add to Wallet</button> : <div>In wallet</div>}
 
                 </div>
-
             )}
+
+            <Pagination
+                startIndex={startIndex}
+                lastIndex={lastIndex}
+                length={filteredCoins.length}
+                updateIndex={updateIndex}
+                itemsPerPage={10}
+            />
         </div>
     )
 }

@@ -78,7 +78,7 @@
 }
 
 .allPostsContainer {
-    padding: .5rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     gap: .5rem;
@@ -89,6 +89,9 @@
     min-height: 50px;
     background-color: white;
     border-radius: 5px;
+    width: fit-content;
+    align-self: center;
+    padding: .5rem;
 }
 
 .createNewThreadBtn:hover {

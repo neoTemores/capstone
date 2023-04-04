@@ -1,6 +1,6 @@
 .allCoinsContainer {
     display: grid;
-    padding: .5rem;
+    padding: 1rem;
     gap: 1rem;
 }
 
@@ -64,4 +64,11 @@
     font-family: inherit;
     color: inherit;
     padding: .25rem;
+}
+
+.paginationContainer {
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    gap: .5rem;
 }
