@@ -2,6 +2,8 @@ import { Link, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { useRef } from "react"
 import { attemptUserLogin } from "../../State/user/currentUser"
+import { setCurrentUser } from "../../State/user/currentUser"
+import { fetchAllSavedCoinsByUser } from "../../State/wallet/savedCoins"
 import { setLoggedIn } from "../../State/user/loggedIn"
 import { BiHide } from "react-icons/bi"
 import "./landing.css"
@@ -12,6 +14,7 @@ const LoginPage = () => {
     const userName = useRef()
     const password = useRef()
     const loginError = useRef()
+
     const show = (ref) => ref.current.type = "text"
     const hide = (ref) => ref.current.type = "password"
 
@@ -27,7 +30,10 @@ const LoginPage = () => {
         Promise.resolve(dispatch(attemptUserLogin(loginUser)))
             .then(val => {
                 if (val.payload?.status === 200) {
+                    // console.log(val.payload.user)
                     dispatch(setLoggedIn(true))
+                    dispatch(setCurrentUser(val.payload.user))
+                    dispatch(fetchAllSavedCoinsByUser(val.payload.user.id))
                     navigate("/")
                 }
                 else loginError.current.classList.remove("notVisible")

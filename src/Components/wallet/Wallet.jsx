@@ -17,7 +17,7 @@ const Wallet = () => {
         if (!loggedIn) return redirectToLogin()
 
         dispatch(fetchAllSavedCoinsByUser(currentUser.id))
-    }, [])
+    }, [currentUser])
 
     useEffect(() => {
         if (allSavedCoins.length > 0)
@@ -39,10 +39,13 @@ const Wallet = () => {
 
     const handleRemoveFromWallet = (e) => {
         let id;
+
         allSavedCoins.forEach(elem => {
-            if (elem.currencyName === e.target.dataset.name)
+            if (elem.currencyName === e.target.dataset.name) {
                 id = elem.id
+            }
         })
+
         dispatch(deleteFromWallet(id))
     }
 

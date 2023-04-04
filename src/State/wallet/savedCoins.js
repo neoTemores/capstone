@@ -3,10 +3,9 @@ import { WALLET_URL } from "../url";
 
 export const fetchAllSavedCoinsByUser = createAsyncThunk(
     "fetchAllSavedCoinsByUser",
-    async (userid = 0) => {
+    async (userid) => {
         const res = await fetch(WALLET_URL.GET_ALL_BY_USER + userid)
         const data = await res.json()
-        console.log(data)
         return data[WALLET_URL.LIST_NAME]
     }
 )

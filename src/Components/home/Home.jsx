@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import { addCoinToWallet } from "../../State/wallet/savedCoins"
+import { setSavedCoins } from "../../State/wallet/savedCoins"
+import { fetchAllSavedCoinsByUser } from "../../State/wallet/savedCoins"
 import { FcSearch } from "react-icons/fc"
 import "./home.css"
 
@@ -37,6 +39,8 @@ const Home = () => {
     const dispatch = useDispatch();
     const [query, setQuery] = useState("")
     const allCoins = useSelector(state => state.allCoins.value)
+    const allSavedCoins = useSelector(state => state.savedCoins.value)
+    const currentUser = useSelector(state => state.currentUser.value)
     const loggedIn = useSelector(state => state.loggedIn.value)
 
     const filteredCoins = allCoins.filter(item => {
@@ -45,7 +49,10 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(fetchAllCoins())
-    }, [])
+        if (loggedIn)
+            dispatch(fetchAllSavedCoinsByUser(currentUser.id))
+
+    }, [currentUser, loggedIn])
 
     const getImg = (symbol) => `https://assets.coincap.io/assets/icons/${symbol.toLowerCase()}@2x.png`;
 
@@ -53,7 +60,7 @@ const Home = () => {
         if (!loggedIn) return navigate("/login")
 
         let coin = {
-            userId: 1,
+            userId: currentUser.id,
             currencyName: e.target.dataset.name
         }
         dispatch(addCoinToWallet(coin))
@@ -62,6 +69,14 @@ const Home = () => {
     if (allCoins.length < 1)
         return <h1>Loading...</h1>
 
+    const foundInWallet = (id) => {
+        let found = false
+        allSavedCoins.forEach(coin => {
+            if (coin.currencyName == id)
+                found = true
+        })
+        return found
+    }
 
     return (
         <div className="allCoinsContainer">
@@ -102,8 +117,8 @@ const Home = () => {
                     <div>${parseMoneyValue(elem.marketCapUsd)}</div>
                     <div>${parseMoneyValue(elem.volumeUsd24Hr)}</div>
                     <div>${parseMoneyValue(elem.supply)}</div>
+                    {(!loggedIn || !foundInWallet(elem.id)) && <button data-name={elem.id} onClick={handleAddToWallet}>Add to Wallet</button>}
 
-                    <button data-name={elem.id} onClick={handleAddToWallet}>Add to Wallet</button>
                 </div>
 
             )}

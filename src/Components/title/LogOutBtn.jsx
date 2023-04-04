@@ -2,6 +2,8 @@ import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { setLoggedIn } from "../../State/user/loggedIn"
 import { setCurrentUser } from "../../State/user/currentUser"
+import { setSavedCoins } from "../../State/wallet/savedCoins"
+
 
 const LogOutBtn = () => {
     const dispatch = useDispatch()
@@ -9,9 +11,11 @@ const LogOutBtn = () => {
     const currentUser = useSelector(state => state.currentUser.value)
 
     const handleLogOut = () => {
-        navigate("/")
+        // window.location.reload()
+        // dispatch(setSavedCoins([]))
         dispatch(setLoggedIn(false))
-        dispatch(setCurrentUser({}))
+        // dispatch(setCurrentUser({}))
+        navigate("/")
     }
 
     return (
