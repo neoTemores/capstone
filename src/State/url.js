@@ -32,7 +32,8 @@ export const COMMENTS_URL = {
 
 export const USER_URL = {
     "LOGIN": "http://localhost:8080/api/getuser",
-    "CREATE": "http://localhost:8080/api/createuser"
+    "CREATE": "http://localhost:8080/api/createuser",
+    "ALL_USERS": "http://localhost:8080/api/users"
 }
 
 export const USER_PROFILE_URL = {

@@ -55,13 +55,30 @@
     font-size: 1rem;
     padding: .25rem;
     border-radius: 5px;
-    color: #555
+    color: #555;
 }
+
+.editUserInput.password {
+    border: none;
+    outline: none;
+}
+
+.editUserInput:not(.password):focus,
+.editUserBioTextArea:focus {
+    outline-color: deepskyblue;
+}
+
 
 .passwordFieldContainer {
     display: flex;
     align-items: center;
     gap: .25rem;
+    border: 2px solid #333;
+    border-radius: 5px;
+}
+
+.passwordFieldContainer:focus-within {
+    border: 2px solid deepskyblue
 }
 
 .toggleViewPasswordIcon {

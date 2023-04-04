@@ -8,6 +8,7 @@ import allCommentsReducer from "./State/comments/allComments";
 import currentUserReducer from "./State/user/currentUser";
 import showNewPostModalReducer from "./State/posts/showNewPostModal";
 import userProfileReducer from "./State/user/userProfile";
+import allUsersListReducer from "./State/user/allUsersList";
 
 export const store = configureStore({
     reducer: {
@@ -20,5 +21,6 @@ export const store = configureStore({
         currentUser: currentUserReducer,
         showNewPostModal: showNewPostModalReducer,
         userProfile: userProfileReducer,
+        allUsersList: allUsersListReducer
     },
 });

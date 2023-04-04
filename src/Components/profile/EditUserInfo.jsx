@@ -69,7 +69,7 @@ const EditUserInfo = ({ setEditinguser }) => {
                         name='password'
                         onChange={handleChange}
                         type="password"
-                        className='editUserInput'
+                        className='editUserInput password'
                         value={profileData.password} />
                     <BiHide
                         className='toggleViewPasswordIcon'
@@ -84,7 +84,7 @@ const EditUserInfo = ({ setEditinguser }) => {
                     <input
                         ref={confirmPassword}
                         type="password"
-                        className='editUserInput' />
+                        className='editUserInput password' />
                     <BiHide
                         className='toggleViewPasswordIcon'
                         onMouseDown={() => show(confirmPassword)}

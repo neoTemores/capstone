@@ -1,10 +1,14 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { fetchAllUsersList } from '../../State/user/allUsersList'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { BiHide } from 'react-icons/bi'
 import { USER_URL } from '../../State/url'
 import SuccessModal from './SuccessModal'
 
 const CreateAccountPage = () => {
+    const dispatch = useDispatch()
+    const allUsersList = useSelector(state => state.allUsersList.value)
     const email = useRef()
     const userName = useRef()
     const password = useRef()
@@ -13,8 +17,23 @@ const CreateAccountPage = () => {
     const show = (ref) => ref.current.type = "text"
     const hide = (ref) => ref.current.type = "password"
     const [showModal, setShowModal] = useState(false)
+    const [showUserNameErr, setShowUserNameErr] = useState(false)
 
-    const handleCreateAccount = (e) => {
+
+    useEffect(() => {
+        dispatch(fetchAllUsersList())
+    }, [])
+
+    const handleCheckUserName = (e) => {
+        setShowUserNameErr(false)
+        allUsersList.forEach(elem => {
+            if (elem.username.toLowerCase() == e.target.value.toLowerCase()) {
+                setShowUserNameErr(true)
+            }
+        })
+    }
+
+    const handleCreateAccount = () => {
         passwordError.current.classList.add("notVisible")
 
         let newUser = {
@@ -26,6 +45,8 @@ const CreateAccountPage = () => {
 
         if (newUser.password !== confirmPassword.current.value)
             return passwordError.current.classList.remove("notVisible")
+
+        if (showUserNameErr) return
 
         if (newUser.password.length > 0) attemptAccountCreation(newUser)
     }
@@ -50,7 +71,9 @@ const CreateAccountPage = () => {
             <h1>Create your account</h1>
             <form className="loginForm" onSubmit={e => e.preventDefault()}>
                 <input ref={email} type="email" placeholder="E-mail" required />
-                <input ref={userName} placeholder="Username" required />
+                <input ref={userName} onChange={handleCheckUserName} placeholder="Username" required />
+                {showUserNameErr &&
+                    <div className='newPostError'>That username is already taken</div>}
 
                 <div className="landingPasswordContainer">
                     <input className="landingFormInput" ref={password} type="password" placeholder="Password" required />
