@@ -17,11 +17,10 @@
     display: flex;
     flex-direction: column;
     gap: .5rem;
-    /* width: 80%; */
     padding: .5rem;
     background-color: white;
     border-radius: 5px;
-    box-shadow: 5px 5px 5px black;
+    border: 1px solid #1115
 }
 
 .myProfileMyPostsContainer {
@@ -30,6 +29,13 @@
 
 .myProfileMyCommentsContainer {
     grid-area: comments;
+}
+
+.myProfileMyPostsContainer,
+.myProfileMyCommentsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
 }
 
 .userDisplayData>div>span {

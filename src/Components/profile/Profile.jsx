@@ -5,6 +5,7 @@ import EditUserInfo from './EditUserInfo'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUserProfile } from '../../State/user/userProfile'
+import { fetchAllComments } from '../../State/comments/allComments'
 import Post from '../templates/Post'
 import Comment from '../templates/Comment'
 
@@ -20,6 +21,9 @@ const Profile = () => {
         dispatch(fetchUserProfile(currentUser.username))
     }, [allPosts, allComments])
 
+    useEffect(() => {
+        dispatch(fetchAllComments())
+    }, [])
 
     return (
         <div className='profilePageContainer'>
@@ -37,7 +41,7 @@ const Profile = () => {
                 <h1>Comments</h1>
                 {userProfile?.userComments?.commentList?.slice(0, 3).map(elem => {
                     return (
-                        <Comment key={elem.id} comment={elem} />
+                        <Comment key={elem.id} comment={elem} location={"myprofile"} />
                     )
                 })}
                 {userProfile?.userComments?.commentList?.length > 3 && <button>View all comments</button>}

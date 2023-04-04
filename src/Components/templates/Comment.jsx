@@ -4,7 +4,7 @@ import { hideAll, showAll, hideSpecific, showSpecific } from "../forum/helperMet
 import { deleteComment, patchComment } from '../../State/comments/allComments'
 
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, location }) => {
     const dispatch = useDispatch()
 
     const [editText, setEditText] = useState("")
@@ -14,44 +14,40 @@ const Comment = ({ comment }) => {
         let id = e.target.dataset.id
         setEditText(text)
 
-        hideAll(".editCommentTextArea")
-        let textbox = showSpecific(".editCommentTextArea", id)
+        hideAll(".editCommentElem")
+        let textbox = showSpecific(".editCommentElem", id)
         textbox.focus()
 
-        showAll(".commentBody")
-        hideSpecific(".commentBody", id)
-
-        showAll(".commentEditDeleteBtn")
-        hideSpecific(".commentEditDeleteBtn", id)
-
-        hideAll(".commentUpdateCancelEditBtn")
-        showSpecific(".commentUpdateCancelEditBtn", id)
+        showAll(".displayCommentElem")
+        hideSpecific(".displayCommentElem", id)
     }
+
     const handleCancelEdit = () => {
-        hideAll(".commentUpdateCancelEditBtn")
-        hideAll(".editCommentTextArea")
-        showAll(".commentBody")
-        showAll('.commentEditDeleteBtn')
+        hideAll(".editCommentElem")
+        showAll(".displayCommentElem")
     }
+
     const handleDeleteComment = (e) => {
-        dispatch(deleteComment(e.target.dataset.id))
+        dispatch(deleteComment(e.target.dataset.commentid))
     }
+
     const handleUpdateComment = (e) => {
         if (editText.trim().length < 1) return;
 
         let updatedComment = {
-            "id": e.target.dataset.id,
+            "id": e.target.dataset.commentid,
             "body": editText,
         }
         console.log(updatedComment)
         dispatch(patchComment(updatedComment))
         handleCancelEdit()
     }
+
     return (
-        <div key={comment.id} className='comment'>
+        <div className='comment'>
             <p
-                data-id={comment.id}
-                className='commentBody'>
+                data-id={comment.id + location}
+                className='displayCommentElem commentBody'>
                 @user# {comment.userId} - {comment.body}
             </p>
             <textarea
@@ -59,34 +55,36 @@ const Comment = ({ comment }) => {
                 value={editText}
                 onChange={(e) => setEditText(e.target.value)}
                 placeholder='Comment can not be blank...'
-                data-id={comment.id}
-                className='editCommentTextArea hide' />
+                data-id={comment.id + location}
+                className='editCommentElem editCommentTextArea hide' />
 
             {comment.userId == currentUser.id &&
                 <div className='commentBtnsContainer'>
                     <button
-                        className='commentEditDeleteBtn'
-                        data-id={comment.id}
+                        className='displayCommentElem commentEditDeleteBtn'
+                        data-id={comment.id + location}
                         onClick={(e) => handleEditComment(e, comment.body)}>
                         Edit
                     </button>
                     <button
-                        className='commentEditDeleteBtn'
+                        className='displayCommentElem commentEditDeleteBtn'
                         onClick={handleDeleteComment}
-                        data-id={comment.id}>
+                        data-commentid={comment.id}
+                        data-id={comment.id + location}>
                         Delete
                     </button>
 
                     <button
                         onClick={handleUpdateComment}
-                        data-id={comment.id}
-                        className='commentUpdateCancelEditBtn hide'>
+                        data-commentid={comment.id}
+                        data-id={comment.id + location}
+                        className='editCommentElem commentUpdateCancelEditBtn hide'>
                         Update
                     </button>
                     <button
                         onClick={handleCancelEdit}
-                        data-id={comment.id}
-                        className='commentUpdateCancelEditBtn hide'>
+                        data-id={comment.id + location}
+                        className='editCommentElem commentUpdateCancelEditBtn hide'>
                         Cancel
                     </button>
                 </div>

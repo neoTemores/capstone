@@ -1,10 +1,13 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const LoginSignupBtns = () => {
+    const navigate = useNavigate()
+
     return (
         <div className='loginSignupContainer'>
-            <button>Log in</button>
-            <button>Sign up</button>
+            <button onClick={() => navigate("/login")}>Log in</button>
+            <button onClick={() => navigate("/create-acc")}>Sign up</button>
         </div>
     )
 }

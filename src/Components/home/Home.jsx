@@ -1,6 +1,7 @@
 import { fetchAllCoins } from "../../State/coins/allCoins"
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom"
 import { addCoinToWallet } from "../../State/wallet/savedCoins"
 import "./home.css"
 
@@ -31,9 +32,11 @@ export const parseMoneyValue = (num) => {
 }
 
 const Home = () => {
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     const [query, setQuery] = useState("")
     const allCoins = useSelector(state => state.allCoins.value)
+    const loggedIn = useSelector(state => state.loggedIn.value)
 
     const filteredCoins = allCoins.filter(item => {
         return item.id.toLowerCase().includes(query.toLowerCase()) || item.symbol.toLowerCase().includes(query.toLowerCase())
@@ -46,6 +49,8 @@ const Home = () => {
     const getImg = (symbol) => `https://assets.coincap.io/assets/icons/${symbol.toLowerCase()}@2x.png`;
 
     const handleAddToWallet = (e) => {
+        if (!loggedIn) return navigate("/login")
+
         let coin = {
             userId: 1,
             currencyName: e.target.dataset.name

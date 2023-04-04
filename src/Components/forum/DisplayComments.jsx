@@ -13,7 +13,7 @@ const DisplayComments = ({ elem }) => {
                 allComments.map(comment => {
                     if (comment.postId == elem.id)
                         return (
-                            <Comment key={comment.id} comment={comment} />
+                            <Comment key={comment.id} comment={comment} location={"forum"} />
                         )
                 }
                 )}

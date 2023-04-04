@@ -82,11 +82,9 @@
 
 .createNewThreadBtn {
     font-size: inherit;
-    /* border: none; */
     min-height: 50px;
     background-color: white;
-    /* border-bottom: 5px solid #9995; */
-    /* box-shadow: 5px 5px 5px #555; */
+    border-radius: 5px;
 }
 
 .createNewThreadBtn:hover {
@@ -98,9 +96,10 @@
     display: flex;
     flex-direction: column;
     gap: .25rem;
-    padding: .25rem;
+    padding: .5rem;
     border: 1px solid #1115;
-    background-color: #fff;
+    background-color: white;
+    border-radius: 5px;
 }
 
 .postBtnContainer,
@@ -139,10 +138,11 @@
 .comment {
     display: flex;
     flex-direction: column;
-    /* justify-content: space-between; */
+    background-color: white;
     gap: .5rem;
-    border: 1px solid rgba(0, 0, 139, 0.5);
-    padding: .25rem;
+    border: 1px solid #1115;
+    padding: .5rem;
+    border-radius: 5px;
 }
 
 .editCommentTextArea {
