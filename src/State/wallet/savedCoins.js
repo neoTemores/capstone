@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { WALLET_URL } from "../../App";
+import { WALLET_URL } from "../url";
 
 export const fetchAllSavedCoinsByUser = createAsyncThunk(
     "fetchAllSavedCoinsByUser",

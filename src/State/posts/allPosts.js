@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { POSTS_URL } from "../../App";
+import { POSTS_URL } from "../url";
 
 export const fetchAllPosts = createAsyncThunk(
     "fetchAllPosts",

@@ -1,28 +1,55 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
 import { useRef } from "react"
+import { attemptUserLogin } from "../../State/user/currentUser"
+import { setLoggedIn } from "../../State/user/loggedIn"
 import { BiHide } from "react-icons/bi"
 import "./landing.css"
 
 const LoginPage = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const userName = useRef()
     const password = useRef()
-
+    const loginError = useRef()
     const show = (ref) => ref.current.type = "text"
     const hide = (ref) => ref.current.type = "password"
+
+    const handleLogin = (e) => {
+        loginError.current.classList.add("notVisible")
+        const loginUser = {
+            "username": userName.current.value,
+            "password": password.current.value
+        }
+        if (!loginUser.username.length > 0 || !loginUser.password.length > 0) return;
+
+
+        Promise.resolve(dispatch(attemptUserLogin(loginUser)))
+            .then(val => {
+                if (val.payload?.status === 200) {
+                    dispatch(setLoggedIn(true))
+                    navigate("/")
+                }
+                else loginError.current.classList.remove("notVisible")
+            })
+    }
+
     return (
         <div className="loginPageContainer">
-            <h1>Welcome to Eagle Wallet</h1>
+            <h1>Welcome</h1>
             <form className="loginForm" onSubmit={e => e.preventDefault()}>
-                <input placeholder="Username" required />
-                <input type="password" placeholder="Password" required />
-                {/* <div className='loginPasswordContainer'>
-                    <input ref={password} type="password" placeholder="Password" required />
+                <input ref={userName} placeholder="Username" required />
+
+                <div className="landingPasswordContainer">
+                    <input className="landingFormInput" ref={password} type="password" placeholder="Password" required />
                     <BiHide
                         className='toggleViewPasswordIcon'
                         onMouseDown={() => show(password)}
                         onMouseUp={() => hide(password)}
                         onMouseLeave={() => hide(password)} />
-                </div> */}
-                <button type="submit">Log in</button>
+                </div>
+                <div ref={loginError} className='newPostError notVisible'>Username/Password did not match</div>
+                <button onClick={handleLogin} type="submit">Log in</button>
                 <Link className="createAccLink" to={"/create-acc"}>Create account</Link>
             </form>
         </div>

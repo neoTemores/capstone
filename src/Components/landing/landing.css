@@ -19,12 +19,49 @@
     border-radius: 5px;
 }
 
-.loginForm>* {
+.loginForm>*,
+.landingFormInput {
     font-size: 2rem;
     padding: .5rem;
     border-radius: 5px;
 }
 
+.loginForm>* {
+    outline-color: deepskyblue;
+}
+
+.landingFormInput {
+    border: none;
+    outline: none
+}
+
+.landingPasswordContainer {
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    gap: .25rem;
+    align-items: center;
+    border: 2px solid #333;
+}
+
+.landingPasswordContainer:focus-within {
+    border: 2px solid deepskyblue;
+}
+
 .createAccLink {
-    width: fit-content
+    width: fit-content;
+    text-decoration: none;
+    color: navy;
+    opacity: .5;
+}
+
+.createAccLink:hover {
+    opacity: 1;
+}
+
+.accountCreatedMsgContainer {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    align-items: center;
 }

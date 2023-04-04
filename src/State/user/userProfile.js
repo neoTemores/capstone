@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { USER_PROFILE_URL } from "../../App";
+import { USER_PROFILE_URL } from "../url";
 
 export const fetchUserProfile = createAsyncThunk(
     "fetchUserProfile",

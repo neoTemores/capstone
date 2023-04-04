@@ -29,6 +29,7 @@ const Profile = () => {
         <div className='profilePageContainer'>
             <div className='myProfileMyPostsContainer'>
                 <h1>Posts</h1>
+                {userProfile?.userPosts?.posts?.length === 0 && <h3>You do not have any Posts!</h3>}
                 {userProfile?.userPosts?.posts?.slice(0, 3).map(elem => {
                     return (
                         <Post key={elem.id} elem={elem} />
@@ -39,6 +40,7 @@ const Profile = () => {
 
             <div className='myProfileMyCommentsContainer'>
                 <h1>Comments</h1>
+                {userProfile?.userComments?.commentList?.length === 0 && <h3>You do not have any Comments!</h3>}
                 {userProfile?.userComments?.commentList?.slice(0, 3).map(elem => {
                     return (
                         <Comment key={elem.id} comment={elem} location={"myprofile"} />

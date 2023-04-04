@@ -39,7 +39,27 @@
     font-size: .8rem;
 }
 
+
+.filterCoinsContainer {
+    border: 1px solid #333;
+    display: flex;
+    gap: .25rem;
+    padding: .25rem;
+    background-color: white;
+    border-radius: 5px;
+    width: 50%;
+    align-self: center;
+    justify-self: center
+}
+
+.filterCoinsContainer:focus-within {
+    outline: 1px solid deepskyblue;
+}
+
 .filterCoinsInput {
+    border: none;
+    outline: none;
+    flex: 1;
     font-size: inherit;
     font-family: inherit;
     color: inherit;

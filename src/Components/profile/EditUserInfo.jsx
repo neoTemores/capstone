@@ -97,6 +97,7 @@ const EditUserInfo = ({ setEditinguser }) => {
             <div>
                 <textarea
                     name='bio'
+                    placeholder='Tell us a little bit about yourself!'
                     onChange={handleChange}
                     rows={8}
                     className='editUserBioTextArea'

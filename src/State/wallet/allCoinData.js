@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { COIN_URL } from "../../App";
+import { COIN_URL } from "../url";
 
 
 export const fetchIndividualCoinData = createAsyncThunk(

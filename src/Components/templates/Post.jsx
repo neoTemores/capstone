@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { hideAll, showAll, hideSpecific, showSpecific, focusElement } from "../forum/helperMethods"
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteAllCommentsByPostId } from '../../State/comments/allComments'
@@ -9,12 +10,15 @@ import DisplayComments from '../forum/DisplayComments'
 
 const Post = ({ elem }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [editPostData, setEditPostData] = useState({ "title": "", "body": "" })
     const [newCommentText, setNewCommentText] = useState("")
     const currentUser = useSelector(state => state.currentUser.value)
+    const loggedIn = useSelector(state => state.loggedIn.value)
 
 
     const handleVewNewCommentTextArea = (e) => {
+        if (!loggedIn) return navigate("/login")
         setNewCommentText("")
         showAll(".addCommentBtn")
         hideSpecific(".addCommentBtn", e.target.dataset.id)

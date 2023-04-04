@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import { addCoinToWallet } from "../../State/wallet/savedCoins"
+import { FcSearch } from "react-icons/fc"
 import "./home.css"
 
 export const parseMoneyValue = (num) => {
@@ -64,12 +65,16 @@ const Home = () => {
 
     return (
         <div className="allCoinsContainer">
-            <input
-                className="filterCoinsInput"
-                type="search"
-                value={query}
-                onChange={e => setQuery(e.target.value)}
-                placeholder="Search for a coin by name or symbol..." />
+            <div className="filterCoinsContainer">
+                <FcSearch style={{ fontSize: "1.5rem" }} />
+                <input
+                    className="filterCoinsInput"
+                    type="search"
+                    value={query}
+                    onChange={e => setQuery(e.target.value)}
+                    placeholder="Search for a coin by name or symbol..." />
+            </div>
+
 
             <div className="coinGridHeaderContainer">
                 <div className="gridHeader">Currency</div>
