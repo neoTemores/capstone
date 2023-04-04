@@ -111,6 +111,11 @@
     display: flex;
     gap: .25rem;
     max-height: 20px;
+
+}
+
+.commentBtnsContainer {
+    align-self: flex-end
 }
 
 .postBtnContainer {
@@ -133,14 +138,15 @@
 
 .comment {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    /* justify-content: space-between; */
     gap: .5rem;
     border: 1px solid rgba(0, 0, 139, 0.5);
     padding: .25rem;
 }
 
 .editCommentTextArea {
-    width: 85%
+    width: 100%
 }
 
 .newCommentTextArea,
