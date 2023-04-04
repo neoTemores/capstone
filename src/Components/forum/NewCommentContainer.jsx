@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { postNewComment } from '../../State/comments/allComments';
 import { hideAll, showAll } from './helperMethods';

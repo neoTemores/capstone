@@ -5,20 +5,21 @@ import EditUserInfo from './EditUserInfo'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUserProfile } from '../../State/user/userProfile'
+import Post from '../templates/Post'
+import Comment from '../templates/Comment'
 
 const Profile = () => {
     const dispatch = useDispatch()
     const [editingUser, setEditinguser] = useState(false)
     const currentUser = useSelector(state => state.currentUser.value)
     const userProfile = useSelector(state => state.userProfile.value)
+    const allPosts = useSelector(state => state.allPosts.value)
+    const allComments = useSelector(state => state.allComments.value)
 
     useEffect(() => {
         dispatch(fetchUserProfile(currentUser.username))
-    }, [])
+    }, [allPosts, allComments])
 
-    useEffect(() => {
-        console.log(userProfile)
-    }, [userProfile])
 
     return (
         <div className='profilePageContainer'>
@@ -26,14 +27,7 @@ const Profile = () => {
                 <h1>Posts</h1>
                 {userProfile?.userPosts?.posts?.slice(0, 3).map(elem => {
                     return (
-                        <div key={elem.id} className='individualPostContainer'>
-                            <h3>{elem.title}</h3>
-                            <p>{elem.body}</p>
-                            <div className='postEditDeleteUpdateCancelBtnContainer myPosts'>
-                                <button>Edit</button>
-                                <button>Delete</button>
-                            </div>
-                        </div>
+                        <Post key={elem.id} elem={elem} />
                     )
                 })}
                 {userProfile?.userPosts?.posts?.length > 3 && <button>View all posts</button>}
@@ -43,13 +37,7 @@ const Profile = () => {
                 <h1>Comments</h1>
                 {userProfile?.userComments?.commentList?.slice(0, 3).map(elem => {
                     return (
-                        <div key={elem.id} className='individualPostContainer'>
-                            <p>{elem.body}</p>
-                            <div className='commentBtnsContainer myComments'>
-                                <button>Edit</button>
-                                <button>Delete</button>
-                            </div>
-                        </div>
+                        <Comment key={elem.id} comment={elem} />
                     )
                 })}
                 {userProfile?.userComments?.commentList?.length > 3 && <button>View all comments</button>}
