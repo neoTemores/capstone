@@ -12,7 +12,9 @@ const NewCommentContainer = ({ elem, newCommentText, setNewCommentText }) => {
         const newComment = {
             "userId": currentUser.id,
             "postId": e.target.dataset.id,
-            "body": newCommentText.trim()
+            "body": newCommentText.trim(),
+            "username": currentUser.username,
+            "date": new Date()
         }
         dispatch(postNewComment(newComment))
 

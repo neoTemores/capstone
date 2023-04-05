@@ -19,6 +19,22 @@ export const attemptUserLogin = createAsyncThunk(
     }
 )
 
+export const updateCurrentUserData = createAsyncThunk(
+    "updateCurrentUserData",
+    async (updatedUser) => {
+        let reqBody = {
+            method: "PUT",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updatedUser)
+        }
+        const res = await fetch(USER_URL.UPDATE + updatedUser.id, reqBody)
+        const data = await res.json()
+        return {
+            "status": res.status,
+            "updatedUser": data
+        }
+    }
+)
 
 export const currentUserSlice = createSlice({
     name: "currentUser",
@@ -33,6 +49,13 @@ export const currentUserSlice = createSlice({
             .addCase(attemptUserLogin.fulfilled, (state, action) => {
                 if (action.payload.status === 200)
                     state.value = action.payload.user
+            })
+            .addCase(updateCurrentUserData.fulfilled, (state, action) => {
+                if (action.payload.status === 200) {
+                    state.value.bio = action.payload.updatedUser.bio
+                    state.value.password = action.payload.updatedUser.password
+                    state.value.email = action.payload.updatedUser.email
+                }
             })
     }
 })

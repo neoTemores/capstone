@@ -16,7 +16,9 @@ const CreateNewPostModal = () => {
         let newPost = {
             "title": postData.title.trim(),
             "body": postData.body.trim(),
-            "userID": currentUser.id
+            "userID": currentUser.id,
+            "username": currentUser.username,
+            "date": new Date()
         }
         dispatch(addNewPost(newPost))
         dispatch(setShowNewPostModal(false))

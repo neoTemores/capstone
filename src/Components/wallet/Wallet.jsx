@@ -23,9 +23,9 @@ const Wallet = () => {
     }, [currentUser])
 
     useEffect(() => {
-        if (allSavedCoins.length > 0)
+        if (allSavedCoins?.length > 0)
             getCoinData()
-    }, [allSavedCoins.length])
+    }, [allSavedCoins?.length])
 
     const redirectToLogin = () => {
         navigate("/")
@@ -55,7 +55,7 @@ const Wallet = () => {
         setLastIndex(prev => prev + num)
     }
 
-    if (allSavedCoins.length < 1)
+    if (allSavedCoins?.length < 1)
         return <h1>You do not have any saved coins!</h1>
 
     return (

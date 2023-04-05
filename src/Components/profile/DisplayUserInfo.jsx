@@ -33,14 +33,14 @@ const DisplayUserInfo = ({ setEditinguser }) => {
         setMemberString(`Eagle for ${years} year${y}, ${months} month${m} and ${days} day${d}`)
     }
 
-    const hidePassword = () => new Array(currentUser.password.length).fill("*").join("")
+    // const hidePassword = () => new Array(currentUser.password.length).fill("*").join("")
 
     return (
         <>
             <div><h3>{memberString}</h3></div>
             <div><span>Username: </span>{currentUser.username}</div>
 
-            <div><span>Password: </span>{hidePassword()}</div>
+            {/* <div><span>Password: </span>{hidePassword()}</div> */}
 
             <div><span>Email: </span>{currentUser.email}</div>
 

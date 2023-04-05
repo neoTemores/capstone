@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { hideAll, showAll, hideSpecific, showSpecific, focusElement } from "../forum/helperMethods"
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteAllCommentsByPostId } from '../../State/comments/allComments'
@@ -15,7 +15,6 @@ const Post = ({ elem }) => {
     const [newCommentText, setNewCommentText] = useState("")
     const currentUser = useSelector(state => state.currentUser.value)
     const loggedIn = useSelector(state => state.loggedIn.value)
-
 
     const handleVewNewCommentTextArea = (e) => {
         if (!loggedIn) return navigate("/login")
@@ -75,7 +74,9 @@ const Post = ({ elem }) => {
                 {elem.title}
             </h3>
             <p className='displayPostElem individualPostBody' data-id={elem.id}>{elem.body}</p>
-            <p>{elem.id}</p>
+            <p>
+                @<Link to={`/profile/${elem.userID}`}>{elem.username}</Link> - {new Date(elem.date).toDateString()}
+            </p>
 
             <input
                 className='editPostElem editPostTitleInput hide'

@@ -46,7 +46,7 @@ const Home = () => {
 
     const foundInWallet = (id) => {
         let found = false
-        allSavedCoins.forEach(coin => {
+        allSavedCoins?.forEach(coin => {
             if (coin.currencyName == id)
                 found = true
         })

@@ -11,10 +11,9 @@ const LogOutBtn = () => {
     const currentUser = useSelector(state => state.currentUser.value)
 
     const handleLogOut = () => {
-        // window.location.reload()
-        // dispatch(setSavedCoins([]))
+        dispatch(setSavedCoins([]))
         dispatch(setLoggedIn(false))
-        // dispatch(setCurrentUser({}))
+        dispatch(setCurrentUser({}))
         navigate("/")
     }
 

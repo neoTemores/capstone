@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { hideAll, showAll, hideSpecific, showSpecific } from "../forum/helperMethods"
 import { deleteComment, patchComment } from '../../State/comments/allComments'
@@ -48,7 +49,10 @@ const Comment = ({ comment, location }) => {
             <p
                 data-id={comment.id + location}
                 className='displayCommentElem commentBody'>
-                @user# {comment.userId} - {comment.body}
+
+                @<Link>{comment.username}</Link> - {comment.body}
+                <br />
+                <span>{new Date(comment.date).toDateString()}</span>
             </p>
             <textarea
                 rows={4}

@@ -3,6 +3,7 @@ import { useState } from 'react'
 const Pagination = ({ startIndex, lastIndex, length, updateIndex, itemsPerPage }) => {
 
     const [currentPage, setCurrentPage] = useState(1)
+    const numOfPages = Math.ceil(length / itemsPerPage)
 
     const handleChangePage = (index, page) => {
         updateIndex(index)
@@ -19,7 +20,8 @@ const Pagination = ({ startIndex, lastIndex, length, updateIndex, itemsPerPage }
                 </button>
             }
 
-            <div>{currentPage} of {Math.ceil(length / itemsPerPage)}</div>
+            {numOfPages !== 0 && <div>{currentPage} of {numOfPages}</div>}
+
 
             {lastIndex < length &&
                 <button

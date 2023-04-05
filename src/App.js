@@ -7,6 +7,7 @@ import Wallet from "./Components/wallet/Wallet"
 import Profile from "./Components/profile/Profile"
 import LoginPage from './Components/landing/LoginPage'
 import CreateAccountPage from './Components/landing/CreateAccountPage'
+import TestProfile from './Components/templates/TestProfile'
 
 const App = () => {
 
@@ -19,6 +20,8 @@ const App = () => {
         <Route path='/forum' element={<Forum />} />
         <Route path='/wallet' element={<Wallet />} />
         <Route path='/profile' element={<Profile />} />
+        <Route exact path='/profile/:id' element={<TestProfile />} />
+
         <Route path='/login' element={<LoginPage />} />
         <Route path='/create-acc' element={<CreateAccountPage />} />
       </Routes>

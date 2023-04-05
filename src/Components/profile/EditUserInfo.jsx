@@ -1,9 +1,11 @@
 import { useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { updateCurrentUserData } from '../../State/user/currentUser'
 import { BiHide } from "react-icons/bi"
 
 
 const EditUserInfo = ({ setEditinguser }) => {
+    const dispatch = useDispatch()
     const currentUser = useSelector(state => state.currentUser.value)
     const password = useRef()
     const confirmPassword = useRef()
@@ -11,14 +13,18 @@ const EditUserInfo = ({ setEditinguser }) => {
     const passwordError = useRef()
 
     const [profileData, setProfileData] = useState({
-        "email": "",
+        "id": currentUser.id,
+        "email": currentUser.email,
         "password": currentUser.password,
         "bio": currentUser.bio
     })
 
-    const handleSaveChanges = () => {
-        if (isValidData())
-            console.log("match")
+    const handleSaveChanges = (e) => {
+        e.preventDefault()
+        if (isValidData()) {
+            dispatch(updateCurrentUserData(profileData))
+            setEditinguser(false)
+        }
     }
 
 
@@ -46,7 +52,7 @@ const EditUserInfo = ({ setEditinguser }) => {
     const hide = (ref) => ref.current.type = "password"
 
     return (
-        <form onSubmit={e => e.preventDefault()}>
+        <form >
             <div>
                 Email:
                 <input

@@ -33,6 +33,7 @@ export const COMMENTS_URL = {
 export const USER_URL = {
     "LOGIN": "http://localhost:8080/api/getuser",
     "CREATE": "http://localhost:8080/api/createuser",
+    "UPDATE": "http://localhost:8080/api/updateuser/",
     "ALL_USERS": "http://localhost:8080/api/users"
 }
 

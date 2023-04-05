@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUserProfile } from '../../State/user/userProfile'
 import { fetchAllComments } from '../../State/comments/allComments'
-import { fetchAllSavedCoinsByUser } from '../../State/wallet/savedCoins'
+import { fetchAllSavedCoinsByUser, setSavedCoins } from '../../State/wallet/savedCoins'
 import { setAllCoinData, fetchIndividualCoinData } from '../../State/wallet/allCoinData'
 import Post from '../templates/Post'
 import Comment from '../templates/Comment'
@@ -40,13 +40,12 @@ const Profile = () => {
     }, [])
 
     useEffect(() => {
-        if (allSavedCoins.length > 0)
-            getCoinData()
-    }, [allSavedCoins.length])
+        getCoinData()
+    }, [allSavedCoins?.length])
 
     const getCoinData = () => {
         dispatch(setAllCoinData([]))
-        allSavedCoins.forEach(elem => {
+        allSavedCoins?.forEach(elem => {
             dispatch(fetchIndividualCoinData(elem.currencyName))
         })
     }
@@ -115,10 +114,12 @@ const Profile = () => {
                 <h1>Coins</h1>
                 <div className='userProfileCoinsData'>
 
-                    <div className="userProfileCoinsContainer headers">
-                        <div className="gridHeader">Currency</div>
-                        <div className="gridHeader profileCoinChange">Change</div>
-                    </div>
+                    {allCoinData?.length === 0 ? <h3>No coins in Wallet</h3>
+                        :
+                        <div className="userProfileCoinsContainer headers">
+                            <div className="gridHeader">Currency</div>
+                            <div className="gridHeader profileCoinChange">Change</div>
+                        </div>}
 
                     {allCoinData.slice(startIndexCoins, lastIndexCoins).map(elem =>
 
