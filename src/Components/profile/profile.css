@@ -5,22 +5,8 @@
     grid-template-columns: 2fr 1fr;
     grid-template-areas:
         "posts bio"
-        "comments bio";
-    /* justify-content: center; */
-    /* align-items: center; */
+        "comments coins";
     min-height: 80vh;
-}
-
-.userDisplayData {
-    height: fit-content;
-    grid-area: bio;
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-    padding: .5rem;
-    background-color: white;
-    border-radius: 5px;
-    border: 1px solid #1115
 }
 
 .myProfileMyPostsContainer {
@@ -31,8 +17,43 @@
     grid-area: comments;
 }
 
+.userBioContainer {
+    grid-area: bio;
+}
+
+.myProfileCoinsContainer {
+    grid-area: coins;
+}
+
+.userProfileCoinsContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.userProfileCoinsContainer.headers {
+    border-bottom: 1px solid #333;
+}
+
+.profileCoinChange {
+    justify-self: center;
+}
+
+.userDisplayData,
+.userProfileCoinsData {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding: .5rem;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #1115
+}
+
 .myProfileMyPostsContainer,
-.myProfileMyCommentsContainer {
+.myProfileMyCommentsContainer,
+.userBioContainer,
+.myProfileCoinsContainer {
     display: flex;
     flex-direction: column;
     gap: .5rem;

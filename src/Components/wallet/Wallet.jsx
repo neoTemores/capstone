@@ -1,9 +1,10 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { fetchAllSavedCoinsByUser, deleteFromWallet } from "../../State/wallet/savedCoins"
 import { fetchIndividualCoinData, setAllCoinData } from "../../State/wallet/allCoinData"
-import { parseMoneyValue } from "../home/Home"
+import Pagination from "../templates/Pagination"
+import { getImg, parseMoneyValue } from "../home/helperMethods"
 
 const Wallet = () => {
     const dispatch = useDispatch()
@@ -12,6 +13,8 @@ const Wallet = () => {
     const allCoinData = useSelector(state => state.allCoinData.value)
     const currentUser = useSelector(state => state.currentUser.value)
     const loggedIn = useSelector(state => state.loggedIn.value)
+    const [startIndex, setStartIndex] = useState(0)
+    const [lastIndex, setLastIndex] = useState(10)
 
     useEffect(() => {
         if (!loggedIn) return redirectToLogin()
@@ -35,7 +38,6 @@ const Wallet = () => {
             dispatch(fetchIndividualCoinData(elem.currencyName))
         })
     }
-    const getImg = (symbol) => `https://assets.coincap.io/assets/icons/${symbol.toLowerCase()}@2x.png`;
 
     const handleRemoveFromWallet = (e) => {
         let id;
@@ -47,6 +49,10 @@ const Wallet = () => {
         })
 
         dispatch(deleteFromWallet(id))
+    }
+    const updateIndex = (num) => {
+        setStartIndex(prev => prev + num)
+        setLastIndex(prev => prev + num)
     }
 
     if (allSavedCoins.length < 1)
@@ -65,7 +71,7 @@ const Wallet = () => {
                 <div className="gridHeader">Watching</div>
             </div>
 
-            {allCoinData.map(elem =>
+            {allCoinData.slice(startIndex, lastIndex).map(elem =>
 
                 <div className="individualCoinContainer" key={elem.id}>
 
@@ -91,7 +97,13 @@ const Wallet = () => {
 
                 </div>
             )}
-
+            <Pagination
+                startIndex={startIndex}
+                lastIndex={lastIndex}
+                length={allCoinData.length}
+                updateIndex={updateIndex}
+                itemsPerPage={10}
+            />
         </div>
     )
 }

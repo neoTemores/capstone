@@ -3,37 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import { addCoinToWallet } from "../../State/wallet/savedCoins"
-import { setSavedCoins } from "../../State/wallet/savedCoins"
 import { fetchAllSavedCoinsByUser } from "../../State/wallet/savedCoins"
 import { FcSearch } from "react-icons/fc"
 import "./home.css"
 import Pagination from "../templates/Pagination"
-
-export const parseMoneyValue = (num) => {
-    num = Math.round(num)
-    let stringNum = num.toString();
-    let letter;
-
-    if (stringNum.length >= 13) {
-        stringNum = (num /= 1000000000000).toFixed(1)
-        letter = 'T'
-    }
-    else if (stringNum.length >= 10) {
-        stringNum = (num /= 1000000000).toFixed(1)
-        letter = 'B'
-    }
-    else if (stringNum.length >= 7) {
-        stringNum = (num /= 1000000).toFixed(1)
-        letter = 'M'
-    }
-    else {
-        stringNum = (num /= 1000).toFixed(1)
-        letter = 'K'
-    }
-
-    let lastIndex = stringNum.length - 1
-    return `${stringNum.substring(0, lastIndex)}${stringNum[lastIndex]}${letter}`
-}
+import { parseMoneyValue, getImg } from "./helperMethods"
 
 const Home = () => {
     const navigate = useNavigate()
@@ -56,8 +30,6 @@ const Home = () => {
             dispatch(fetchAllSavedCoinsByUser(currentUser.id))
 
     }, [currentUser, loggedIn])
-
-    const getImg = (symbol) => `https://assets.coincap.io/assets/icons/${symbol.toLowerCase()}@2x.png`;
 
     const handleAddToWallet = (e) => {
         if (!loggedIn) return navigate("/login")
