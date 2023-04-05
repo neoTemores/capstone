@@ -50,7 +50,7 @@ const Comment = ({ comment, location }) => {
                 data-id={comment.id + location}
                 className='displayCommentElem commentBody'>
 
-                @<Link>{comment.username}</Link> - {comment.body}
+                @<Link to={`/profile/${comment.username}/${comment.userId}`}>{comment.username}</Link> - {comment.body}
                 <br />
                 <span>{new Date(comment.date).toDateString()}</span>
             </p>

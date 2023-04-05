@@ -27,7 +27,6 @@ const EditUserInfo = ({ setEditinguser }) => {
         }
     }
 
-
     const isValidData = () => {
         let isValidData = true
         emailError.current.classList.add("notVisible")

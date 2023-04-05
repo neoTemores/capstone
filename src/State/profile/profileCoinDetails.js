@@ -2,8 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { COIN_URL } from "../url";
 
 
-export const fetchIndividualCoinData = createAsyncThunk(
-    "fetchIndividualCoinData",
+export const fetchProfileCoinDetails = createAsyncThunk(
+    "fetchProfileCoinDetails",
     async (coinId) => {
         const res = await fetch(COIN_URL.GET_ONE + coinId)
         const data = await res.json()
@@ -12,11 +12,11 @@ export const fetchIndividualCoinData = createAsyncThunk(
 )
 
 
-export const allCoinDataSlice = createSlice({
-    name: "allCoinData",
+export const profileCoinDetailsSlice = createSlice({
+    name: "profileCoinDetails",
     initialState: { value: [] },
     reducers: {
-        setAllCoinData: (state, action) => {
+        setProfileCoinDetails: (state, action) => {
             state.value = action.payload
         },
     },
@@ -25,11 +25,11 @@ export const allCoinDataSlice = createSlice({
             // .addCase(fetchIndividualCoinData.pending, (state) => {
             //     state.value = []
             // })
-            .addCase(fetchIndividualCoinData.fulfilled, (state, action) => {
+            .addCase(fetchProfileCoinDetails.fulfilled, (state, action) => {
                 state.value = [...state.value, action.payload]
             })
     }
 })
 
-export const { setAllCoinData } = allCoinDataSlice.actions;
-export default allCoinDataSlice.reducer;
+export const { setProfileCoinDetails } = profileCoinDetailsSlice.actions;
+export default profileCoinDetailsSlice.reducer;

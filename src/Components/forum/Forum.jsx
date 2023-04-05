@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { fetchAllPosts } from "../../State/posts/allPosts"
 import { fetchAllComments } from '../../State/comments/allComments'
 import { setShowNewPostModal } from '../../State/posts/showNewPostModal'
+import { setProfileCoinDetails } from '../../State/profile/profileCoinDetails'
 import "./Forum.css"
 
 import CreateNewPostModal from './CreateNewPostModal'

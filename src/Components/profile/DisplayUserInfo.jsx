@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
 const DisplayUserInfo = ({ setEditinguser }) => {
+    const { id } = useParams()
     const currentUser = useSelector(state => state.currentUser.value)
+    const userProfile = useSelector(state => state.userProfile.value)
     const [memberString, setMemberString] = useState("")
     const [userDate, setUserDate] = useState("")
 
     useEffect(() => {
-        if (currentUser.date)
+        if (userProfile?.date)
             calcDaysOfMembership()
-    }, [])
+    }, [userProfile])
 
     const calcDaysOfMembership = () => {
-        let splitDate = currentUser.date.split("-");
+        let splitDate = userProfile?.date.split("-");
         let userJoinedDate = new Date(splitDate[0], splitDate[1] - 1, splitDate[2])
         setUserDate(userJoinedDate.toDateString())
 
@@ -33,24 +36,24 @@ const DisplayUserInfo = ({ setEditinguser }) => {
         setMemberString(`Eagle for ${years} year${y}, ${months} month${m} and ${days} day${d}`)
     }
 
-    // const hidePassword = () => new Array(currentUser.password.length).fill("*").join("")
-
     return (
         <>
             <div><h3>{memberString}</h3></div>
-            <div><span>Username: </span>{currentUser.username}</div>
+            <div><span>Username: </span>{userProfile.username}</div>
 
-            {/* <div><span>Password: </span>{hidePassword()}</div> */}
-
-            <div><span>Email: </span>{currentUser.email}</div>
+            <div><span>Email: </span>{userProfile.email}</div>
 
             <div><span>Member since: </span>{userDate}</div>
 
-            <div><span>Bio: </span>{currentUser.bio}</div>
+            <div><span>Bio: </span>{userProfile.userBio}</div>
 
             <div className='userDataEditDeleteBtnContainer'>
-                <button onClick={() => setEditinguser(true)}>Edit my profile</button>
-                <button>Delete profile</button>
+                {currentUser?.id == id &&
+                    <>
+                        <button onClick={() => setEditinguser(true)}>Edit my profile</button>
+                        <button>Delete profile</button>
+                    </>
+                }
             </div>
         </>
     )

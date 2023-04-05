@@ -18,7 +18,7 @@ const LoginPage = () => {
     const show = (ref) => ref.current.type = "text"
     const hide = (ref) => ref.current.type = "password"
 
-    const handleLogin = (e) => {
+    const handleLogin = () => {
         loginError.current.classList.add("notVisible")
         const loginUser = {
             "username": userName.current.value,
@@ -30,7 +30,6 @@ const LoginPage = () => {
         Promise.resolve(dispatch(attemptUserLogin(loginUser)))
             .then(val => {
                 if (val.payload?.status === 200) {
-                    // console.log(val.payload.user)
                     dispatch(setLoggedIn(true))
                     dispatch(setCurrentUser(val.payload.user))
                     dispatch(fetchAllSavedCoinsByUser(val.payload.user.id))

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { setLoggedIn } from "../../State/user/loggedIn"
 import { setCurrentUser } from "../../State/user/currentUser"
 import { setSavedCoins } from "../../State/wallet/savedCoins"
+import { setUserProfile } from "../../State/profile/userProfile"
 
 
 const LogOutBtn = () => {
@@ -14,6 +15,7 @@ const LogOutBtn = () => {
         dispatch(setSavedCoins([]))
         dispatch(setLoggedIn(false))
         dispatch(setCurrentUser({}))
+        dispatch(setUserProfile([]))
         navigate("/")
     }
 

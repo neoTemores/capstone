@@ -1,27 +1,26 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { useParams } from 'react-router-dom'
 import "./profile.css"
 import DisplayUserInfo from './DisplayUserInfo'
 import EditUserInfo from './EditUserInfo'
-import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchUserProfile } from '../../State/user/userProfile'
-import { fetchAllComments } from '../../State/comments/allComments'
-import { fetchAllSavedCoinsByUser, setSavedCoins } from '../../State/wallet/savedCoins'
-import { setAllCoinData, fetchIndividualCoinData } from '../../State/wallet/allCoinData'
+import { fetchUserProfile, setUserProfile } from '../../State/profile/userProfile'
+import { fetchProfileCoinDetails, setProfileCoinDetails } from '../../State/profile/profileCoinDetails'
 import Post from '../templates/Post'
 import Comment from '../templates/Comment'
 import Pagination from '../templates/Pagination'
 import { getImg } from '../home/helperMethods'
 
 const Profile = () => {
+    const { username } = useParams()
+    const fetched = useRef(false)
     const dispatch = useDispatch()
     const [editingUser, setEditinguser] = useState(false)
-    const currentUser = useSelector(state => state.currentUser.value)
     const userProfile = useSelector(state => state.userProfile.value)
+    const currentUser = useSelector(state => state.currentUser.value)
     const allPosts = useSelector(state => state.allPosts.value)
     const allComments = useSelector(state => state.allComments.value)
-    const allSavedCoins = useSelector(state => state.savedCoins.value)
-    const allCoinData = useSelector(state => state.allCoinData.value)
+    const profileCoinDetails = useSelector(state => state.profileCoinDetails.value)
 
     const [startIndexPost, setStartIndexPost] = useState(0)
     const [lastIndexPost, setLastIndexPost] = useState(3)
@@ -30,25 +29,24 @@ const Profile = () => {
     const [startIndexCoins, setStartIndexCoins] = useState(0)
     const [lastIndexCoins, setLastIndexCoins] = useState(4)
 
-    useEffect(() => {
-        dispatch(fetchUserProfile(currentUser.username))
-    }, [allPosts, allComments])
 
     useEffect(() => {
-        dispatch(fetchAllComments())
-        dispatch(fetchAllSavedCoinsByUser(currentUser.id))
-    }, [])
+        dispatch(fetchUserProfile(username))
+    }, [allPosts, allComments, username, currentUser])
 
     useEffect(() => {
-        getCoinData()
-    }, [allSavedCoins?.length])
 
-    const getCoinData = () => {
-        dispatch(setAllCoinData([]))
-        allSavedCoins?.forEach(elem => {
-            dispatch(fetchIndividualCoinData(elem.currencyName))
-        })
-    }
+        if (!fetched.current && username == userProfile.username) {
+            dispatch(setProfileCoinDetails([]))
+            fetched.current = true
+            userProfile?.userSavedCoins?.savedCoinsList?.forEach(elem => {
+                dispatch(fetchProfileCoinDetails(elem.currencyName))
+            })
+        } else {
+            fetched.current = false
+        }
+    }, [userProfile, username])
+
 
     const updatePostIndex = (num) => {
         setStartIndexPost(prev => prev + num)
@@ -65,9 +63,10 @@ const Profile = () => {
     }
     return (
         <div className='profilePageContainer'>
+            <h1 className='profilePageHeader'>Welcome to @{userProfile.username}'s Page</h1>
             <div className='myProfileMyPostsContainer'>
                 <h1>Posts</h1>
-                {userProfile?.userPosts?.posts?.length === 0 && <h3>You do not have any Posts!</h3>}
+                {userProfile?.userPosts?.posts?.length === 0 && <h3>@{userProfile.username} does not have any Posts!</h3>}
                 {userProfile?.userPosts?.posts?.slice(startIndexPost, lastIndexPost).map(elem => {
                     return (
                         <Post key={elem.id} elem={elem} />
@@ -86,7 +85,7 @@ const Profile = () => {
             <div className='myProfileMyCommentsContainer'>
                 <h1>Comments</h1>
                 {userProfile?.userComments?.commentList?.length === 0 &&
-                    <h3>You do not have any Comments!</h3>}
+                    <h3>@{userProfile.username} does not have any Comments!</h3>}
 
                 {userProfile?.userComments?.commentList?.slice(startIndexComments, lastIndexComments).map(elem => {
                     return (<Comment key={elem.id} comment={elem} location={"myprofile"} />)
@@ -114,14 +113,14 @@ const Profile = () => {
                 <h1>Coins</h1>
                 <div className='userProfileCoinsData'>
 
-                    {allCoinData?.length === 0 ? <h3>No coins in Wallet</h3>
+                    {profileCoinDetails.length === 0 ? <h3>No coins in Wallet</h3>
                         :
                         <div className="userProfileCoinsContainer headers">
                             <div className="gridHeader">Currency</div>
                             <div className="gridHeader profileCoinChange">Change</div>
                         </div>}
 
-                    {allCoinData.slice(startIndexCoins, lastIndexCoins).map(elem =>
+                    {profileCoinDetails.slice(startIndexCoins, lastIndexCoins).map(elem =>
 
                         <div className="userProfileCoinsContainer" key={elem.id}>
 
@@ -144,7 +143,7 @@ const Profile = () => {
                 <Pagination
                     startIndex={startIndexCoins}
                     lastIndex={lastIndexCoins}
-                    length={allCoinData.length}
+                    length={profileCoinDetails.length}
                     updateIndex={updateCoinsIndex}
                     itemsPerPage={4}
                 />

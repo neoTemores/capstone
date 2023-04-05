@@ -54,6 +54,9 @@ export const savedCoinsSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            // .addCase(fetchAllSavedCoinsByUser.pending, (state) => {
+            //     state.value = []
+            // })
             .addCase(fetchAllSavedCoinsByUser.fulfilled, (state, action) => {
                 state.value = action.payload
             })
