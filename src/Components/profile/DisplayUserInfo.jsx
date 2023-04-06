@@ -1,9 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useParams, useNavigate } from 'react-router-dom'
+import { setSavedCoins } from '../../State/wallet/savedCoins'
+import { setLoggedIn } from '../../State/user/loggedIn'
+import { setCurrentUser } from '../../State/user/currentUser'
+import { setUserProfile } from '../../State/profile/userProfile'
+import { USER_URL } from '../../State/url'
 
 const DisplayUserInfo = ({ setEditinguser }) => {
     const { id } = useParams()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const currentUser = useSelector(state => state.currentUser.value)
     const userProfile = useSelector(state => state.userProfile.value)
     const [memberString, setMemberString] = useState("")
@@ -36,6 +43,20 @@ const DisplayUserInfo = ({ setEditinguser }) => {
         setMemberString(`Eagle for ${years} year${y}, ${months} month${m} and ${days} day${d}`)
     }
 
+    const handleDeleteProfile = async () => {
+        const res = await fetch(USER_URL.DELETE + currentUser.id, { method: "DELETE" })
+        const data = await res.json()
+
+        if (data.res === 202)
+            handleLogOut()
+    }
+    const handleLogOut = () => {
+        dispatch(setSavedCoins([]))
+        dispatch(setLoggedIn(false))
+        dispatch(setCurrentUser({}))
+        dispatch(setUserProfile([]))
+        navigate("/")
+    }
     return (
         <>
             <div><h3>{memberString}</h3></div>
@@ -51,7 +72,7 @@ const DisplayUserInfo = ({ setEditinguser }) => {
                 {currentUser?.id == id &&
                     <>
                         <button onClick={() => setEditinguser(true)}>Edit my profile</button>
-                        <button>Delete profile</button>
+                        <button onClick={handleDeleteProfile}>Delete profile</button>
                     </>
                 }
             </div>
