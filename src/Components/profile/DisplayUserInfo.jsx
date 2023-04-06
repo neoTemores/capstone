@@ -56,6 +56,7 @@ const DisplayUserInfo = ({ setEditinguser }) => {
         dispatch(setCurrentUser({}))
         dispatch(setUserProfile([]))
         navigate("/")
+        window.location.reload()
     }
     return (
         <>

@@ -16,7 +16,7 @@ const CreateAccountPage = () => {
     const passwordError = useRef()
     const show = (ref) => ref.current.type = "text"
     const hide = (ref) => ref.current.type = "password"
-    const [showModal, setShowModal] = useState(true)
+    const [showModal, setShowModal] = useState(false)
     const [showUserNameErr, setShowUserNameErr] = useState(false)
 
 
@@ -37,9 +37,9 @@ const CreateAccountPage = () => {
         passwordError.current.classList.add("notVisible")
 
         let newUser = {
-            "email": email.current.value,
-            "username": userName.current.value,
-            "password": password.current.value,
+            "email": email.current.value.trim(),
+            "username": userName.current.value.trim(),
+            "password": password.current.value.trim(),
             "bio": ""
         }
 
@@ -65,8 +65,8 @@ const CreateAccountPage = () => {
     return (
 
         <div className="loginPageContainer">
-            {showModal && <SuccessModal userName={"CSS styles"} />}
-            {/* {showModal && <SuccessModal userName={userName.current.value} />} */}
+            {/* {showModal && <SuccessModal userName={"CSS styles"} />} */}
+            {showModal && <SuccessModal userName={userName.current.value} />}
             <h1>Create your account</h1>
             <form className="loginForm" onSubmit={e => e.preventDefault()}>
                 <input ref={email} type="email" placeholder="E-mail" required />

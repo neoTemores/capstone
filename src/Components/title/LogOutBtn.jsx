@@ -17,6 +17,7 @@ const LogOutBtn = () => {
         dispatch(setCurrentUser({}))
         dispatch(setUserProfile([]))
         navigate("/")
+        window.location.reload()
     }
 
     return (
