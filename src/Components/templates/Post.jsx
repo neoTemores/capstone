@@ -7,9 +7,10 @@ import { deletePost, patchPost } from "../../State/posts/allPosts"
 import NewCommentContainer from '../forum/NewCommentContainer'
 import DisplayComments from '../forum/DisplayComments'
 import { setLoading } from '../../State/loading'
-import { BsTrash } from "react-icons/bs"
-import { MdOutlineModeEdit, MdKeyboardArrowDown } from "react-icons/md"
+import { BsTrash, BsSendPlus } from "react-icons/bs"
+import { MdOutlineModeEdit, MdKeyboardArrowDown, MdSaveAs } from "react-icons/md"
 import { HiOutlineChatBubbleLeftEllipsis } from "react-icons/hi2"
+import { FcCancel } from "react-icons/fc"
 
 
 const Post = ({ elem }) => {
@@ -69,7 +70,7 @@ const Post = ({ elem }) => {
     }
     const handleSubmitPostUpdate = (e) => {
         let updatedPostData = {
-            "id": e.target.dataset.id,
+            "id": e.currentTarget.dataset.id,
             "title": editPostData.title,
             "body": editPostData.body
         }
@@ -137,17 +138,16 @@ const Post = ({ elem }) => {
                             onClick={handleDeletePost}
                             data-id={elem.id} />
 
-                        <button
+                        <BsSendPlus
+                            style={{ fontSize: "1.25rem", color: "green" }}
                             className='editPostElem postUpdateCancelEditBtn hide'
                             onClick={handleSubmitPostUpdate}
-                            data-id={elem.id}>
-                            Update
-                        </button>
-                        <button
+                            data-id={elem.id} />
+
+                        <FcCancel
+                            style={{ fontSize: "1.5rem" }}
                             className='editPostElem postUpdateCancelEditBtn hide'
-                            onClick={handleCancelPostEdit} data-id={elem.id}>
-                            Cancel
-                        </button>
+                            onClick={handleCancelPostEdit} data-id={elem.id} />
                     </div>
                 }
             </div>

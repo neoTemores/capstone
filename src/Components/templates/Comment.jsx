@@ -4,8 +4,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { hideAll, showAll, hideSpecific, showSpecific } from "../forum/helperMethods"
 import { deleteComment, patchComment } from '../../State/comments/allComments'
 import { setLoading } from "../../State/loading"
-import { BsTrash } from "react-icons/bs"
+import { BsTrash, BsSendPlus } from "react-icons/bs"
 import { MdOutlineModeEdit } from "react-icons/md"
+import { FcCancel } from "react-icons/fc"
 
 
 const Comment = ({ comment, location }) => {
@@ -41,8 +42,8 @@ const Comment = ({ comment, location }) => {
         if (editText.trim().length < 1) return;
 
         let updatedComment = {
-            "id": e.target.dataset.commentid,
-            "body": editText,
+            "id": e.currentTarget.dataset.commentid,
+            "body": editText.trim(),
         }
         dispatch(setLoading(true))
         Promise.resolve(dispatch(patchComment(updatedComment)))
@@ -83,19 +84,19 @@ const Comment = ({ comment, location }) => {
                         data-id={comment.id + location}
                         style={{ "color": "red", "fontSize": "1rem" }} />
 
-                    <button
+                    <BsSendPlus
+                        style={{ fontSize: "1rem", color: "green" }}
                         onClick={handleUpdateComment}
                         data-commentid={comment.id}
                         data-id={comment.id + location}
-                        className='editCommentElem commentUpdateCancelEditBtn hide'>
-                        Update
-                    </button>
-                    <button
+                        className='editCommentElem commentUpdateCancelEditBtn hide' />
+
+                    <FcCancel
+                        style={{ fontSize: "1.1rem" }}
                         onClick={handleCancelEdit}
                         data-id={comment.id + location}
-                        className='editCommentElem commentUpdateCancelEditBtn hide'>
-                        Cancel
-                    </button>
+                        className='editCommentElem commentUpdateCancelEditBtn hide' />
+
                 </div>
             }
         </div>
@@ -103,3 +104,17 @@ const Comment = ({ comment, location }) => {
 }
 
 export default Comment
+// {/* <button
+//     onClick={handleUpdateComment}
+//     data-commentid={comment.id}
+//     data-id={comment.id + location}
+//     className='editCommentElem commentUpdateCancelEditBtn hide'>
+//     Update
+// </button> */}
+
+//  {/* <button
+//                         onClick={handleCancelEdit}
+//                         data-id={comment.id + location}
+//                         className='editCommentElem commentUpdateCancelEditBtn hide'>
+//                         Cancel
+//                     </button> */}

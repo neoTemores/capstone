@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { GrPrevious, GrNext } from "react-icons/gr"
 
 const Pagination = ({ startIndex, lastIndex, length, updateIndex, itemsPerPage }) => {
@@ -11,6 +11,7 @@ const Pagination = ({ startIndex, lastIndex, length, updateIndex, itemsPerPage }
         setCurrentPage(prev => prev + page)
         window.scroll(0, 0)
     }
+
     return (
         <div className="paginationContainer">
             {startIndex > 0 &&
