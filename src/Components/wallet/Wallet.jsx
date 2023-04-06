@@ -6,6 +6,8 @@ import { fetchIndividualCoinData, setAllCoinData } from "../../State/wallet/allC
 import Pagination from "../templates/Pagination"
 import { getImg, parseMoneyValue } from "../home/helperMethods"
 import { setLoading } from "../../State/loading"
+import { BsTrash } from "react-icons/bs"
+
 
 const Wallet = () => {
     const dispatch = useDispatch()
@@ -47,7 +49,7 @@ const Wallet = () => {
 
         dispatch(setLoading(true))
         allSavedCoins.forEach(elem => {
-            if (elem.currencyName === e.target.dataset.name) {
+            if (elem.currencyName === e.currentTarget.dataset.name) {
                 id = elem.id
             }
         })
@@ -101,7 +103,11 @@ const Wallet = () => {
                     <div className="volume">${parseMoneyValue(elem.volumeUsd24Hr)}</div>
                     <div className="supply">${parseMoneyValue(elem.supply)}</div>
 
-                    <button data-name={elem.id} onClick={handleRemoveFromWallet}>Remove from Wallet</button>
+                    <BsTrash
+                        data-name={elem.id}
+                        onClick={handleRemoveFromWallet}
+                        className="deleteCoinFromWalletBtn"
+                        style={{ "color": "red", "fontSize": "1.5rem" }} />
 
                 </div>
             )}

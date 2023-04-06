@@ -1,19 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Georgia, Arial, Helvetica, sans-serif;
+  font-family: 'PT Sans', Georgia, Arial, Helvetica, sans-serif;
 }
 
 
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-image: url("./Assets/usaa2.jpeg"); */
-  /* background-attachment: fixed; */
-  /* background-position: center; */
-  /* background-repeat: no-repeat; */
-  /* background-size: cover; */
   color: #333;
   background-color: whitesmoke;
 }

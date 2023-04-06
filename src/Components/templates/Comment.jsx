@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { hideAll, showAll, hideSpecific, showSpecific } from "../forum/helperMethods"
 import { deleteComment, patchComment } from '../../State/comments/allComments'
 import { setLoading } from "../../State/loading"
+import { BsTrash, BsSendPlus } from "react-icons/bs"
+import { MdOutlineModeEdit } from "react-icons/md"
+import { FcCancel } from "react-icons/fc"
 
 
 const Comment = ({ comment, location }) => {
@@ -13,7 +16,7 @@ const Comment = ({ comment, location }) => {
     const currentUser = useSelector(state => state.currentUser.value)
 
     const handleEditComment = (e, text) => {
-        let id = e.target.dataset.id
+        let id = e.currentTarget.dataset.id
         setEditText(text)
 
         hideAll(".editCommentElem")
@@ -31,7 +34,7 @@ const Comment = ({ comment, location }) => {
 
     const handleDeleteComment = (e) => {
         dispatch(setLoading(true))
-        Promise.resolve(dispatch(deleteComment(e.target.dataset.commentid)))
+        Promise.resolve(dispatch(deleteComment(e.currentTarget.dataset.commentid)))
             .then(() => dispatch(setLoading(false)))
     }
 
@@ -39,8 +42,8 @@ const Comment = ({ comment, location }) => {
         if (editText.trim().length < 1) return;
 
         let updatedComment = {
-            "id": e.target.dataset.commentid,
-            "body": editText,
+            "id": e.currentTarget.dataset.commentid,
+            "body": editText.trim(),
         }
         dispatch(setLoading(true))
         Promise.resolve(dispatch(patchComment(updatedComment)))
@@ -68,33 +71,32 @@ const Comment = ({ comment, location }) => {
 
             {comment.userId == currentUser.id &&
                 <div className='commentBtnsContainer'>
-                    <button
+                    <MdOutlineModeEdit
                         className='displayCommentElem commentEditDeleteBtn'
                         data-id={comment.id + location}
-                        onClick={(e) => handleEditComment(e, comment.body)}>
-                        Edit
-                    </button>
-                    <button
+                        onClick={(e) => handleEditComment(e, comment.body)}
+                        style={{ "color": "navy", "fontSize": "1rem" }} />
+
+                    <BsTrash
                         className='displayCommentElem commentEditDeleteBtn'
                         onClick={handleDeleteComment}
                         data-commentid={comment.id}
-                        data-id={comment.id + location}>
-                        Delete
-                    </button>
+                        data-id={comment.id + location}
+                        style={{ "color": "red", "fontSize": "1rem" }} />
 
-                    <button
+                    <BsSendPlus
+                        style={{ fontSize: "1rem", color: "green" }}
                         onClick={handleUpdateComment}
                         data-commentid={comment.id}
                         data-id={comment.id + location}
-                        className='editCommentElem commentUpdateCancelEditBtn hide'>
-                        Update
-                    </button>
-                    <button
+                        className='editCommentElem commentUpdateCancelEditBtn hide' />
+
+                    <FcCancel
+                        style={{ fontSize: "1.1rem" }}
                         onClick={handleCancelEdit}
                         data-id={comment.id + location}
-                        className='editCommentElem commentUpdateCancelEditBtn hide'>
-                        Cancel
-                    </button>
+                        className='editCommentElem commentUpdateCancelEditBtn hide' />
+
                 </div>
             }
         </div>
@@ -102,3 +104,17 @@ const Comment = ({ comment, location }) => {
 }
 
 export default Comment
+// {/* <button
+//     onClick={handleUpdateComment}
+//     data-commentid={comment.id}
+//     data-id={comment.id + location}
+//     className='editCommentElem commentUpdateCancelEditBtn hide'>
+//     Update
+// </button> */}
+
+//  {/* <button
+//                         onClick={handleCancelEdit}
+//                         data-id={comment.id + location}
+//                         className='editCommentElem commentUpdateCancelEditBtn hide'>
+//                         Cancel
+//                     </button> */}

@@ -2,8 +2,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useEffect } from "react";
 import { useSelector } from "react-redux"
 import LoginSignupBtns from "./LoginSignupBtns";
-import "./title.css"
 import LogOutBtn from "./LogOutBtn";
+import { GiHamburgerMenu } from "react-icons/gi"
+import "./title.css"
 
 const Navbar = () => {
     const navigate = useNavigate()
@@ -28,7 +29,7 @@ const Navbar = () => {
             <h1 className="navTitle" onClick={() => navigate("/")}>Eagle Wallet</h1>
             {location.pathname !== "/login" && location.pathname !== "/create-acc" &&
                 <>
-                    <div className="navLinksContainer">
+                    <div className="navLinksContainer standardMenu">
                         <Link className="navLink" to="/" id="/">Home</Link>
                         |
                         <Link className="navLink" to="/forum" id="/forum">Forum</Link>
@@ -46,7 +47,13 @@ const Navbar = () => {
                             </>}
                     </div>
 
-                    {loggedIn ? <LogOutBtn /> : <LoginSignupBtns />}
+                    <div className="standardMenu">
+                        {loggedIn ? <LogOutBtn /> : <LoginSignupBtns />}
+                    </div>
+
+                    <div className="hamburgerMenuContainer">
+                        <GiHamburgerMenu style={{ fontSize: "3rem" }} />
+                    </div>
                 </>
             }
         </div>

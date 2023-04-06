@@ -8,7 +8,7 @@ const Loading = () => {
         <div className='loadingModal'>
 
             <RingLoader
-                cssOverride={{ transform: "scale(5)" }}
+                cssOverride={{ transform: "scale(2.5)" }}
                 color='navy'
             />
 

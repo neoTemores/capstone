@@ -117,7 +117,37 @@
     display: flex;
     gap: .25rem;
     max-height: 20px;
+    /* justify-content: center; */
+    align-items: center;
+}
 
+
+.viewCommentsBtn {
+    transition: all .2s;
+    align-self: center;
+}
+
+.postEditDeleteBtn:hover,
+.addCommentBtn:hover,
+.viewCommentsBtn:hover,
+.commentEditDeleteBtn:hover,
+.postUpdateCancelEditBtn:hover,
+.commentUpdateCancelEditBtn:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.postEditDeleteBtn,
+.addCommentBtn,
+.viewCommentsBtn,
+.commentEditDeleteBtn,
+.postUpdateCancelEditBtn,
+.commentUpdateCancelEditBtn {
+    opacity: .5;
+}
+
+.rotate180 {
+    transform: rotate(180deg);
 }
 
 .commentBtnsContainer {
