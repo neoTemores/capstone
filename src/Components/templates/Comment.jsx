@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { hideAll, showAll, hideSpecific, showSpecific } from "../forum/helperMethods"
 import { deleteComment, patchComment } from '../../State/comments/allComments'
 import { setLoading } from "../../State/loading"
+import { BsTrash } from "react-icons/bs"
+import { MdOutlineModeEdit } from "react-icons/md"
 
 
 const Comment = ({ comment, location }) => {
@@ -13,7 +15,7 @@ const Comment = ({ comment, location }) => {
     const currentUser = useSelector(state => state.currentUser.value)
 
     const handleEditComment = (e, text) => {
-        let id = e.target.dataset.id
+        let id = e.currentTarget.dataset.id
         setEditText(text)
 
         hideAll(".editCommentElem")
@@ -31,7 +33,7 @@ const Comment = ({ comment, location }) => {
 
     const handleDeleteComment = (e) => {
         dispatch(setLoading(true))
-        Promise.resolve(dispatch(deleteComment(e.target.dataset.commentid)))
+        Promise.resolve(dispatch(deleteComment(e.currentTarget.dataset.commentid)))
             .then(() => dispatch(setLoading(false)))
     }
 
@@ -68,19 +70,18 @@ const Comment = ({ comment, location }) => {
 
             {comment.userId == currentUser.id &&
                 <div className='commentBtnsContainer'>
-                    <button
+                    <MdOutlineModeEdit
                         className='displayCommentElem commentEditDeleteBtn'
                         data-id={comment.id + location}
-                        onClick={(e) => handleEditComment(e, comment.body)}>
-                        Edit
-                    </button>
-                    <button
+                        onClick={(e) => handleEditComment(e, comment.body)}
+                        style={{ "color": "navy", "fontSize": "1rem" }} />
+
+                    <BsTrash
                         className='displayCommentElem commentEditDeleteBtn'
                         onClick={handleDeleteComment}
                         data-commentid={comment.id}
-                        data-id={comment.id + location}>
-                        Delete
-                    </button>
+                        data-id={comment.id + location}
+                        style={{ "color": "red", "fontSize": "1rem" }} />
 
                     <button
                         onClick={handleUpdateComment}

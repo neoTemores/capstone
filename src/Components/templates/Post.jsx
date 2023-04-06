@@ -7,6 +7,9 @@ import { deletePost, patchPost } from "../../State/posts/allPosts"
 import NewCommentContainer from '../forum/NewCommentContainer'
 import DisplayComments from '../forum/DisplayComments'
 import { setLoading } from '../../State/loading'
+import { BsTrash } from "react-icons/bs"
+import { MdOutlineModeEdit, MdKeyboardArrowDown } from "react-icons/md"
+import { HiOutlineChatBubbleLeftEllipsis } from "react-icons/hi2"
 
 
 const Post = ({ elem }) => {
@@ -21,15 +24,15 @@ const Post = ({ elem }) => {
         if (!loggedIn) return navigate("/login")
         setNewCommentText("")
         showAll(".addCommentBtn")
-        hideSpecific(".addCommentBtn", e.target.dataset.id)
+        hideSpecific(".addCommentBtn", e.currentTarget.dataset.id)
         hideAll(".newCommentContainer")
-        let elem = showSpecific(".newCommentContainer", e.target.dataset.id)
+        let elem = showSpecific(".newCommentContainer", e.currentTarget.dataset.id)
         elem.childNodes[0].focus()
     }
 
     const viewEditPostTextArea = (e, title, body) => {
         setEditPostData({ title, body })
-        let id = e.target.dataset.id
+        let id = e.currentTarget.dataset.id
 
         hideAll(".editPostElem")
         showSpecific(".editPostElem", id)
@@ -39,8 +42,9 @@ const Post = ({ elem }) => {
     }
 
     const handleViewComments = (e) => {
+        e.currentTarget.classList.toggle("rotate180")
         document.querySelectorAll(".commentsContainer").forEach(item => {
-            if (item.dataset.id == e.target.dataset.id)
+            if (item.dataset.id == e.currentTarget.dataset.id)
                 return item.classList.toggle("hide")
         })
     }
@@ -57,9 +61,9 @@ const Post = ({ elem }) => {
     const handleDeletePost = (e) => {
 
         dispatch(setLoading(true))
-        Promise.resolve(dispatch(deleteAllCommentsByPostId(e.target.dataset.id)))
+        Promise.resolve(dispatch(deleteAllCommentsByPostId(e.currentTarget.dataset.id)))
             .then(
-                Promise.resolve(dispatch(deletePost(e.target.dataset.id)))
+                Promise.resolve(dispatch(deletePost(e.currentTarget.dataset.id)))
                     .then(() => dispatch(setLoading(false)))
             )
     }
@@ -104,33 +108,34 @@ const Post = ({ elem }) => {
 
             <div className='postBtnContainer'>
                 <div className='postToggleAddCommentBtns'>
-                    <button
+
+                    <MdKeyboardArrowDown
+                        style={{ "color": "navy", "fontSize": "2rem" }}
                         onClick={handleViewComments}
-                        data-id={elem.id}>
-                        Toggle Comments
-                    </button>
-                    <button
+                        className='viewCommentsBtn rotate180'
+                        data-id={elem.id} />
+
+                    <HiOutlineChatBubbleLeftEllipsis
+                        style={{ "color": "#333", "fontSize": "1.5rem" }}
                         onClick={handleVewNewCommentTextArea}
                         data-id={elem.id}
-                        className="addCommentBtn">
-                        Add Comment
-                    </button>
+                        className="addCommentBtn" />
                 </div>
 
                 {elem.userID === currentUser.id &&
                     <div className='postEditDeleteUpdateCancelBtnContainer'>
-                        <button
+
+                        <MdOutlineModeEdit
+                            style={{ "color": "navy", "fontSize": "1.5rem" }}
                             className='displayPostElem postEditDeleteBtn'
                             onClick={(e) => viewEditPostTextArea(e, elem.title, elem.body)}
-                            data-id={elem.id}>
-                            Edit
-                        </button>
-                        <button
+                            data-id={elem.id} />
+
+                        <BsTrash
+                            style={{ "color": "red", "fontSize": "1.5rem" }}
                             className='displayPostElem postEditDeleteBtn'
                             onClick={handleDeletePost}
-                            data-id={elem.id}>
-                            Delete
-                        </button>
+                            data-id={elem.id} />
 
                         <button
                             className='editPostElem postUpdateCancelEditBtn hide'
