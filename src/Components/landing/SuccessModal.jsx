@@ -6,9 +6,9 @@ const SuccessModal = ({ userName }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        setTimeout(() => {
-            navigate("/login")
-        }, 5000);
+        // setTimeout(() => {
+        //     navigate("/login")
+        // }, 5000);
     }, [])
     return ReactDOM.createPortal(
         <div className='modalContainer'>

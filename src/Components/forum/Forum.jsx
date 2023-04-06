@@ -4,12 +4,11 @@ import { useEffect, useState } from 'react'
 import { fetchAllPosts } from "../../State/posts/allPosts"
 import { fetchAllComments } from '../../State/comments/allComments'
 import { setShowNewPostModal } from '../../State/posts/showNewPostModal'
-import { setProfileCoinDetails } from '../../State/profile/profileCoinDetails'
-import "./Forum.css"
-
 import CreateNewPostModal from './CreateNewPostModal'
 import Post from '../templates/Post'
 import Pagination from '../templates/Pagination'
+import { setLoading } from '../../State/loading'
+import "./Forum.css"
 
 const Forum = () => {
     const dispatch = useDispatch();
@@ -21,7 +20,9 @@ const Forum = () => {
     const [lastIndex, setLastIndex] = useState(5)
 
     useEffect(() => {
-        dispatch(fetchAllPosts())
+        dispatch(setLoading(true))
+        Promise.resolve(dispatch(fetchAllPosts()))
+            .then(() => dispatch(setLoading(false)))
         dispatch(fetchAllComments())
     }, [])
 

@@ -6,9 +6,10 @@ import { addCoinToWallet } from "../../State/wallet/savedCoins"
 import { fetchAllSavedCoinsByUser } from "../../State/wallet/savedCoins"
 import { FcSearch } from "react-icons/fc"
 import { AiFillStar, AiOutlineStar } from "react-icons/ai"
-import "./home.css"
 import Pagination from "../templates/Pagination"
 import { parseMoneyValue, getImg } from "./helperMethods"
+import { setLoading } from "../../State/loading"
+import "./home.css"
 
 const Home = () => {
     const navigate = useNavigate()
@@ -26,7 +27,10 @@ const Home = () => {
     })
 
     useEffect(() => {
-        dispatch(fetchAllCoins())
+        dispatch(setLoading(true))
+        Promise.resolve(dispatch(fetchAllCoins()))
+            .then(() => dispatch(setLoading(false)))
+
         if (loggedIn)
             dispatch(fetchAllSavedCoinsByUser(currentUser.id))
 
@@ -39,11 +43,13 @@ const Home = () => {
             userId: currentUser.id,
             currencyName: e.currentTarget.dataset.name
         }
-        dispatch(addCoinToWallet(coin))
+        dispatch(setLoading(true))
+        Promise.resolve(dispatch(addCoinToWallet(coin)))
+            .then(() => dispatch(setLoading(false)))
     }
 
-    if (allCoins.length < 1)
-        return <h1>Loading...</h1>
+    // if (allCoins.length < 1)
+    //     return <h1>Loading...</h1>
 
     const foundInWallet = (id) => {
         let found = false
@@ -100,8 +106,6 @@ const Home = () => {
                     <div className="supply">${parseMoneyValue(elem.supply)}</div>
 
                     {(!loggedIn || !foundInWallet(elem.id)) ? <AiOutlineStar className="addToWathListIcon" data-name={elem.id} onClick={handleAddToWallet} /> : <AiFillStar className="addToWathListIcon filled" />}
-
-                    {/* {(!loggedIn || !foundInWallet(elem.id)) ? <button data-name={elem.id} onClick={handleAddToWallet}>Add to Wallet</button> : <div>In wallet</div>} */}
 
                 </div>
             )}
