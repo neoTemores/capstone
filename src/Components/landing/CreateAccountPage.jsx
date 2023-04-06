@@ -16,7 +16,7 @@ const CreateAccountPage = () => {
     const passwordError = useRef()
     const show = (ref) => ref.current.type = "text"
     const hide = (ref) => ref.current.type = "password"
-    const [showModal, setShowModal] = useState(false)
+    const [showModal, setShowModal] = useState(true)
     const [showUserNameErr, setShowUserNameErr] = useState(false)
 
 
@@ -59,15 +59,14 @@ const CreateAccountPage = () => {
         }
 
         const res = await fetch(USER_URL.CREATE, reqBody)
-        const data = await res.json()
-        console.log(data)
         if (res.status === 200)
             setShowModal(true)
     }
     return (
 
         <div className="loginPageContainer">
-            {showModal && <SuccessModal userName={userName.current.value} />}
+            {showModal && <SuccessModal userName={"CSS styles"} />}
+            {/* {showModal && <SuccessModal userName={userName.current.value} />} */}
             <h1>Create your account</h1>
             <form className="loginForm" onSubmit={e => e.preventDefault()}>
                 <input ref={email} type="email" placeholder="E-mail" required />

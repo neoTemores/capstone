@@ -6,6 +6,7 @@ import { deleteAllCommentsByPostId } from '../../State/comments/allComments'
 import { deletePost, patchPost } from "../../State/posts/allPosts"
 import NewCommentContainer from '../forum/NewCommentContainer'
 import DisplayComments from '../forum/DisplayComments'
+import { setLoading } from '../../State/loading'
 
 
 const Post = ({ elem }) => {
@@ -54,8 +55,13 @@ const Post = ({ elem }) => {
         })
     }
     const handleDeletePost = (e) => {
-        let promise = Promise.resolve(dispatch(deleteAllCommentsByPostId(e.target.dataset.id)))
-        promise.then(dispatch(deletePost(e.target.dataset.id)))
+
+        dispatch(setLoading(true))
+        Promise.resolve(dispatch(deleteAllCommentsByPostId(e.target.dataset.id)))
+            .then(
+                Promise.resolve(dispatch(deletePost(e.target.dataset.id)))
+                    .then(() => dispatch(setLoading(false)))
+            )
     }
     const handleSubmitPostUpdate = (e) => {
         let updatedPostData = {
@@ -63,7 +69,9 @@ const Post = ({ elem }) => {
             "title": editPostData.title,
             "body": editPostData.body
         }
-        dispatch(patchPost(updatedPostData))
+        dispatch(setLoading(true))
+        Promise.resolve(dispatch(patchPost(updatedPostData)))
+            .then(() => dispatch(setLoading(false)))
         handleCancelPostEdit()
     }
     return (

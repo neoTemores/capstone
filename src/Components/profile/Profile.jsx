@@ -10,6 +10,7 @@ import Post from '../templates/Post'
 import Comment from '../templates/Comment'
 import Pagination from '../templates/Pagination'
 import { getImg } from '../home/helperMethods'
+import { setLoading } from '../../State/loading'
 
 const Profile = () => {
     const { username } = useParams()
@@ -31,7 +32,10 @@ const Profile = () => {
 
 
     useEffect(() => {
-        dispatch(fetchUserProfile(username))
+        dispatch(setLoading(true))
+        Promise.resolve(dispatch(fetchUserProfile(username)))
+            .then(() => dispatch(setLoading(false)))
+
     }, [allPosts, allComments, username, currentUser])
 
     useEffect(() => {
@@ -120,7 +124,7 @@ const Profile = () => {
                             <div className="gridHeader profileCoinChange">Change</div>
                         </div>}
 
-                    {profileCoinDetails.slice(startIndexCoins, lastIndexCoins).map(elem =>
+                    {profileCoinDetails?.slice(startIndexCoins, lastIndexCoins).map(elem =>
 
                         <div className="userProfileCoinsContainer" key={elem.id}>
 

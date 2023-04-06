@@ -7,13 +7,15 @@ import Wallet from "./Components/wallet/Wallet"
 import Profile from "./Components/profile/Profile"
 import LoginPage from './Components/landing/LoginPage'
 import CreateAccountPage from './Components/landing/CreateAccountPage'
+import Loading from './Components/templates/Loading'
+import { useSelector } from 'react-redux'
 
 const App = () => {
-
+  const loading = useSelector(state => state.loading.value)
   return (
     <div className="appContainer">
       <Navbar />
-
+      {loading && <Loading />}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/forum' element={<Forum />} />

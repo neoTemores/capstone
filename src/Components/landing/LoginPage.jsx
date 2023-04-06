@@ -6,6 +6,7 @@ import { setCurrentUser } from "../../State/user/currentUser"
 import { fetchAllSavedCoinsByUser } from "../../State/wallet/savedCoins"
 import { setLoggedIn } from "../../State/user/loggedIn"
 import { BiHide } from "react-icons/bi"
+import { setLoading } from "../../State/loading"
 import "./landing.css"
 
 const LoginPage = () => {
@@ -26,7 +27,7 @@ const LoginPage = () => {
         }
         if (!loginUser.username.length > 0 || !loginUser.password.length > 0) return;
 
-
+        dispatch(setLoading(true))
         Promise.resolve(dispatch(attemptUserLogin(loginUser)))
             .then(val => {
                 if (val.payload?.status === 200) {
@@ -36,6 +37,8 @@ const LoginPage = () => {
                     navigate("/")
                 }
                 else loginError.current.classList.remove("notVisible")
+
+                dispatch(setLoading(false))
             })
     }
 

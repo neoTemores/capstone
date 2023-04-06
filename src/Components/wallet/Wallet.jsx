@@ -5,6 +5,7 @@ import { fetchAllSavedCoinsByUser, deleteFromWallet } from "../../State/wallet/s
 import { fetchIndividualCoinData, setAllCoinData } from "../../State/wallet/allCoinData"
 import Pagination from "../templates/Pagination"
 import { getImg, parseMoneyValue } from "../home/helperMethods"
+import { setLoading } from "../../State/loading"
 
 const Wallet = () => {
     const dispatch = useDispatch()
@@ -19,7 +20,9 @@ const Wallet = () => {
     useEffect(() => {
         if (!loggedIn) return redirectToLogin()
 
-        dispatch(fetchAllSavedCoinsByUser(currentUser.id))
+        dispatch(setLoading(true))
+        Promise.resolve(dispatch(fetchAllSavedCoinsByUser(currentUser.id)))
+            .then(() => dispatch(setLoading(false)))
     }, [currentUser])
 
     useEffect(() => {
@@ -42,13 +45,15 @@ const Wallet = () => {
     const handleRemoveFromWallet = (e) => {
         let id;
 
+        dispatch(setLoading(true))
         allSavedCoins.forEach(elem => {
             if (elem.currencyName === e.target.dataset.name) {
                 id = elem.id
             }
         })
 
-        dispatch(deleteFromWallet(id))
+        Promise.resolve(dispatch(deleteFromWallet(id)))
+            .then(() => dispatch(setLoading(false)))
     }
     const updateIndex = (num) => {
         setStartIndex(prev => prev + num)

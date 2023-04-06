@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateCurrentUserData } from '../../State/user/currentUser'
 import { BiHide } from "react-icons/bi"
+import { setLoading } from "../../State/loading"
 
 
 const EditUserInfo = ({ setEditinguser }) => {
@@ -22,7 +23,9 @@ const EditUserInfo = ({ setEditinguser }) => {
     const handleSaveChanges = (e) => {
         e.preventDefault()
         if (isValidData()) {
-            dispatch(updateCurrentUserData(profileData))
+            dispatch(setLoading(true))
+            Promise.resolve(dispatch(updateCurrentUserData(profileData)))
+                .then(() => dispatch(setLoading(false)))
             setEditinguser(false)
         }
     }

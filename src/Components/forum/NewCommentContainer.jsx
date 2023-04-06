@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { postNewComment } from '../../State/comments/allComments';
 import { hideAll, showAll } from './helperMethods';
+import { setLoading } from '../../State/loading';
 
 const NewCommentContainer = ({ elem, newCommentText, setNewCommentText }) => {
     const dispatch = useDispatch()
@@ -16,7 +17,10 @@ const NewCommentContainer = ({ elem, newCommentText, setNewCommentText }) => {
             "username": currentUser.username,
             "date": new Date()
         }
-        dispatch(postNewComment(newComment))
+
+        dispatch(setLoading(true))
+        let promise = Promise.resolve(dispatch(postNewComment(newComment)))
+        promise.then(() => dispatch(setLoading(false)))
 
         hideAll(".newCommentContainer")
         showAll(".addCommentBtn")

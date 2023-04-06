@@ -10,6 +10,7 @@ import showNewPostModalReducer from "./State/posts/showNewPostModal";
 import userProfileReducer from "./State/profile/userProfile";
 import allUsersListReducer from "./State/user/allUsersList";
 import profileCoinDetailsReducer from "./State/profile/profileCoinDetails";
+import loadingReducer from "./State/loading"
 
 export const store = configureStore({
     reducer: {
@@ -23,6 +24,7 @@ export const store = configureStore({
         showNewPostModal: showNewPostModalReducer,
         userProfile: userProfileReducer,
         allUsersList: allUsersListReducer,
-        profileCoinDetails: profileCoinDetailsReducer
+        profileCoinDetails: profileCoinDetailsReducer,
+        loading: loadingReducer
     },
 });

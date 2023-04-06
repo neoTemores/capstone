@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { hideAll, showAll, hideSpecific, showSpecific } from "../forum/helperMethods"
 import { deleteComment, patchComment } from '../../State/comments/allComments'
+import { setLoading } from "../../State/loading"
 
 
 const Comment = ({ comment, location }) => {
@@ -29,7 +30,9 @@ const Comment = ({ comment, location }) => {
     }
 
     const handleDeleteComment = (e) => {
-        dispatch(deleteComment(e.target.dataset.commentid))
+        dispatch(setLoading(true))
+        Promise.resolve(dispatch(deleteComment(e.target.dataset.commentid)))
+            .then(() => dispatch(setLoading(false)))
     }
 
     const handleUpdateComment = (e) => {
@@ -39,8 +42,9 @@ const Comment = ({ comment, location }) => {
             "id": e.target.dataset.commentid,
             "body": editText,
         }
-        console.log(updatedComment)
-        dispatch(patchComment(updatedComment))
+        dispatch(setLoading(true))
+        Promise.resolve(dispatch(patchComment(updatedComment)))
+            .then(() => dispatch(setLoading(false)))
         handleCancelEdit()
     }
 

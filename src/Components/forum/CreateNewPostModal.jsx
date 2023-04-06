@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setShowNewPostModal } from '../../State/posts/showNewPostModal'
 import { addNewPost } from '../../State/posts/allPosts'
+import { setLoading } from '../../State/loading'
 
 const CreateNewPostModal = () => {
     const dispatch = useDispatch()
@@ -20,7 +21,10 @@ const CreateNewPostModal = () => {
             "username": currentUser.username,
             "date": new Date()
         }
-        dispatch(addNewPost(newPost))
+        dispatch(setLoading(true))
+        let promise = Promise.resolve(dispatch(addNewPost(newPost)))
+        promise.then(() => dispatch(setLoading(false)))
+
         dispatch(setShowNewPostModal(false))
     }
 
