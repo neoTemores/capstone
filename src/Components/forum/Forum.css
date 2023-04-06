@@ -196,11 +196,16 @@
     color: #555
 }
 
+
 .editCommentTextArea,
 .newCommentTextArea {
     width: 100%;
     border-radius: 0px 25px 25px;
 }
+
+/* .editCommentTextArea {
+    width: 100%;
+} */
 
 .hide {
     display: none;

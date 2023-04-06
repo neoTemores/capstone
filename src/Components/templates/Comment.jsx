@@ -63,6 +63,7 @@ const Comment = ({ comment, location }) => {
             </p>
             <textarea
                 rows={4}
+                cols={editText.length}
                 value={editText}
                 onChange={(e) => setEditText(e.target.value)}
                 placeholder='Comment can not be blank...'
