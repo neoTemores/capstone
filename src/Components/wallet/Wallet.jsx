@@ -68,9 +68,9 @@ const Wallet = () => {
                 <div className="gridHeader">Currency</div>
                 <div className="gridHeader">Price</div>
                 <div className="gridHeader">Change</div>
-                <div className="gridHeader">Market cap</div>
-                <div className="gridHeader">Volume(24hr)</div>
-                <div className="gridHeader">Supply</div>
+                <div className="gridHeader marketCap">Market cap</div>
+                <div className="gridHeader volume">Volume(24hr)</div>
+                <div className="gridHeader supply">Supply</div>
                 <div className="gridHeader">Watching</div>
             </div>
 
@@ -92,9 +92,9 @@ const Wallet = () => {
                         style={{ "color": elem.changePercent24Hr < 0 ? "red" : "green" }}>
                         {elem.changePercent24Hr.toFixed(2)}%
                     </div>
-                    <div>${parseMoneyValue(elem.marketCapUsd)}</div>
-                    <div>${parseMoneyValue(elem.volumeUsd24Hr)}</div>
-                    <div>${parseMoneyValue(elem.supply)}</div>
+                    <div className="marketCap">${parseMoneyValue(elem.marketCapUsd)}</div>
+                    <div className="volume">${parseMoneyValue(elem.volumeUsd24Hr)}</div>
+                    <div className="supply">${parseMoneyValue(elem.supply)}</div>
 
                     <button data-name={elem.id} onClick={handleRemoveFromWallet}>Remove from Wallet</button>
 

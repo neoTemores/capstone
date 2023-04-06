@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { addCoinToWallet } from "../../State/wallet/savedCoins"
 import { fetchAllSavedCoinsByUser } from "../../State/wallet/savedCoins"
 import { FcSearch } from "react-icons/fc"
+import { AiFillStar, AiOutlineStar } from "react-icons/ai"
 import "./home.css"
 import Pagination from "../templates/Pagination"
 import { parseMoneyValue, getImg } from "./helperMethods"
@@ -36,7 +37,7 @@ const Home = () => {
 
         let coin = {
             userId: currentUser.id,
-            currencyName: e.target.dataset.name
+            currencyName: e.currentTarget.dataset.name
         }
         dispatch(addCoinToWallet(coin))
     }
@@ -75,9 +76,9 @@ const Home = () => {
                 <div className="gridHeader">Currency</div>
                 <div className="gridHeader">Price</div>
                 <div className="gridHeader">Change</div>
-                <div className="gridHeader">Market cap</div>
-                <div className="gridHeader">Volume(24hr)</div>
-                <div className="gridHeader">Supply</div>
+                <div className="gridHeader marketCap">Market cap</div>
+                <div className="gridHeader volume">Volume(24hr)</div>
+                <div className="gridHeader supply">Supply</div>
                 <div className="gridHeader">Watching</div>
             </div>
 
@@ -94,10 +95,13 @@ const Home = () => {
                     <div>${elem.priceUsd.toFixed(2)}</div>
 
                     <div style={{ "color": elem.changePercent24Hr < 0 ? "red" : "green" }}>{elem.changePercent24Hr.toFixed(2)}%</div>
-                    <div>${parseMoneyValue(elem.marketCapUsd)}</div>
-                    <div>${parseMoneyValue(elem.volumeUsd24Hr)}</div>
-                    <div>${parseMoneyValue(elem.supply)}</div>
-                    {(!loggedIn || !foundInWallet(elem.id)) ? <button data-name={elem.id} onClick={handleAddToWallet}>Add to Wallet</button> : <div>In wallet</div>}
+                    <div className="marketCap">${parseMoneyValue(elem.marketCapUsd)}</div>
+                    <div className="volume">${parseMoneyValue(elem.volumeUsd24Hr)}</div>
+                    <div className="supply">${parseMoneyValue(elem.supply)}</div>
+
+                    {(!loggedIn || !foundInWallet(elem.id)) ? <AiOutlineStar className="addToWathListIcon" data-name={elem.id} onClick={handleAddToWallet} /> : <AiFillStar className="addToWathListIcon filled" />}
+
+                    {/* {(!loggedIn || !foundInWallet(elem.id)) ? <button data-name={elem.id} onClick={handleAddToWallet}>Add to Wallet</button> : <div>In wallet</div>} */}
 
                 </div>
             )}
