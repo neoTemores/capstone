@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { hideAll, showAll, hideSpecific, showSpecific } from "../forum/helperMethods"
+import { hideAll, showAll, hideSpecific, showSpecific, focusElement } from "../forum/helperMethods"
 import { deleteComment, patchComment } from '../../State/comments/allComments'
 import { setLoading } from "../../State/loading"
 import { BsTrash, BsSendPlus } from "react-icons/bs"
@@ -22,7 +22,7 @@ const Comment = ({ comment, location }) => {
         hideAll(".editCommentElem")
         let textbox = showSpecific(".editCommentElem", id)
         textbox.focus()
-
+        focusElement(".editCommentTextArea", id)
         showAll(".displayCommentElem")
         hideSpecific(".displayCommentElem", id)
     }
@@ -104,17 +104,3 @@ const Comment = ({ comment, location }) => {
 }
 
 export default Comment
-// {/* <button
-//     onClick={handleUpdateComment}
-//     data-commentid={comment.id}
-//     data-id={comment.id + location}
-//     className='editCommentElem commentUpdateCancelEditBtn hide'>
-//     Update
-// </button> */}
-
-//  {/* <button
-//                         onClick={handleCancelEdit}
-//                         data-id={comment.id + location}
-//                         className='editCommentElem commentUpdateCancelEditBtn hide'>
-//                         Cancel
-//                     </button> */}

@@ -2,6 +2,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { postNewComment } from '../../State/comments/allComments';
 import { hideAll, showAll } from './helperMethods';
 import { setLoading } from '../../State/loading';
+import { FcCancel } from "react-icons/fc"
+import { ImReply } from "react-icons/im"
 
 const NewCommentContainer = ({ elem, newCommentText, setNewCommentText }) => {
     const dispatch = useDispatch()
@@ -12,7 +14,7 @@ const NewCommentContainer = ({ elem, newCommentText, setNewCommentText }) => {
 
         const newComment = {
             "userId": currentUser.id,
-            "postId": e.target.dataset.id,
+            "postId": e.currentTarget.dataset.id,
             "body": newCommentText.trim(),
             "username": currentUser.username,
             "date": new Date()
@@ -43,8 +45,17 @@ const NewCommentContainer = ({ elem, newCommentText, setNewCommentText }) => {
                 data-id={elem.id}
                 className='newCommentTextArea' />
             <div className='addCommentBtnContainer'>
-                <button onClick={handlePostComment} data-id={elem.id}>Reply</button>
-                <button onClick={handleCancel} data-id={elem.id}>Cancel</button>
+
+                <ImReply
+                    style={{ fontSize: "1.5rem", color: "green" }}
+                    className='commentUpdateCancelEditBtn'
+                    onClick={handlePostComment}
+                    data-id={elem.id} />
+
+                <FcCancel
+                    className='commentUpdateCancelEditBtn'
+                    style={{ fontSize: "1.5rem" }}
+                    onClick={handleCancel} data-id={elem.id} />
             </div>
 
         </div>

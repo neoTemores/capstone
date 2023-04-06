@@ -115,7 +115,7 @@
 .postToggleAddCommentBtns,
 .postEditDeleteUpdateCancelBtnContainer {
     display: flex;
-    gap: .25rem;
+    gap: .5rem;
     max-height: 20px;
     /* justify-content: center; */
     align-items: center;
@@ -173,18 +173,16 @@
 }
 
 .comment {
+    width: fit-content;
     display: flex;
     flex-direction: column;
     background-color: white;
     gap: .5rem;
     border: 1px solid #1115;
     padding: .5rem;
-    border-radius: 5px;
+    border-radius: 0px 20px 20px 20px;
 }
 
-.editCommentTextArea {
-    width: 100%
-}
 
 .newCommentTextArea,
 .editCommentTextArea,
@@ -196,6 +194,12 @@
     padding: .5rem;
     border-radius: 5px;
     color: #555
+}
+
+.editCommentTextArea,
+.newCommentTextArea {
+    width: 100%;
+    border-radius: 0px 25px 25px;
 }
 
 .hide {
