@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { fetchAllSavedCoinsByUser, deleteFromWallet } from "../../State/wallet/savedCoins"
 import { fetchIndividualCoinData, setAllCoinData } from "../../State/wallet/allCoinData"
+import { fetchUserProfile } from "../../State/profile/userProfile"
 import Pagination from "../templates/Pagination"
 import { getImg, parseMoneyValue } from "../home/helperMethods"
 import { setLoading } from "../../State/loading"
@@ -55,7 +56,10 @@ const Wallet = () => {
         })
 
         Promise.resolve(dispatch(deleteFromWallet(id)))
-            .then(() => dispatch(setLoading(false)))
+            .then(() => {
+                dispatch(fetchUserProfile(currentUser.username))
+                dispatch(setLoading(false))
+            })
     }
     const updateIndex = (num) => {
         setStartIndex(prev => prev + num)

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import { addCoinToWallet } from "../../State/wallet/savedCoins"
 import { fetchAllSavedCoinsByUser } from "../../State/wallet/savedCoins"
+import { fetchUserProfile } from "../../State/profile/userProfile"
 import { FcSearch } from "react-icons/fc"
 import { AiFillStar, AiOutlineStar } from "react-icons/ai"
 import Pagination from "../templates/Pagination"
@@ -31,8 +32,9 @@ const Home = () => {
         Promise.resolve(dispatch(fetchAllCoins()))
             .then(() => dispatch(setLoading(false)))
 
-        if (loggedIn)
+        if (loggedIn) {
             dispatch(fetchAllSavedCoinsByUser(currentUser.id))
+        }
 
     }, [currentUser, loggedIn])
 
@@ -45,7 +47,10 @@ const Home = () => {
         }
         dispatch(setLoading(true))
         Promise.resolve(dispatch(addCoinToWallet(coin)))
-            .then(() => dispatch(setLoading(false)))
+            .then(() => {
+                dispatch(fetchUserProfile(currentUser.username))
+                dispatch(setLoading(false))
+            })
     }
 
     // if (allCoins.length < 1)
