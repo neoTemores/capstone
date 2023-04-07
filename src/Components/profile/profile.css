@@ -8,7 +8,7 @@
         "header header"
         "posts bio"
         "comments coins";
-    min-height: 80vh;
+    /* min-height: 80vh; */
 }
 
 .profilePageHeader {
@@ -129,4 +129,24 @@
 .postEditDeleteUpdateCancelBtnContainer.myPosts,
 .commentBtnsContainer.myComments {
     align-self: flex-end;
+}
+
+@media screen and (max-width: 800px) {
+
+    .profilePageContainer {
+        grid-template-areas:
+            "header header"
+            "bio coins"
+            "posts posts"
+            "comments comments" !important;
+    }
+
+    .userProfileCoinsContainer {
+        gap: .5rem
+    }
+
+    .profileCoinChange {
+        justify-self: end;
+    }
+
 }

@@ -9,9 +9,12 @@ import LoginPage from './Components/landing/LoginPage'
 import CreateAccountPage from './Components/landing/CreateAccountPage'
 import Loading from './Components/templates/Loading'
 import { useSelector } from 'react-redux'
+import Footer from './Components/footer/Footer'
+import About from './Components/footer/About'
 
 const App = () => {
   const loading = useSelector(state => state.loading.value)
+
   return (
     <div className="appContainer">
       <Navbar />
@@ -23,7 +26,9 @@ const App = () => {
         <Route exact path='/profile/:username/:id' element={<Profile />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/create-acc' element={<CreateAccountPage />} />
+        <Route path='/about' element={<About />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

@@ -25,12 +25,14 @@ export const showSpecific = (classToFind, target) => {
 }
 
 export const focusElement = (classToFind, target) => {
+    let element;
     document.querySelectorAll(classToFind).forEach(elem => {
         if (elem.dataset.id == target) {
             elem.focus()
-            return
+            element = elem
         }
     })
+    return element
 }
 
 export const containsComment = (id, allComments) => {

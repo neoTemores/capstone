@@ -104,9 +104,11 @@
     flex-direction: column;
     gap: .25rem;
     padding: .5rem;
-    border: 1px solid #1115;
+    border: 2px solid #1115;
     background-color: white;
     border-radius: 5px;
+    box-shadow: 2px 2px 2px #3333;
+
 }
 
 .postBtnContainer,
@@ -177,12 +179,18 @@
     display: flex;
     flex-direction: column;
     background-color: white;
-    gap: .5rem;
+    /* gap: .5rem; */
     border: 1px solid #1115;
+    /* border: 2px solid navy; */
     padding: .5rem;
-    border-radius: 0px 20px 20px 20px;
+    border-radius: 0px 25px 25px;
+    background-color: rgb(173, 216, 230, .25);
+    box-shadow: 2px 2px 2px #3333;
 }
 
+.commentBody {
+    padding: .25rem;
+}
 
 .newCommentTextArea,
 .editCommentTextArea,
@@ -197,15 +205,26 @@
 }
 
 
-.editCommentTextArea,
+.editCommentTextArea {
+    width: 100%;
+    font-style: italic;
+    font-weight: bold;
+    /* color: navy; */
+    outline: none;
+    border: none;
+    background-color: rgb(173, 216, 230, .1);
+
+}
+
 .newCommentTextArea {
     width: 100%;
     border-radius: 0px 25px 25px;
 }
 
-/* .editCommentTextArea {
-    width: 100%;
-} */
+.dateStamp {
+    font-size: .8rem;
+    font-style: italic;
+}
 
 .hide {
     display: none;
