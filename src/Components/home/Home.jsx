@@ -23,7 +23,7 @@ const Home = () => {
     const [startIndex, setStartIndex] = useState(0)
     const [lastIndex, setLastIndex] = useState(10)
 
-    const filteredCoins = allCoins.filter(item => {
+    const filteredCoins = allCoins?.filter(item => {
         return item.id.toLowerCase().includes(query.toLowerCase()) || item.symbol.toLowerCase().includes(query.toLowerCase())
     })
 
