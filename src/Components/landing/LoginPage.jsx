@@ -30,6 +30,7 @@ const LoginPage = () => {
         dispatch(setLoading(true))
         Promise.resolve(dispatch(attemptUserLogin(loginUser)))
             .then(val => {
+                console.log(val)
                 if (val.payload?.status === 200) {
                     dispatch(setLoggedIn(true))
                     dispatch(setCurrentUser(val.payload.user))

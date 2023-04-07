@@ -6,7 +6,7 @@ export const attemptUserLogin = createAsyncThunk(
     async (user) => {
         let reqBody = {
             method: "POST",
-            headers: { 'Content-Type': 'application/json' },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(user)
         }
 
