@@ -18,16 +18,25 @@ const HamburgerMenu = ({ setShowHamMenu, updateActiveTab }) => {
 
     return ReactDOM.createPortal(
         <div className="hamNavContainer" onMouseLeave={() => setShowHamMenu(false)}>
-            <AiOutlineClose className="openHamIcon" onClick={() => setShowHamMenu(prev => !prev)} />
 
-            <Link className="navLink hamLink" to="/" id="/">Home</Link>
+            <AiOutlineClose className="openHamIcon" onClick={() => setShowHamMenu(false)} />
 
-            <Link className="navLink hamLink" to="/forum" id="/forum">Forum</Link>
+            <Link onClick={() => setShowHamMenu(false)}
+                className="navLink hamLink" to="/" id="/">Home
+            </Link>
 
-            <Link className="navLink hamLink" to="/wallet" id="/wallet">Wallet</Link>
+            <Link onClick={() => setShowHamMenu(false)}
+                className="navLink hamLink" to="/forum" id="/forum">Forum
+            </Link>
+
+            <Link onClick={() => setShowHamMenu(false)}
+                className="navLink hamLink" to="/wallet" id="/wallet">Wallet
+            </Link>
+
             {loggedIn &&
                 <>
                     <Link
+                        onClick={() => setShowHamMenu(false)}
                         className="navLink hamLink"
                         to={`/profile/${currentUser.username}/${currentUser.id}`}
                         id={`/profile/${currentUser.username}/${currentUser.id}`}>
