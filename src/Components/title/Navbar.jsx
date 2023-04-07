@@ -1,20 +1,23 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux"
 import LoginSignupBtns from "./LoginSignupBtns";
 import LogOutBtn from "./LogOutBtn";
 import { GiHamburgerMenu } from "react-icons/gi"
 import "./title.css"
+import HamburgerMenu from "./HamburgerMenu";
 
 const Navbar = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const loggedIn = useSelector(state => state.loggedIn.value);
     const currentUser = useSelector(state => state.currentUser.value)
+    const [showHamMenu, setShowHamMenu] = useState(false)
 
     useEffect(() => {
         updateActiveTab()
     }, [location])
+
 
     const updateActiveTab = () => {
         document.querySelectorAll(".navLink").forEach(elem => {
@@ -52,7 +55,8 @@ const Navbar = () => {
                     </div>
 
                     <div className="hamburgerMenuContainer">
-                        <GiHamburgerMenu style={{ fontSize: "3rem" }} />
+                        <GiHamburgerMenu onClick={() => setShowHamMenu(true)} style={{ fontSize: "3rem" }} />
+                        {showHamMenu && <HamburgerMenu setShowHamMenu={setShowHamMenu} updateActiveTab={updateActiveTab} />}
                     </div>
                 </>
             }

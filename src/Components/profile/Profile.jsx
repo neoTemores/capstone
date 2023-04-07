@@ -68,40 +68,6 @@ const Profile = () => {
     return (
         <div className='profilePageContainer'>
             <h1 className='profilePageHeader'>Welcome to @{userProfile.username}'s Page</h1>
-            <div className='myProfileMyPostsContainer'>
-                <h1>Posts</h1>
-                {userProfile?.userPosts?.posts?.length === 0 && <h3>@{userProfile.username} does not have any Posts!</h3>}
-                {userProfile?.userPosts?.posts?.slice(startIndexPost, lastIndexPost).map(elem => {
-                    return (
-                        <Post key={elem.id} elem={elem} />
-                    )
-                })}
-
-                <Pagination
-                    startIndex={startIndexPost}
-                    lastIndex={lastIndexPost}
-                    length={userProfile?.userPosts?.posts?.length}
-                    updateIndex={updatePostIndex}
-                    itemsPerPage={3} />
-            </div>
-
-
-            <div className='myProfileMyCommentsContainer'>
-                <h1>Comments</h1>
-                {userProfile?.userComments?.commentList?.length === 0 &&
-                    <h3>@{userProfile.username} does not have any Comments!</h3>}
-
-                {userProfile?.userComments?.commentList?.slice(startIndexComments, lastIndexComments).map(elem => {
-                    return (<Comment key={elem.id} comment={elem} location={"myprofile"} />)
-                })}
-
-                <Pagination
-                    startIndex={startIndexComments}
-                    lastIndex={lastIndexComments}
-                    length={userProfile?.userComments?.commentList?.length}
-                    updateIndex={updateCommentsIndex}
-                    itemsPerPage={3} />
-            </div>
 
             <div className='userBioContainer'>
                 <h1>About</h1>
@@ -113,6 +79,8 @@ const Profile = () => {
                     }
                 </div>
             </div>
+
+
             <div className='myProfileCoinsContainer'>
                 <h1>Coins</h1>
                 <div className='userProfileCoinsData'>
@@ -152,6 +120,42 @@ const Profile = () => {
                     itemsPerPage={4}
                 />
             </div>
+
+            <div className='myProfileMyPostsContainer'>
+                <h1>Posts</h1>
+                {userProfile?.userPosts?.posts?.length === 0 && <h3>@{userProfile.username} does not have any Posts!</h3>}
+                {userProfile?.userPosts?.posts?.slice(startIndexPost, lastIndexPost).map(elem => {
+                    return (
+                        <Post key={elem.id} elem={elem} />
+                    )
+                })}
+
+                <Pagination
+                    startIndex={startIndexPost}
+                    lastIndex={lastIndexPost}
+                    length={userProfile?.userPosts?.posts?.length}
+                    updateIndex={updatePostIndex}
+                    itemsPerPage={3} />
+            </div>
+
+
+            <div className='myProfileMyCommentsContainer'>
+                <h1>Comments</h1>
+                {userProfile?.userComments?.commentList?.length === 0 &&
+                    <h3>@{userProfile.username} does not have any Comments!</h3>}
+
+                {userProfile?.userComments?.commentList?.slice(startIndexComments, lastIndexComments).map(elem => {
+                    return (<Comment key={elem.id} comment={elem} location={"myprofile"} />)
+                })}
+
+                <Pagination
+                    startIndex={startIndexComments}
+                    lastIndex={lastIndexComments}
+                    length={userProfile?.userComments?.commentList?.length}
+                    updateIndex={updateCommentsIndex}
+                    itemsPerPage={3} />
+            </div>
+
         </div>
     )
 }
