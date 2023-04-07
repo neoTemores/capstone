@@ -6,8 +6,8 @@ const LoginSignupBtns = () => {
 
     return (
         <div className='loginSignupContainer'>
-            <button onClick={() => navigate("/login")}>Log in</button>
-            <button onClick={() => navigate("/create-acc")}>Sign up</button>
+            <button className='navBtn logIn' onClick={() => navigate("/login")}>Log in</button>
+            <button className='navBtn signUp' onClick={() => navigate("/create-acc")}>Sign up</button>
         </div>
     )
 }

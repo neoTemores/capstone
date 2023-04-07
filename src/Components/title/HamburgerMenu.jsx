@@ -17,7 +17,9 @@ const HamburgerMenu = ({ setShowHamMenu, updateActiveTab }) => {
     }, [location])
 
     return ReactDOM.createPortal(
-        <div className="hamNavContainer" onMouseLeave={() => setShowHamMenu(false)}>
+        <div className="hamNavContainer"
+            onMouseLeave={() => setShowHamMenu(false)}
+        >
 
             <AiOutlineClose className="openHamIcon" onClick={() => setShowHamMenu(false)} />
 

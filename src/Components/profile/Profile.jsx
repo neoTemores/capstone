@@ -66,7 +66,13 @@ const Profile = () => {
     }
     return (
         <div className='profilePageContainer'>
-            <h1 className='profilePageHeader'>Welcome to @{userProfile.username}'s Page</h1>
+            <h1 className='profilePageHeader'>Welcome to
+                {currentUser.username === username ?
+                    <> your profile </> :
+                    <><span style={{ fontSize: "1.5rem" }}> @</span>{userProfile.username}'s </>
+                }
+                Page
+            </h1>
 
             <div className='userBioContainer'>
                 <h1>About</h1>

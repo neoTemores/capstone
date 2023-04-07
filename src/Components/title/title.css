@@ -4,10 +4,10 @@
 .navbarContainer {
     background-color: darkblue;
     color: white;
-    padding: 1rem;
+    padding: .25rem 1rem 1rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: end;
     position: sticky;
     top: 0;
     z-index: 1;
@@ -17,6 +17,11 @@
     font-family: 'Playfair Display', sans-serif;
     font-size: 3rem;
     /* color: red */
+}
+
+.firstLetter {
+    font-family: inherit;
+    font-size: 4rem;
 }
 
 .navTitle:hover {
@@ -32,7 +37,7 @@
 .navLink {
     color: #eee;
     text-decoration: none;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
 }
 
 .navLink:hover {
@@ -40,16 +45,19 @@
 }
 
 .activeLink {
-    border-bottom: 2px solid #eee;
+    border-bottom: 2px solid #0AF;
 }
 
 .loginSignupContainer {
     display: flex;
     justify-content: center;
-    gap: .25rem;
+    gap: .5rem;
 }
 
 .userNameLogo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: 'Kalam', sans-serif;
 }
 
@@ -75,12 +83,12 @@
     bottom: 0;
     right: 0;
     /* height: 100vh; */
-    height: 45%;
+    height: fit-content;
     width: 25%;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
+    gap: 2rem;
+    padding: 1rem .5rem;
     align-items: center;
     justify-content: center;
     /* background: rgba(0, 0, 0, 0.7); */
@@ -103,14 +111,55 @@
     font-size: 2rem;
 }
 
+.navBtn {
+    border: none;
+    outline: none;
+    font-family: inherit;
+    padding: .25rem .5rem;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 1px solid #0AF;
+    background-color: inherit;
 
-@media screen and (max-width: 750px) {
+    transition: all .2s ease-in-out;
+}
+
+
+.navBtn.signUp {
+    background-color: #0AF;
+    color: whitesmoke;
+    font-size: 1.4rem;
+}
+
+.navBtn.logIn,
+.navBtn.logOut {
+    color: #0AF;
+}
+
+.navBtn.logOut {
+    font-size: 1rem;
+}
+
+.navBtn:hover {
+    box-shadow: 2px 2px 5px white;
+    color: white;
+    border: 1px solid white;
+}
+
+.navBtn.logOut:hover {
+    box-shadow: none;
+}
+
+
+@media screen and (max-width: 800px) {
     .standardMenu {
         display: none !important
     }
 
     .hamburgerMenuContainer {
         display: flex;
+        align-self: center;
     }
 
     .loginSignupContainer {

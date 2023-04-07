@@ -67,7 +67,7 @@ const CreateAccountPage = () => {
         <div className="loginPageContainer">
             {/* {showModal && <SuccessModal userName={"CSS styles"} />} */}
             {showModal && <SuccessModal userName={userName.current.value} />}
-            <h1>Create your account</h1>
+            <h1 className='landingTitle'>Become an Eagle</h1>
             <form className="loginForm" onSubmit={e => e.preventDefault()}>
                 <input ref={email} type="email" placeholder="E-mail" required />
                 <input ref={userName} onChange={handleCheckUserName} placeholder="Username" required />
@@ -94,7 +94,7 @@ const CreateAccountPage = () => {
 
                 <div ref={passwordError} className='newPostError notVisible'>Passwords must match</div>
 
-                <button type="submit" onClick={handleCreateAccount}>Create account</button>
+                <button className="landingBtn createAcc" type="submit" onClick={handleCreateAccount}>Create account</button>
                 <Link className="createAccLink" to={"/login"}>Return to Log in</Link>
             </form>
         </div>

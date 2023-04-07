@@ -85,18 +85,22 @@
 }
 
 .createNewThreadBtn {
-    font-size: inherit;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
     min-height: 50px;
-    background-color: white;
+    background-color: #0AF;
     border-radius: 5px;
-    width: fit-content;
+    /* font-weight: bold; */
+    opacity: .8;
     align-self: center;
-    padding: .5rem;
+    padding: .5rem 1rem;
+    color: whitesmoke;
+    transition: all .2s;
 }
 
 .createNewThreadBtn:hover {
-    font-weight: bold;
-    /* background-color: #9991; */
+    opacity: 1;
+    box-shadow: 1px 1px 1px #333;
 }
 
 .individualPostContainer {

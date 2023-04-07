@@ -25,9 +25,12 @@ const Navbar = () => {
             elem.id === location.pathname && elem.classList.add("activeLink")
         })
     }
+
     return (
         <div className="navbarContainer">
-            <h1 className="navTitle" onClick={() => navigate("/")}>Crypto Eagle</h1>
+            <h1 className="navTitle" onClick={() => navigate("/")}>
+                <span className="firstLetter">C</span>rypto <span className="firstLetter">E</span>agle
+            </h1>
             {location.pathname !== "/login" && location.pathname !== "/create-acc" &&
                 <>
                     <div className="navLinksContainer standardMenu">

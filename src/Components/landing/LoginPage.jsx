@@ -22,8 +22,8 @@ const LoginPage = () => {
     const handleLogin = () => {
         loginError.current.classList.add("notVisible")
         const loginUser = {
-            "username": userName.current.value,
-            "password": password.current.value
+            "username": userName.current.value.trim(),
+            "password": password.current.value.trim()
         }
         if (!loginUser.username.length > 0 || !loginUser.password.length > 0) return;
 
@@ -45,7 +45,7 @@ const LoginPage = () => {
 
     return (
         <div className="loginPageContainer">
-            <h1>Welcome</h1>
+            <h1 className='landingTitle'>Welcome</h1>
             <form className="loginForm" onSubmit={e => e.preventDefault()}>
                 <input ref={userName} placeholder="Username" required />
 
@@ -58,7 +58,7 @@ const LoginPage = () => {
                         onMouseLeave={() => hide(password)} />
                 </div>
                 <div ref={loginError} className='newPostError notVisible'>Username/Password did not match</div>
-                <button onClick={handleLogin} type="submit">Log in</button>
+                <button className="landingBtn logIn" onClick={handleLogin} type="submit">Log in</button>
                 <Link className="createAccLink" to={"/create-acc"}>Create account</Link>
             </form>
         </div>

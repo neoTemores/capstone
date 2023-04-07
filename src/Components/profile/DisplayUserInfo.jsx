@@ -8,7 +8,7 @@ import { setUserProfile } from '../../State/profile/userProfile'
 import { USER_URL } from '../../State/url'
 
 const DisplayUserInfo = ({ setEditinguser }) => {
-    const { id } = useParams()
+    const { username } = useParams()
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const currentUser = useSelector(state => state.currentUser.value)
@@ -78,7 +78,7 @@ const DisplayUserInfo = ({ setEditinguser }) => {
             <div><span>Bio: </span>{userProfile.userBio}</div>
 
             <div className='userDataEditDeleteBtnContainer'>
-                {currentUser?.id == id &&
+                {currentUser?.username == username &&
                     <>
                         <button onClick={() => setEditinguser(true)}>Edit my profile</button>
                         <button onClick={handleDeleteProfile}>Delete profile</button>
