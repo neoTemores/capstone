@@ -54,9 +54,7 @@
     width: 95%;
 }
 
-/* .toggleViewPasswordIcon {
-    transform: translateX(-2px);
-} */
+
 
 .landingPasswordContainer:focus-within {
     border: 2px solid deepskyblue;
