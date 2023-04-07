@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { hideAll, showAll, hideSpecific, showSpecific, focusElement } from "../forum/helperMethods"
@@ -20,8 +20,8 @@ const Comment = ({ comment, location }) => {
         setEditText(text)
 
         hideAll(".editCommentElem")
-        let textbox = showSpecific(".editCommentElem", id)
-        textbox.focus()
+        showSpecific(".editCommentElem", id)
+
         focusElement(".editCommentTextArea", id)
         showAll(".displayCommentElem")
         hideSpecific(".displayCommentElem", id)
@@ -62,10 +62,10 @@ const Comment = ({ comment, location }) => {
                 <span className='dateStamp'>{new Date(comment.date).toDateString()}</span>
             </p>
             <textarea
-                rows={4}
+                rows={(editText.length / 100) + 2}
                 cols={editText.length}
                 value={editText}
-                onChange={(e) => setEditText(e.target.value)}
+                onChange={(e) => { setEditText(e.target.value) }}
                 placeholder='Comment can not be blank...'
                 data-id={comment.id + location}
                 className='editCommentElem editCommentTextArea hide' />
