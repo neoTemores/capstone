@@ -22,7 +22,7 @@ const LogOutBtn = () => {
 
     return (
         <div className="userNameLogOutBtnContainer hamMenuUserNameLogOutBtn">
-            <h4 className="userNameLogo">@ {currentUser.username}</h4>
+            <h4 className="userNameLogo">@{currentUser.username}</h4>
             <button onClick={handleLogOut}>Log out</button>
         </div>
     )

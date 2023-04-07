@@ -60,7 +60,9 @@
     padding: .5rem;
     background-color: white;
     border-radius: 5px;
-    border: 1px solid #1115
+    border: 1px solid #1115;
+    box-shadow: 2px 2px 2px #3333;
+
 }
 
 .myProfileMyPostsContainer,
@@ -72,6 +74,7 @@
     gap: .5rem;
     padding: .5rem;
 }
+
 
 .userDisplayData>div>span {
     font-weight: bold;
@@ -147,6 +150,23 @@
 
     .profileCoinChange {
         justify-self: end;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+
+    .profilePageContainer {
+        grid-template-areas:
+            "header header"
+            "bio bio"
+            "coins coins"
+            "posts posts"
+            "comments comments" !important;
+    }
+
+    .profileCoinChange {
+        justify-self: center;
     }
 
 }

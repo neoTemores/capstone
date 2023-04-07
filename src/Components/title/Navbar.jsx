@@ -29,7 +29,7 @@ const Navbar = () => {
     }
     return (
         <div className="navbarContainer">
-            <h1 className="navTitle" onClick={() => navigate("/")}>Eagle Wallet</h1>
+            <h1 className="navTitle" onClick={() => navigate("/")}>Crypto Eagle</h1>
             {location.pathname !== "/login" && location.pathname !== "/create-acc" &&
                 <>
                     <div className="navLinksContainer standardMenu">

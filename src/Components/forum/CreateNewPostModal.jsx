@@ -17,7 +17,7 @@ const CreateNewPostModal = () => {
         let newPost = {
             "title": postData.title.trim(),
             "body": postData.body.trim(),
-            "userID": currentUser.id,
+            "userId": currentUser.id,
             "username": currentUser.username,
             "date": new Date()
         }

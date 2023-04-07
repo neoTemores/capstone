@@ -22,22 +22,22 @@ const HamburgerMenu = ({ setShowHamMenu, updateActiveTab }) => {
             <AiOutlineClose className="openHamIcon" onClick={() => setShowHamMenu(false)} />
 
             <Link onClick={() => setShowHamMenu(false)}
-                className="navLink hamLink" to="/" id="/">Home
+                className="navLink" to="/" id="/">Home
             </Link>
 
             <Link onClick={() => setShowHamMenu(false)}
-                className="navLink hamLink" to="/forum" id="/forum">Forum
+                className="navLink" to="/forum" id="/forum">Forum
             </Link>
 
             <Link onClick={() => setShowHamMenu(false)}
-                className="navLink hamLink" to="/wallet" id="/wallet">Wallet
+                className="navLink" to="/wallet" id="/wallet">Wallet
             </Link>
 
             {loggedIn &&
                 <>
                     <Link
                         onClick={() => setShowHamMenu(false)}
-                        className="navLink hamLink"
+                        className="navLink"
                         to={`/profile/${currentUser.username}/${currentUser.id}`}
                         id={`/profile/${currentUser.username}/${currentUser.id}`}>
                         Profile

@@ -127,7 +127,7 @@ const Post = ({ elem }) => {
                         className="addCommentBtn" />
                 </div>
 
-                {elem.userID === currentUser.id &&
+                {elem.userId === currentUser.id &&
                     <div className='postEditDeleteUpdateCancelBtnContainer'>
 
                         <MdOutlineModeEdit

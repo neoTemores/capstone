@@ -36,18 +36,26 @@ const DisplayUserInfo = ({ setEditinguser }) => {
     }
 
     const pasrseMembership = (years, months, days) => {
+
         let y = years == 1 ? "" : "s"
         let m = months == 1 ? "" : "s"
         let d = days == 1 ? "" : "s"
 
-        setMemberString(`Eagle for ${years} year${y}, ${months} month${m} and ${days} day${d}`)
+        if (years === 0 & months === 0) {
+            setMemberString(`Eagle for ${days} day${d}`)
+        }
+        else if (years === 0) {
+            setMemberString(`Eagle for ${months} month${m} and ${days} day${d}`)
+        } else {
+            setMemberString(`Eagle for ${years} year${y}, ${months} month${m} and ${days} day${d}`)
+        }
+
     }
 
     const handleDeleteProfile = async () => {
         const res = await fetch(USER_URL.DELETE + currentUser.id, { method: "DELETE" })
-        const data = await res.json()
 
-        if (data.res === 202)
+        if (res.status === 202)
             handleLogOut()
     }
     const handleLogOut = () => {

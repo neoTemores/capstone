@@ -21,7 +21,6 @@ export const addCoinToWallet = createAsyncThunk(
 
         const res = await fetch(WALLET_URL.POST, postReq)
         const data = await res.json()
-        console.log(data)
         return {
             "status": res.status,
             "coin": data
