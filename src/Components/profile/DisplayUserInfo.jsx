@@ -45,9 +45,8 @@ const DisplayUserInfo = ({ setEditinguser }) => {
 
     const handleDeleteProfile = async () => {
         const res = await fetch(USER_URL.DELETE + currentUser.id, { method: "DELETE" })
-        const data = await res.json()
 
-        if (data.res === 202)
+        if (res.status === 202)
             handleLogOut()
     }
     const handleLogOut = () => {

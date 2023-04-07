@@ -4,7 +4,7 @@ import "./profile.css"
 import DisplayUserInfo from './DisplayUserInfo'
 import EditUserInfo from './EditUserInfo'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchUserProfile, setUserProfile } from '../../State/profile/userProfile'
+import { fetchUserProfile } from '../../State/profile/userProfile'
 import { fetchProfileCoinDetails, setProfileCoinDetails } from '../../State/profile/profileCoinDetails'
 import Post from '../templates/Post'
 import Comment from '../templates/Comment'
@@ -39,7 +39,6 @@ const Profile = () => {
     }, [allPosts, allComments, username, currentUser])
 
     useEffect(() => {
-
         if (!fetched.current && username == userProfile.username) {
             dispatch(setProfileCoinDetails([]))
             fetched.current = true
