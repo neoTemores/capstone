@@ -88,7 +88,7 @@ const Post = ({ elem }) => {
             </h3>
             <p className='displayPostElem individualPostBody' data-id={elem.id}>{elem.body}</p>
             <p>
-                @<Link to={`/profile/${elem.username}/${elem.userID}`}>
+                @<Link to={`/profile/${elem.username}`}>
                     {elem.username}
                 </Link>
                 - <span className='dateStamp'>{new Date(elem.date).toDateString()}</span>

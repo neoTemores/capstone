@@ -38,8 +38,8 @@ const HamburgerMenu = ({ setShowHamMenu, updateActiveTab }) => {
                     <Link
                         onClick={() => setShowHamMenu(false)}
                         className="navLink"
-                        to={`/profile/${currentUser.username}/${currentUser.id}`}
-                        id={`/profile/${currentUser.username}/${currentUser.id}`}>
+                        to={`/profile/${currentUser.username}`}
+                        id={`/profile/${currentUser.username}`}>
                         Profile
                     </Link>
                 </>}

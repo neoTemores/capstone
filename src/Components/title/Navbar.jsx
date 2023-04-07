@@ -22,8 +22,6 @@ const Navbar = () => {
     const updateActiveTab = () => {
         document.querySelectorAll(".navLink").forEach(elem => {
             elem.classList.remove("activeLink")
-            elem.id == `/${location.pathname}/${currentUser.username}/${currentUser.id}` && elem.classList.add("activeLink")
-
             elem.id === location.pathname && elem.classList.add("activeLink")
         })
     }
@@ -43,8 +41,8 @@ const Navbar = () => {
                                 |
                                 <Link
                                     className="navLink"
-                                    to={`/profile/${currentUser.username}/${currentUser.id}`}
-                                    id={`/profile/${currentUser.username}/${currentUser.id}`}>
+                                    to={`/profile/${currentUser.username}`}
+                                    id={`/profile/${currentUser.username}`}>
                                     Profile
                                 </Link>
                             </>}
