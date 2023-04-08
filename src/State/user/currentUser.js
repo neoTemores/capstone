@@ -9,7 +9,6 @@ export const attemptUserLogin = createAsyncThunk(
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(user)
         }
-
         const res = await fetch(USER_URL.LOGIN, reqBody)
         const data = await res.json()
         return {

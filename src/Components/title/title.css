@@ -16,7 +16,6 @@
 .navTitle {
     font-family: 'Playfair Display', sans-serif;
     font-size: 3rem;
-    /* color: red */
 }
 
 .firstLetter {
@@ -84,7 +83,7 @@
     right: 0;
     /* height: 100vh; */
     height: fit-content;
-    width: 25%;
+    /* width: fit-content; */
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -130,6 +129,7 @@
     background-color: #0AF;
     color: whitesmoke;
     font-size: 1.4rem;
+    width: max-content;
 }
 
 .navBtn.logIn,
@@ -168,4 +168,14 @@
         width: 100%;
     }
 
+}
+
+@media screen and (max-width: 420px) {
+    .navTitle {
+        font-size: 2.5rem;
+    }
+
+    .firstLetter {
+        font-size: 3.5rem;
+    }
 }

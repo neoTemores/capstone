@@ -65,6 +65,7 @@
     font-family: inherit;
     color: inherit;
     padding: .25rem;
+    background-color: inherit;
 }
 
 .addToWathListIcon {
@@ -136,5 +137,9 @@
     .coinGridHeaderContainer,
     .individualCoinContainer {
         grid-template-columns: repeat(4, 1fr);
+    }
+
+    .filterCoinsContainer {
+        width: 75%;
     }
 }

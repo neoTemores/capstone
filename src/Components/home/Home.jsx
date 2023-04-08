@@ -76,7 +76,7 @@ const Home = () => {
                 <FcSearch style={{ fontSize: "1.5rem" }} />
                 <input
                     className="filterCoinsInput"
-                    type="search"
+                    // type="search"
                     value={query}
                     onChange={e => setQuery(e.target.value)}
                     placeholder="Search for a coin by name or symbol..." />
