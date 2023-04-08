@@ -6,6 +6,9 @@ import { setLoggedIn } from '../../State/user/loggedIn'
 import { setCurrentUser } from '../../State/user/currentUser'
 import { setUserProfile } from '../../State/profile/userProfile'
 import { USER_URL } from '../../State/url'
+import { BiEdit } from "react-icons/bi"
+import { CgUserRemove } from "react-icons/cg"
+import { IoPersonRemoveOutline } from "react-icons/io5"
 
 const DisplayUserInfo = ({ setEditinguser }) => {
     const { username } = useParams()
@@ -53,6 +56,8 @@ const DisplayUserInfo = ({ setEditinguser }) => {
     }
 
     const handleDeleteProfile = async () => {
+        if (!window.confirm("WAIT! Deleting your profile is permanent. Continue?")) return;
+
         const res = await fetch(USER_URL.DELETE + currentUser.id, { method: "DELETE" })
 
         if (res.status === 202)
@@ -80,8 +85,17 @@ const DisplayUserInfo = ({ setEditinguser }) => {
             <div className='userDataEditDeleteBtnContainer'>
                 {currentUser?.username == username &&
                     <>
-                        <button onClick={() => setEditinguser(true)}>Edit my profile</button>
-                        <button onClick={handleDeleteProfile}>Delete profile</button>
+                        <button
+                            className='editProfileBtn edit'
+                            onClick={() => setEditinguser(true)}>
+                            <BiEdit className='editProfileIcon' style={{ fontSize: "1.5rem", color: "navy" }} /> Edit Profile
+                        </button>
+
+                        <button
+                            className='editProfileBtn delete'
+                            onClick={handleDeleteProfile}>
+                            <IoPersonRemoveOutline className='editProfileIcon' style={{ fontSize: "1.4rem", color: "red" }} /> Delete Profile
+                        </button>
                     </>
                 }
             </div>
