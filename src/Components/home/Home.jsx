@@ -70,6 +70,11 @@ const Home = () => {
         setLastIndex(prev => prev + num)
     }
 
+    const handleQueryChange = (e) => {
+        setQuery(e.target.value)
+        setStartIndex(0)
+        setLastIndex(10)
+    }
     return (
         <div className="allCoinsContainer">
             <div className="filterCoinsContainer">
@@ -78,7 +83,8 @@ const Home = () => {
                     className="filterCoinsInput"
                     // type="search"
                     value={query}
-                    onChange={e => setQuery(e.target.value)}
+                    onChange={handleQueryChange}
+                    // onChange={e => setQuery(e.target.value)}
                     placeholder="Search for a coin by name or symbol..." />
             </div>
 
