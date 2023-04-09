@@ -1,5 +1,7 @@
 .loadingModal {
     display: flex;
+    flex-direction: column;
+    gap: 3rem;
     position: fixed;
     z-index: 1;
     left: 0;

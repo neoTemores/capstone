@@ -11,6 +11,7 @@ const Loading = () => {
                 cssOverride={{ transform: "scale(2.5)" }}
                 color='navy'
             />
+            <h1 style={{ color: "navy" }}>Loading...</h1>
 
         </div>,
         document.getElementById("portal")
