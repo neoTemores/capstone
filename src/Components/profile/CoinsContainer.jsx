@@ -18,7 +18,7 @@ const CoinsContainer = () => {
             <h1>Coins</h1>
             <div className='userProfileCoinsData'>
 
-                {profileCoinDetails.length === 0 ? <h3>No coins in Wallet</h3>
+                {profileCoinDetails?.length === 0 ? <h3>No coins in Wallet</h3>
                     :
                     <div className="userProfileCoinsContainer headers">
                         <div className="gridHeader">Currency</div>

@@ -17,7 +17,7 @@ const CommentsContainer = () => {
     }
 
     useEffect(() => {
-        if (slicedComments.length === 0) {
+        if (slicedComments?.length === 0) {
             setStartIndexComments(0)
             setLastIndexComments(3)
         }
@@ -27,9 +27,9 @@ const CommentsContainer = () => {
         <div className='myProfileMyCommentsContainer'>
             <h1>Comments</h1>
             {userProfile?.userComments?.commentList?.length === 0 &&
-                <h3>@{userProfile.username} does not have any Comments!</h3>}
+                <h3>@{userProfile?.username} does not have any Comments!</h3>}
 
-            {slicedComments.map(elem => {
+            {slicedComments?.map(elem => {
                 return (<Comment key={elem.id} comment={elem} location={"myprofile"} />)
             })}
 

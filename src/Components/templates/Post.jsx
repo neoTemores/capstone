@@ -21,6 +21,7 @@ const Post = ({ elem }) => {
     const currentUser = useSelector(state => state.currentUser.value)
     const loggedIn = useSelector(state => state.loggedIn.value)
 
+
     const handleVewNewCommentTextArea = (e) => {
         if (!loggedIn) return navigate("/login")
         setNewCommentText("")
