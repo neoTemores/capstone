@@ -11,12 +11,22 @@
     /* min-height: 80vh; */
 }
 
+.profileFirstLetter {
+    font-family: inherit;
+    font-size: 2.5rem;
+}
+
+.profilePageContainer h1 {
+    font-family: kalam;
+}
+
 .profilePageHeader {
     grid-area: header;
 }
 
 .myProfileMyPostsContainer {
     grid-area: posts;
+
 }
 
 .myProfileMyCommentsContainer {
@@ -52,7 +62,8 @@
 }
 
 .userDisplayData,
-.userProfileCoinsData {
+.userProfileCoinsData,
+.myProfileCommentsDisplay {
     height: fit-content;
     display: flex;
     flex-direction: column;

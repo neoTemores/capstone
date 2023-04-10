@@ -121,7 +121,7 @@ const Post = ({ elem }) => {
                         data-id={elem.id} />
 
                     <HiOutlineChatBubbleLeftEllipsis
-                        style={{ "color": "#333", "fontSize": "1.5rem" }}
+                        style={{ "color": "#222", "fontSize": "1.5rem" }}
                         onClick={handleVewNewCommentTextArea}
                         data-id={elem.id}
                         className="addCommentBtn" />

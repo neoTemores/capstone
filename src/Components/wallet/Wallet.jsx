@@ -17,8 +17,9 @@ const Wallet = () => {
     const allCoinData = useSelector(state => state.allCoinData.value)
     const currentUser = useSelector(state => state.currentUser.value)
     const loggedIn = useSelector(state => state.loggedIn.value)
+    let index = 8
     const [startIndex, setStartIndex] = useState(0)
-    const [lastIndex, setLastIndex] = useState(10)
+    const [lastIndex, setLastIndex] = useState(index)
 
     useEffect(() => {
         if (!loggedIn && localStorage.getItem('cryptoEagleUser') === null)
@@ -93,7 +94,7 @@ const Wallet = () => {
                 <div className="individualCoinContainer" key={elem.id}>
 
                     <div className="imgSymbolCointainer">
-                        <img src={getImg(elem.symbol)} height="32" />
+                        <img src={getImg(elem.symbol)} height="48" />
                         <div>
                             <div>{elem.name}</div>
                             <div className="symbol">{elem.symbol}</div>
@@ -123,7 +124,7 @@ const Wallet = () => {
                 lastIndex={lastIndex}
                 length={allCoinData.length}
                 updateIndex={updateIndex}
-                itemsPerPage={10}
+                itemsPerPage={index}
             />
         </div>
     )

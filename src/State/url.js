@@ -42,7 +42,6 @@ export const USER_PROFILE_URL = {
     "GET": "/api/"
 }
 
-
 // export const COIN_URL = {
 //     "LIST_NAME": "coinList",
 //     "GET_ALL": "http://eaglewallet-env.eba-q3b6jzqz.us-east-2.elasticbeanstalk.com/api/get-coins",

@@ -14,7 +14,7 @@ const Pagination = ({ startIndex, lastIndex, length, updateIndex, itemsPerPage }
     const handleChangePage = (index, page) => {
         updateIndex(index)
         setCurrentPage(prev => prev + page)
-        window.scroll(0, 0)
+        // window.scroll(0, 0)
     }
 
     return (

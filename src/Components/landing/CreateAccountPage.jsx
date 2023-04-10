@@ -65,8 +65,10 @@ const CreateAccountPage = () => {
     return (
 
         <div className="loginPageContainer">
-            {/* {showModal && <SuccessModal userName={"CSS styles"} />} */}
+
+            {/* {showModal && <SuccessModal userName={"TestAcc"} />} */}
             {showModal && <SuccessModal userName={userName.current.value} />}
+
             <h1 className='landingTitle'>Become an Eagle</h1>
             <form className="loginForm" onSubmit={e => e.preventDefault()}>
                 <input ref={email} type="email" placeholder="E-mail" required />

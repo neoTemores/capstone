@@ -77,6 +77,13 @@
     color: #555
 }
 
+.forumHeaderContainer {
+    display: flex;
+    align-self: center;
+    width: 100%;
+    justify-content: space-around;
+}
+
 .allPostsContainer {
     padding: 1rem;
     display: flex;
@@ -98,7 +105,9 @@
 
 .createNewThreadBtn {
     align-self: center;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+    margin-bottom: 0rem !important;
+    align-self: center;
 }
 
 .submitNewThreadBtn {
@@ -143,6 +152,17 @@
     align-self: center;
 }
 
+
+.postEditDeleteBtn,
+.addCommentBtn,
+.viewCommentsBtn,
+.commentEditDeleteBtn,
+.postUpdateCancelEditBtn,
+.commentUpdateCancelEditBtn {
+    opacity: .5;
+    transition: all .2s ease-in-out;
+}
+
 .postEditDeleteBtn:hover,
 .addCommentBtn:hover,
 .viewCommentsBtn:hover,
@@ -153,13 +173,8 @@
     opacity: 1;
 }
 
-.postEditDeleteBtn,
-.addCommentBtn,
-.viewCommentsBtn,
-.commentEditDeleteBtn,
-.postUpdateCancelEditBtn,
-.commentUpdateCancelEditBtn {
-    opacity: .5;
+.addCommentBtn:hover {
+    color: #0AF !important
 }
 
 .rotate180 {
@@ -249,4 +264,12 @@
 
 .hide {
     display: none;
+}
+
+@media screen and (max-width: 700px) {
+    .forumHeaderContainer {
+        flex-direction: column;
+        gap: .5rem;
+    }
+
 }

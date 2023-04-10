@@ -20,8 +20,9 @@ const Home = () => {
     const allSavedCoins = useSelector(state => state.savedCoins.value)
     const currentUser = useSelector(state => state.currentUser.value)
     const loggedIn = useSelector(state => state.loggedIn.value)
+    let index = 8
     const [startIndex, setStartIndex] = useState(0)
-    const [lastIndex, setLastIndex] = useState(10)
+    const [lastIndex, setLastIndex] = useState(index)
 
     const filteredCoins = allCoins?.filter(item => {
         return item.id.toLowerCase().includes(query.toLowerCase()) || item.symbol.toLowerCase().includes(query.toLowerCase())
@@ -73,7 +74,7 @@ const Home = () => {
     const handleQueryChange = (e) => {
         setQuery(e.target.value)
         setStartIndex(0)
-        setLastIndex(10)
+        setLastIndex(index)
     }
     return (
         <div className="allCoinsContainer">
@@ -81,10 +82,8 @@ const Home = () => {
                 <FcSearch style={{ fontSize: "1.5rem" }} />
                 <input
                     className="filterCoinsInput"
-                    // type="search"
                     value={query}
                     onChange={handleQueryChange}
-                    // onChange={e => setQuery(e.target.value)}
                     placeholder="Search for a coin by name or symbol..." />
             </div>
 
@@ -102,7 +101,7 @@ const Home = () => {
             {filteredCoins.slice(startIndex, lastIndex).map(elem =>
                 <div className="individualCoinContainer" key={elem.id}>
                     <div className="imgSymbolCointainer">
-                        <img src={getImg(elem.symbol)} height="32" />
+                        <img src={getImg(elem.symbol)} height="48" />
                         <div>
                             <div>{elem.name}</div>
                             <div className="symbol">{elem.symbol}</div>
@@ -126,7 +125,7 @@ const Home = () => {
                 lastIndex={lastIndex}
                 length={filteredCoins.length}
                 updateIndex={updateIndex}
-                itemsPerPage={10}
+                itemsPerPage={index}
             />
         </div>
     )

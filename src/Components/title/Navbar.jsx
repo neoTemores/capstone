@@ -17,6 +17,7 @@ const Navbar = () => {
 
     useEffect(() => {
         updateActiveTab()
+        setShowHamMenu(false)
     }, [location])
 
 

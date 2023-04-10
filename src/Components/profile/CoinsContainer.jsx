@@ -15,7 +15,7 @@ const CoinsContainer = () => {
 
     return (
         <div className='myProfileCoinsContainer'>
-            <h1>Coins</h1>
+            <h1><span className='profileFirstLetter'>C</span>oins</h1>
             <div className='userProfileCoinsData'>
 
                 {profileCoinDetails?.length === 0 ? <h3>No coins in Wallet</h3>

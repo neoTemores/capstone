@@ -20,3 +20,36 @@
     text-decoration: none;
     font-family: inherit;
 }
+
+.aboutPageContainer {
+    align-self: center;
+    padding: 1rem 2rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-direction: column;
+}
+
+.aboutListContainer {
+    display: flex;
+    padding-top: .5rem;
+    flex-direction: column;
+    gap: .5rem;
+    border-top: 1px solid #3333;
+}
+
+.aboutListContainer>li {
+    list-style: circle;
+}
+
+.aboutTitleSentence::before,
+.aboutTitleSentence::after {
+    content: "\"";
+    font-family: inherit;
+    font-size: 3rem;
+    position: absolute;
+    transform: translateY(-15px);
+}
+
+.aboutTitleSentence::before {
+    transform: translateX(-15px) translateY(-15px);
+}

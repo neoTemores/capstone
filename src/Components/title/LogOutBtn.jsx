@@ -22,9 +22,16 @@ const LogOutBtn = () => {
         window.location.reload()
     }
 
+    const goToProfile = () => navigate(`/profile/${currentUser.username}`)
+
     return (
         <div className="userNameLogOutBtnContainer hamMenuUserNameLogOutBtn">
-            <h4 className="userNameLogo"><TiUser />{currentUser.username}</h4>
+            <h4
+                onClick={goToProfile}
+                className="userNameLogo">
+                <TiUser />
+                {currentUser.username}
+            </h4>
             <button className="navBtn logOut" onClick={handleLogOut}>Log out</button>
         </div>
     )

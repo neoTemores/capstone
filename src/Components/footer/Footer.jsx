@@ -5,8 +5,18 @@ const Footer = () => {
         <div className="footerContainer">
             <div className="footer">
                 <Link to={"/about"} className="footerLink">About</Link>
-                <Link className="footerLink">Spring Boot Repo</Link>
-                <Link className="footerLink">React Repo</Link>
+                <a
+                    href="https://gitlab.galvanizelabs.net/cohorts/usaa-efit-vetfit/usaa-vetfit-jan-2023/student-work/team-1-capstone"
+                    target="_blank"
+                    className="footerLink">
+                    Spring Boot Repo
+                </a>
+                <a
+                    href="https://github.com/neoTemores/capstone"
+                    target="_blank"
+                    className="footerLink">
+                    React Repo
+                </a>
             </div>
         </div>
     )

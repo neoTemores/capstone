@@ -8,6 +8,7 @@ import CreateNewPostModal from './CreateNewPostModal'
 import Post from '../templates/Post'
 import Pagination from '../templates/Pagination'
 import { setLoading } from '../../State/loading'
+import { FcSearch } from "react-icons/fc"
 import "./Forum.css"
 
 const Forum = () => {
@@ -16,8 +17,14 @@ const Forum = () => {
     const allPosts = useSelector(state => state.allPosts.value)
     const showNewPostModal = useSelector(state => state.showNewPostModal.value)
     const loggedIn = useSelector(state => state.loggedIn.value)
+    const [query, setQuery] = useState("")
+
     const [startIndex, setStartIndex] = useState(0)
     const [lastIndex, setLastIndex] = useState(5)
+
+    const filteredPosts = allPosts?.filter(item => {
+        return item.title.toLowerCase().includes(query.toLowerCase()) || item.body.toLowerCase().includes(query.toLowerCase()) || item.username.toLowerCase().includes(query.toLowerCase())
+    })
 
     useEffect(() => {
         dispatch(setLoading(true))
@@ -34,23 +41,39 @@ const Forum = () => {
         setStartIndex(prev => prev + num)
         setLastIndex(prev => prev + num)
     }
+    const handleQueryChange = (e) => {
+        setQuery(e.target.value)
+        setStartIndex(0)
+        setLastIndex(5)
+    }
     return (
         <div className='allPostsContainer'>
             {showNewPostModal && <CreateNewPostModal />}
-            <button
-                className='createNewThreadBtn'
-                onClick={handleCreateThread}>
-                Create a new thread
-            </button>
 
-            {allPosts.slice(startIndex, lastIndex).map(elem =>
+            <div className='forumHeaderContainer'>
+                <button
+                    className='createNewThreadBtn'
+                    onClick={handleCreateThread}>
+                    Create a new thread
+                </button>
+                <div className="filterCoinsContainer">
+                    <FcSearch style={{ fontSize: "1.5rem" }} />
+                    <input
+                        className="filterCoinsInput"
+                        value={query}
+                        onChange={handleQueryChange}
+                        placeholder="Seach by content or user name..." />
+                </div>
+            </div>
+
+            {filteredPosts?.slice(startIndex, lastIndex).map(elem =>
                 <Post key={elem.id} elem={elem} />
             )}
 
             <Pagination
                 startIndex={startIndex}
                 lastIndex={lastIndex}
-                length={allPosts.length}
+                length={filteredPosts?.length}
                 updateIndex={updateIndex}
                 itemsPerPage={5} />
         </div>

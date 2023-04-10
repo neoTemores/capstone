@@ -58,6 +58,12 @@
     align-items: center;
     justify-content: center;
     font-family: 'Kalam', sans-serif;
+    transition: all .2s ease-in-out;
+}
+
+.userNameLogo:hover {
+    cursor: pointer;
+    color: #0AF
 }
 
 .userNameLogOutBtnContainer {
@@ -87,7 +93,7 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    padding: 1rem .5rem;
+    padding: 1rem 1rem;
     align-items: center;
     justify-content: center;
     /* background: rgba(0, 0, 0, 0.7); */

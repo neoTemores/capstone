@@ -25,14 +25,16 @@ const CommentsContainer = () => {
 
     return (
         <div className='myProfileMyCommentsContainer'>
-            <h1>Comments</h1>
-            {userProfile?.userComments?.commentList?.length === 0 &&
-                <h3>@{userProfile?.username} does not have any Comments!</h3>}
+            <h1><span className='profileFirstLetter'>C</span>omments</h1>
 
-            {slicedComments?.map(elem => {
-                return (<Comment key={elem.id} comment={elem} location={"myprofile"} />)
-            })}
+            <div className='myProfileCommentsDisplay'>
+                {userProfile?.userComments?.commentList?.length === 0 &&
+                    <h3>@{userProfile?.username} does not have any Comments!</h3>}
 
+                {slicedComments?.map(elem => {
+                    return (<Comment key={elem.id} comment={elem} location={"myprofile"} />)
+                })}
+            </div>
             <Pagination
                 startIndex={startIndexComments}
                 lastIndex={lastIndexComments}
