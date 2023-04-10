@@ -19,7 +19,7 @@ const EditUserInfo = ({ setEditinguser }) => {
     const [profileData, setProfileData] = useState({
         "id": currentUser.id,
         "email": currentUser.email,
-        "password": currentUser.password,
+        "password": "",
         "bio": currentUser.bio
     })
 
