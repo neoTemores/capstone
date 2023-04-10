@@ -88,13 +88,12 @@ const Post = ({ elem }) => {
                 {elem.title}
             </h3>
             <p className='displayPostElem individualPostBody' data-id={elem.id}>{elem.body}</p>
-            <p>
+            <p data-id={elem.id} className='displayPostElem'>
                 @<Link to={`/profile/${elem.username}`}>
                     {elem.username}
                 </Link>
                 - <span className='dateStamp'>{new Date(elem.date).toDateString()}</span>
             </p>
-
 
             <input
                 className='editPostElem editPostTitleInput hide'

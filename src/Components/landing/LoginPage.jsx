@@ -30,8 +30,8 @@ const LoginPage = () => {
         dispatch(setLoading(true))
         Promise.resolve(dispatch(attemptUserLogin(loginUser)))
             .then(val => {
-                console.log(val)
                 if (val.payload?.status === 200) {
+                    localStorage.setItem('cryptoEagleUser', JSON.stringify(val.payload.user))
                     dispatch(setLoggedIn(true))
                     dispatch(setCurrentUser(val.payload.user))
                     dispatch(fetchAllSavedCoinsByUser(val.payload.user.id))

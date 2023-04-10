@@ -1,8 +1,11 @@
 import { useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateCurrentUserData } from '../../State/user/currentUser'
+import { fetchUserProfile } from '../../State/profile/userProfile'
 import { BiHide } from "react-icons/bi"
 import { setLoading } from "../../State/loading"
+import { FcCancel } from "react-icons/fc"
+import { FaUserEdit } from "react-icons/fa"
 
 
 const EditUserInfo = ({ setEditinguser }) => {
@@ -25,7 +28,10 @@ const EditUserInfo = ({ setEditinguser }) => {
         if (isValidData()) {
             dispatch(setLoading(true))
             Promise.resolve(dispatch(updateCurrentUserData(profileData)))
-                .then(() => dispatch(setLoading(false)))
+                .then(() => {
+                    dispatch(fetchUserProfile(currentUser.username))
+                    dispatch(setLoading(false))
+                })
             setEditinguser(false)
         }
     }
@@ -114,8 +120,19 @@ const EditUserInfo = ({ setEditinguser }) => {
             </div>
 
             <div className='userDataEditDeleteBtnContainer'>
-                <button type="submit" onClick={handleSaveChanges}>Save changes</button>
-                <button onClick={() => setEditinguser(false)}>Cancel</button>
+
+                <button
+                    className='editProfileBtn save'
+                    onClick={handleSaveChanges}>
+                    <FaUserEdit className='editProfileIcon' style={{ fontSize: "1.5rem", color: "green" }} /> Save changes
+                </button>
+
+                <button
+                    className='editProfileBtn delete'
+                    onClick={() => setEditinguser(false)}>
+                    <FcCancel className='editProfileIcon' style={{ fontSize: "1.4rem", color: "red" }} /> Cancel
+                </button>
+
             </div>
         </form>
     )

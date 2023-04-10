@@ -13,6 +13,7 @@ const LogOutBtn = () => {
     const currentUser = useSelector(state => state.currentUser.value)
 
     const handleLogOut = () => {
+        localStorage.removeItem('cryptoEagleUser')
         dispatch(setSavedCoins([]))
         dispatch(setLoggedIn(false))
         dispatch(setCurrentUser({}))

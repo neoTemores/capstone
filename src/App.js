@@ -8,12 +8,29 @@ import Profile from "./Components/profile/Profile"
 import LoginPage from './Components/landing/LoginPage'
 import CreateAccountPage from './Components/landing/CreateAccountPage'
 import Loading from './Components/templates/Loading'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { setLoggedIn } from './State/user/loggedIn'
+import { setCurrentUser } from './State/user/currentUser'
+import { fetchAllSavedCoinsByUser } from './State/wallet/savedCoins'
 import Footer from './Components/footer/Footer'
 import About from './Components/footer/About'
+import { useEffect } from 'react'
 
 const App = () => {
+  const dispatch = useDispatch()
   const loading = useSelector(state => state.loading.value)
+  const loggedIn = useSelector(state => state.loggedIn.value)
+
+  useEffect(() => {
+    if (!loggedIn & localStorage.getItem('cryptoEagleUser') !== null) {
+
+      const user = JSON.parse(localStorage.cryptoEagleUser)
+      dispatch(setLoggedIn(true))
+      dispatch(setCurrentUser(user))
+      dispatch(fetchAllSavedCoinsByUser(user.id))
+    }
+
+  }, [])
 
   return (
     <div className="appContainer">

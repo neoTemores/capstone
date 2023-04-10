@@ -119,6 +119,10 @@
     border: 1px solid red;
 }
 
+.editProfileBtn.save:hover {
+    color: darkgreen;
+    border: 1px solid green;
+}
 
 
 .editUserBioTextArea,

@@ -13,6 +13,7 @@ const Navbar = () => {
     const loggedIn = useSelector(state => state.loggedIn.value);
     const currentUser = useSelector(state => state.currentUser.value)
     const [showHamMenu, setShowHamMenu] = useState(false)
+    const storedUser = JSON.parse(localStorage.getItem('cryptoEagleUser'))
 
     useEffect(() => {
         updateActiveTab()
@@ -22,7 +23,7 @@ const Navbar = () => {
     const updateActiveTab = () => {
         document.querySelectorAll(".navLink").forEach(elem => {
             elem.classList.remove("activeLink")
-            elem.id === location.pathname && elem.classList.add("activeLink")
+            elem.id == location.pathname && elem.classList.add("activeLink")
         })
     }
 
@@ -39,13 +40,13 @@ const Navbar = () => {
                         <Link className="navLink" to="/forum" id="/forum">Forum</Link>
                         |
                         <Link className="navLink" to="/wallet" id="/wallet">Wallet</Link>
-                        {loggedIn &&
+                        {(localStorage.getItem('cryptoEagleUser') !== null || loggedIn) &&
                             <>
                                 |
                                 <Link
                                     className="navLink"
-                                    to={`/profile/${currentUser.username}`}
-                                    id={`/profile/${currentUser.username}`}>
+                                    to={`/profile/${currentUser.username || storedUser?.username}`}
+                                    id={`/profile/${currentUser.username || storedUser?.username}`}>
                                     Profile
                                 </Link>
                             </>}

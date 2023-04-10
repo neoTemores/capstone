@@ -22,15 +22,15 @@ const Profile = () => {
     const allPosts = useSelector(state => state.allPosts.value)
     const allComments = useSelector(state => state.allComments.value)
 
-
     useEffect(() => {
         dispatch(setLoading(true))
         Promise.resolve(dispatch(fetchUserProfile(username)))
             .then(() => dispatch(setLoading(false)))
 
-    }, [allPosts, allComments, username, currentUser])
+    }, [allPosts, allComments, username]) //currentUser
 
     useEffect(() => {
+
         if (!fetched.current && username == userProfile.username) {
             dispatch(setProfileCoinDetails([]))
             fetched.current = true

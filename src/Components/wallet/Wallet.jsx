@@ -21,11 +21,14 @@ const Wallet = () => {
     const [lastIndex, setLastIndex] = useState(10)
 
     useEffect(() => {
-        if (!loggedIn) return redirectToLogin()
+        if (!loggedIn && localStorage.getItem('cryptoEagleUser') === null)
+            return redirectToLogin()
 
-        dispatch(setLoading(true))
-        Promise.resolve(dispatch(fetchAllSavedCoinsByUser(currentUser.id)))
-            .then(() => dispatch(setLoading(false)))
+        if (currentUser.id) {
+            dispatch(setLoading(true))
+            Promise.resolve(dispatch(fetchAllSavedCoinsByUser(currentUser.id)))
+                .then(() => dispatch(setLoading(false)))
+        }
     }, [currentUser])
 
     useEffect(() => {

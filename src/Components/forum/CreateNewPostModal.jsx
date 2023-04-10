@@ -91,7 +91,7 @@ const CreateNewPostModal = () => {
                         id='bodyError'
                         className='newPostError notVisible'>Body can not be blank</div>
 
-                    <button type='submit' onClick={handleSubmitNewPost}>Create thread</button>
+                    <button type='submit' className='submitNewThreadBtn' onClick={handleSubmitNewPost}>Create thread</button>
                 </form>
 
             </div>

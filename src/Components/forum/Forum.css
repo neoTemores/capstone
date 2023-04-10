@@ -84,21 +84,31 @@
     gap: .5rem;
 }
 
-.createNewThreadBtn {
-    font-size: 1.8rem;
+.createNewThreadBtn,
+.submitNewThreadBtn {
+    font-family: inherit;
     margin-bottom: 1rem;
-    min-height: 50px;
     background-color: #0AF;
     border-radius: 5px;
-    /* font-weight: bold; */
     opacity: .8;
-    align-self: center;
     padding: .5rem 1rem;
     color: whitesmoke;
     transition: all .2s;
 }
 
-.createNewThreadBtn:hover {
+.createNewThreadBtn {
+    align-self: center;
+    font-size: 1.8rem;
+}
+
+.submitNewThreadBtn {
+    font-size: 1.3rem;
+    /* width: 50%; */
+    /* align-self: center; */
+}
+
+.createNewThreadBtn:hover,
+.submitNewThreadBtn:hover {
     opacity: 1;
     box-shadow: 1px 1px 1px #333;
 }
@@ -208,6 +218,13 @@
     color: #555
 }
 
+.newPostTextArea,
+.newCommentTextArea,
+.editPostTextArea,
+.editPostTitleInput,
+.newPostTitleInput {
+    outline-color: #0AF;
+}
 
 .editCommentTextArea {
     width: 100%;
