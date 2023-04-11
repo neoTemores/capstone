@@ -19,6 +19,20 @@ export const allCoinDataSlice = createSlice({
         setAllCoinData: (state, action) => {
             state.value = action.payload
         },
+        sortCoinDataBy: ((state, action) => {
+            if (state.value.length === 1) return;
+            console.log(action.payload)
+
+            if (action.payload.reverse) {
+                state.value = state.value.sort((a, b) =>
+                    (a[action.payload.col] < b[action.payload.col]) ? 1 : -1)
+            }
+
+            else {
+                state.value = state.value.sort((a, b) =>
+                    (a[action.payload.col] > b[action.payload.col]) ? 1 : -1)
+            }
+        })
     },
     extraReducers: (builder) => {
         builder
@@ -31,5 +45,5 @@ export const allCoinDataSlice = createSlice({
     }
 })
 
-export const { setAllCoinData } = allCoinDataSlice.actions;
+export const { setAllCoinData, sortCoinDataBy } = allCoinDataSlice.actions;
 export default allCoinDataSlice.reducer;

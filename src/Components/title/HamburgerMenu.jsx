@@ -6,7 +6,7 @@ import LogOutBtn from "./LogOutBtn"
 import LoginSignupBtns from "./LoginSignupBtns"
 import { AiOutlineClose } from "react-icons/ai"
 
-const HamburgerMenu = ({ setShowHamMenu, updateActiveTab }) => {
+const HamburgerMenu = ({ updateActiveTab }) => {
     const currentUser = useSelector(state => state.currentUser.value)
     const loggedIn = useSelector(state => state.loggedIn.value)
     const location = useLocation()
@@ -16,29 +16,32 @@ const HamburgerMenu = ({ setShowHamMenu, updateActiveTab }) => {
         updateActiveTab()
     }, [location])
 
-    return ReactDOM.createPortal(
+    const handleSlideOut = () => {
+        document.querySelector(".hamNavContainer").classList.remove("slideIn")
+    }
+    return (
         <div className="hamNavContainer"
-            onMouseLeave={() => setShowHamMenu(false)}
+            onMouseLeave={handleSlideOut}
         >
 
-            <AiOutlineClose className="openHamIcon" onClick={() => setShowHamMenu(false)} />
+            <AiOutlineClose className="openHamIcon" onClick={handleSlideOut} />
 
-            <Link onClick={() => setShowHamMenu(false)}
+            <Link onClick={handleSlideOut}
                 className="navLink" to="/" id="/">Home
             </Link>
 
-            <Link onClick={() => setShowHamMenu(false)}
+            <Link onClick={handleSlideOut}
                 className="navLink" to="/forum" id="/forum">Forum
             </Link>
 
-            <Link onClick={() => setShowHamMenu(false)}
+            <Link onClick={handleSlideOut}
                 className="navLink" to="/wallet" id="/wallet">Wallet
             </Link>
 
             {loggedIn &&
                 <>
                     <Link
-                        onClick={() => setShowHamMenu(false)}
+                        onClick={handleSlideOut}
                         className="navLink"
                         to={`/profile/${currentUser.username}`}
                         id={`/profile/${currentUser.username}`}>
@@ -49,7 +52,7 @@ const HamburgerMenu = ({ setShowHamMenu, updateActiveTab }) => {
 
             {loggedIn ? <LogOutBtn /> : <LoginSignupBtns />}
         </div>
-        , document.getElementById("portal"))
+    )
 }
 
 export default HamburgerMenu

@@ -45,12 +45,13 @@ const Profile = () => {
 
     return (
         <div className='profilePageContainer'>
-            <h1 className='profilePageHeader'><span className='profileFirstLetter'>W</span>elcome to
+            <h1 className='profilePageHeader'>
                 {currentUser.username === username ?
-                    <> your profile </> :
-                    <><span style={{ fontSize: "1.4rem" }}> @ </span>{userProfile.username}'s </>
+                    <><span className='profileFirstLetter'>Y</span>our </> :
+                    <><span style={{ fontSize: "2rem" }}> @ </span>{userProfile.username}'s </>
                 }
-                page
+                <span className='profileFirstLetter'>P</span>rofile
+                <span className='profileFirstLetter'> P</span>age
             </h1>
 
             <div className='userBioContainer'>

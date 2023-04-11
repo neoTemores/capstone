@@ -4,10 +4,10 @@
 .navbarContainer {
     background-color: darkblue;
     color: white;
-    padding: .25rem 1rem 1rem;
+    padding: .25rem 1rem 0rem 1rem;
     display: flex;
     justify-content: space-between;
-    align-items: end;
+    align-items: center;
     position: sticky;
     top: 0;
     z-index: 1;
@@ -37,10 +37,12 @@
     color: #eee;
     text-decoration: none;
     font-size: 1.8rem;
+    transition: all .2s ease-in-out;
 }
 
 .navLink:hover {
-    opacity: .8;
+    /* opacity: .8; */
+    color: #0AF;
 }
 
 .activeLink {
@@ -69,16 +71,18 @@
 .userNameLogOutBtnContainer {
     display: flex;
     flex-direction: column;
-    gap: .25rem;
+    /* gap: .25rem; */
+    transform: translateY(-5px);
 }
 
 .hamburgerMenuContainer {
     display: none;
 }
 
-.hamburgerMenuContainer:hover {
+.hamburgerIcon {
     cursor: pointer;
 }
+
 
 .hamNavContainer {
     z-index: 2;
@@ -89,7 +93,7 @@
     right: 0;
     /* height: 100vh; */
     height: fit-content;
-    /* width: fit-content; */
+    width: 25%;
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -100,6 +104,14 @@
     background: darkblue;
     border-bottom-left-radius: 10px;
     color: white;
+    transform: scale(0);
+
+    transform-origin: top right;
+    transition: all .25s ease-in-out;
+}
+
+.slideIn {
+    transform: scale(1);
 }
 
 .openHamIcon {
@@ -158,7 +170,8 @@
 }
 
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 850px) {
+
     .standardMenu {
         display: none !important
     }

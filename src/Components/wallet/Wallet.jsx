@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { fetchAllSavedCoinsByUser, deleteFromWallet } from "../../State/wallet/savedCoins"
-import { fetchIndividualCoinData, setAllCoinData } from "../../State/wallet/allCoinData"
+import { fetchIndividualCoinData, setAllCoinData, sortCoinDataBy } from "../../State/wallet/allCoinData"
 import { fetchUserProfile } from "../../State/profile/userProfile"
 import Pagination from "../templates/Pagination"
 import { getImg, parseMoneyValue } from "../home/helperMethods"
 import { setLoading } from "../../State/loading"
 import { BsTrash } from "react-icons/bs"
+import { BiSortAlt2 } from "react-icons/bi"
 
 
 const Wallet = () => {
@@ -20,6 +21,8 @@ const Wallet = () => {
     let index = 8
     const [startIndex, setStartIndex] = useState(0)
     const [lastIndex, setLastIndex] = useState(index)
+    const sortedBy = useRef(null)
+    const sortReversed = useRef(false)
 
     useEffect(() => {
         if (!loggedIn && localStorage.getItem('cryptoEagleUser') === null)
@@ -70,6 +73,24 @@ const Wallet = () => {
         setLastIndex(prev => prev + num)
     }
 
+    const handleSort = (col) => {
+        const sortObj = {
+            col: col,
+            reverse: sortReversed.current
+        }
+
+        if (sortedBy.current === col) {
+            sortObj.reverse = !sortObj.reverse
+            sortReversed.current = !sortReversed.current
+        } else {
+            sortedBy.current = col
+            sortReversed.current = false
+            sortObj.reverse = false
+        }
+
+        dispatch(sortCoinDataBy(sortObj))
+    }
+
     if (allSavedCoins?.length < 1)
         return (
             <div className="allCoinsContainer">
@@ -80,12 +101,36 @@ const Wallet = () => {
         <div className="allCoinsContainer">
 
             <div className="coinGridHeaderContainer">
-                <div className="gridHeader">Currency</div>
-                <div className="gridHeader">Price</div>
-                <div className="gridHeader">Change</div>
-                <div className="gridHeader marketCap">Market cap</div>
-                <div className="gridHeader volume">Volume(24hr)</div>
-                <div className="gridHeader supply">Supply</div>
+                <div className="gridHeader">
+                    Currency
+                    <BiSortAlt2 className="sortIcon"
+                        onClick={() => handleSort("id")} />
+                </div>
+                <div className="gridHeader">
+                    Price
+                    <BiSortAlt2 className="sortIcon"
+                        onClick={() => handleSort("priceUsd")} />
+                </div>
+                <div className="gridHeader">
+                    Change
+                    <BiSortAlt2 className="sortIcon"
+                        onClick={() => handleSort("changePercent24Hr")} />
+                </div>
+                <div className="gridHeader marketCap">
+                    Market cap
+                    <BiSortAlt2 className="sortIcon"
+                        onClick={() => handleSort("marketCapUsd")} />
+                </div>
+                <div className="gridHeader volume">
+                    Volume(24hr)
+                    <BiSortAlt2 className="sortIcon"
+                        onClick={() => handleSort("volumeUsd24Hr")} />
+                </div>
+                <div className="gridHeader supply">
+                    Supply
+                    <BiSortAlt2 className="sortIcon"
+                        onClick={() => handleSort("supply")} />
+                </div>
                 <div className="gridHeader">Watching</div>
             </div>
 

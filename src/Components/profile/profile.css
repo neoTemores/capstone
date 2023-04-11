@@ -13,7 +13,7 @@
 
 .profileFirstLetter {
     font-family: inherit;
-    font-size: 2.5rem;
+    font-size: 3rem;
 }
 
 .profilePageContainer h1 {
@@ -21,7 +21,13 @@
 }
 
 .profilePageHeader {
+    color: navy;
     grid-area: header;
+    height: min-content;
+    font-size: 2.5rem;
+    /* align-self: center; */
+    justify-self: center;
+    /* border-bottom: 1px solid #333; */
 }
 
 .myProfileMyPostsContainer {
@@ -39,13 +45,6 @@
 
 .myProfileCoinsContainer {
     grid-area: coins;
-}
-
-.profilePageHeader {
-    height: min-content;
-    /* align-self: center; */
-    justify-self: center;
-    border-bottom: 1px solid #333;
 }
 
 .userProfileCoinsContainer {

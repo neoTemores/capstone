@@ -54,7 +54,7 @@ const Forum = () => {
                 <button
                     className='createNewThreadBtn'
                     onClick={handleCreateThread}>
-                    Create a new thread
+                    Create a thread
                 </button>
                 <div className="filterCoinsContainer">
                     <FcSearch style={{ fontSize: "1.5rem" }} />

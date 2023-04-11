@@ -12,12 +12,10 @@ const Navbar = () => {
     const location = useLocation()
     const loggedIn = useSelector(state => state.loggedIn.value);
     const currentUser = useSelector(state => state.currentUser.value)
-    const [showHamMenu, setShowHamMenu] = useState(false)
     const storedUser = JSON.parse(localStorage.getItem('cryptoEagleUser'))
 
     useEffect(() => {
         updateActiveTab()
-        setShowHamMenu(false)
     }, [location])
 
 
@@ -28,6 +26,9 @@ const Navbar = () => {
         })
     }
 
+    const handleShowMenu = () => {
+        document.querySelector(".hamNavContainer").classList.add("slideIn")
+    }
     return (
         <div className="navbarContainer">
             <h1 className="navTitle" onClick={() => navigate("/")}>
@@ -58,8 +59,8 @@ const Navbar = () => {
                     </div>
 
                     <div className="hamburgerMenuContainer">
-                        <GiHamburgerMenu onClick={() => setShowHamMenu(true)} style={{ fontSize: "3rem" }} />
-                        {showHamMenu && <HamburgerMenu setShowHamMenu={setShowHamMenu} updateActiveTab={updateActiveTab} />}
+                        <GiHamburgerMenu className="hamburgerIcon" onClick={handleShowMenu} style={{ fontSize: "3rem" }} />
+                        <HamburgerMenu updateActiveTab={updateActiveTab} />
                     </div>
                 </>
             }
