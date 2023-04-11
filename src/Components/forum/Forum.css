@@ -79,7 +79,9 @@
 
 .forumHeaderContainer {
     display: flex;
-    align-self: center;
+    flex-direction: column;
+    gap: 1rem;
+    /* align-self: center; */
     width: 100%;
     justify-content: space-around;
 }
@@ -264,12 +266,4 @@
 
 .hide {
     display: none;
-}
-
-@media screen and (max-width: 700px) {
-    .forumHeaderContainer {
-        flex-direction: column;
-        gap: .5rem;
-    }
-
 }
