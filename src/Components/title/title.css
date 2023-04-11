@@ -147,7 +147,7 @@
     background-color: #0AF;
     color: whitesmoke;
     font-size: 1.4rem;
-    width: max-content;
+    /* width: max-content; */
 }
 
 .navBtn.logIn,
