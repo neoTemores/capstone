@@ -62,7 +62,8 @@
 
 .userDisplayData,
 .userProfileCoinsData,
-.myProfileCommentsDisplay {
+.myProfileCommentsDisplay,
+.noProfilePostsContainer {
     height: fit-content;
     display: flex;
     flex-direction: column;

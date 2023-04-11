@@ -34,7 +34,10 @@ const PostsContainer = () => {
     return (
         <div className='myProfileMyPostsContainer'>
             <h1><span className='profileFirstLetter'>P</span>osts</h1>
-            {userProfile?.userPosts?.posts?.length === 0 && <h3>@{userProfile.username} does not have any Posts!</h3>}
+            {userProfile?.userPosts?.posts?.length === 0 &&
+                <div className="noProfilePostsContainer">
+                    <h3>@{userProfile.username} does not have any Posts!</h3>
+                </div>}
             {slicedPosts?.map(elem => {
                 return (
                     <Post key={elem.id} elem={elem} />

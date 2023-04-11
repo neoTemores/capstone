@@ -73,7 +73,14 @@ const Wallet = () => {
         setLastIndex(prev => prev + num)
     }
 
+    // const updateIcon = (e) => {
+    //     console.log(e.currentTarget.dataset.name)
+    //     // e.currentTarget.classList.add("hide")
+    // }
+
     const handleSort = (col) => {
+        // updateIcon(e)
+
         const sortObj = {
             col: col,
             reverse: sortReversed.current
@@ -94,7 +101,7 @@ const Wallet = () => {
     if (allSavedCoins?.length < 1)
         return (
             <div className="allCoinsContainer">
-                <h1>You do not have any saved coins!</h1>
+                <h1 style={{ color: "navy" }}>You do not have any saved coins!</h1>
             </div>)
 
     return (
