@@ -64,6 +64,7 @@ const DisplayUserInfo = ({ setEditinguser }) => {
             handleLogOut()
     }
     const handleLogOut = () => {
+        localStorage.removeItem('cryptoEagleUser')
         dispatch(setSavedCoins([]))
         dispatch(setLoggedIn(false))
         dispatch(setCurrentUser({}))
