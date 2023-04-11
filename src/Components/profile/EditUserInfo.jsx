@@ -41,7 +41,7 @@ const EditUserInfo = ({ setEditinguser }) => {
         emailError.current.classList.add("notVisible")
         passwordError.current.classList.add("notVisible")
 
-        if (profileData.password !== confirmPassword.current.value) {
+        if (profileData.password.trim().length < 1 || profileData.password !== confirmPassword.current.value) {
             passwordError.current.classList.remove("notVisible")
             isValidData = false
         }
@@ -79,6 +79,7 @@ const EditUserInfo = ({ setEditinguser }) => {
                 Password:
                 <div className='passwordFieldContainer'>
                     <input
+                        required
                         ref={password}
                         name='password'
                         onChange={handleChange}
