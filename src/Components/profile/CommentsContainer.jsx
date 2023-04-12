@@ -6,6 +6,7 @@ import Pagination from '../templates/Pagination'
 
 const CommentsContainer = () => {
     const userProfile = useSelector(state => state.userProfile.value)
+    const currentUser = useSelector(state => state.currentUser.value)
     const [startIndexComments, setStartIndexComments] = useState(0)
     const [lastIndexComments, setLastIndexComments] = useState(3)
 
@@ -29,7 +30,12 @@ const CommentsContainer = () => {
 
             <div className='myProfileCommentsDisplay'>
                 {userProfile?.userComments?.commentList?.length === 0 &&
-                    <h3>@{userProfile?.username} does not have any Comments!</h3>}
+                    <h3>
+                        {userProfile.username === currentUser.username ? "You do " : `@${userProfile.username} does `}
+                        not have any Comments!
+                    </h3>
+
+                }
 
                 {slicedComments?.map(elem => {
                     return (<Comment key={elem.id} comment={elem} location={"myprofile"} />)

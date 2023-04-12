@@ -8,6 +8,7 @@ const PostsContainer = () => {
     const dispatch = useDispatch()
     const userProfile = useSelector(state => state.userProfile.value)
     const allComments = useSelector(state => state.allComments.value)
+    const currentUser = useSelector(state => state.currentUser.value)
     const [startIndexPost, setStartIndexPost] = useState(0)
     const [lastIndexPost, setLastIndexPost] = useState(3)
 
@@ -36,7 +37,11 @@ const PostsContainer = () => {
             <h1><span className='profileFirstLetter'>P</span>osts</h1>
             {userProfile?.userPosts?.posts?.length === 0 &&
                 <div className="noProfilePostsContainer">
-                    <h3>@{userProfile.username} does not have any Posts!</h3>
+                    <h3>
+                        {userProfile.username === currentUser.username ? "You do " : `@${userProfile.username} does `}
+                        not have any Posts!
+                    </h3>
+
                 </div>}
             {slicedPosts?.map(elem => {
                 return (

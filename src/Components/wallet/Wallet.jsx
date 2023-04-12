@@ -173,7 +173,7 @@ const Wallet = () => {
                         onClick={(e) => handleSort(e, "supply")}
                         className="sortIcon hide rotate180" />
                 </div>
-                <div className="gridHeader">Watching</div>
+                <div className="gridHeader">Remove</div>
             </div>
 
             {allCoinData.slice(startIndex, lastIndex).map(elem =>
