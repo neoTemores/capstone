@@ -9,9 +9,9 @@ const Loading = () => {
 
             <RingLoader
                 cssOverride={{ transform: "scale(2.5)" }}
-                color='navy'
+                color='#0AF'
             />
-            <h1 style={{ color: "navy" }}>Loading...</h1>
+            <h1 style={{ color: "#0AF" }}>Loading...</h1>
 
         </div>,
         document.getElementById("portal")

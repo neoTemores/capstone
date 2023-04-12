@@ -86,7 +86,7 @@ const DisplayUserInfo = ({ setEditinguser }) => {
 
             <div><span>Member since: </span>{userDate}</div>
 
-            <div><span>Bio: </span>{userProfile?.user?.bio}</div>
+            <div className='userBioDisplay'><span>Bio: </span>{userProfile?.user?.bio}</div>
 
             <div className='userDataEditDeleteBtnContainer'>
                 {currentUser?.username == username &&

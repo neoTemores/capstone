@@ -48,7 +48,7 @@ const Profile = () => {
             <h1 className='profilePageHeader'>
                 {currentUser.username === username ?
                     <><span className='profileFirstLetter'>Y</span>our </> :
-                    <><span style={{ fontSize: "2rem" }}> @ </span>{userProfile?.user?.username}'s </>
+                    <><span style={{ fontSize: "2rem" }}> @ </span>{userProfile?.user?.username} 's </>
                 }
                 <span className='profileFirstLetter'>P</span>rofile
                 <span className='profileFirstLetter'> P</span>age

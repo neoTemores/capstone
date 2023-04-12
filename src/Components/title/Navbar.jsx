@@ -6,6 +6,7 @@ import LogOutBtn from "./LogOutBtn";
 import { GiHamburgerMenu } from "react-icons/gi"
 import "./title.css"
 import HamburgerMenu from "./HamburgerMenu";
+import logo from "../images/BlueEagle.gif"
 
 const Navbar = () => {
     const navigate = useNavigate()
@@ -31,9 +32,12 @@ const Navbar = () => {
     }
     return (
         <div className="navbarContainer">
-            <h1 className="navTitle" onClick={() => navigate("/")}>
-                <span className="firstLetter">C</span>rypto <span className="firstLetter">E</span>agle
-            </h1>
+            <div className="titleContainer">
+                <img className="titleLogo" src={logo} height={"64"} />
+                <h1 className="navTitle" onClick={() => navigate("/")}>
+                    <span className="firstLetter">C</span>rypto <span className="firstLetter">E</span>agle
+                </h1>
+            </div>
             {location.pathname !== "/login" && location.pathname !== "/create-acc" &&
                 <>
                     <div className="navLinksContainer standardMenu">

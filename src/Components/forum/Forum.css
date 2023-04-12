@@ -134,6 +134,7 @@
     border-radius: 5px;
     box-shadow: 2px 2px 2px #3333;
 
+    transition: all .2s ease-in-out;
 }
 
 .postBtnContainer,
@@ -148,6 +149,9 @@
     align-items: center;
 }
 
+.individualPostContainer:hover {
+    border: 2px solid #0AF;
+}
 
 .viewCommentsBtn {
     transition: all .2s;
@@ -217,7 +221,13 @@
     border-radius: 0px 25px 25px;
     background-color: rgb(173, 216, 230, .25);
     box-shadow: 2px 2px 2px #3333;
+
+    transition: all .2s ease-in-out;
 }
+
+/* .comment:hover {
+    border: 1px solid #0AF;
+} */
 
 .commentBody {
     padding: .25rem;

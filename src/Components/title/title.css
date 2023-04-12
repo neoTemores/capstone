@@ -4,13 +4,38 @@
 .navbarContainer {
     background-color: darkblue;
     color: white;
-    padding: .25rem 1rem 0rem 1rem;
+    padding: .25rem 1rem 0rem .25rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: sticky;
     top: 0;
     z-index: 1;
+}
+
+.titleContainer {
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+}
+
+.titleLogo {
+    animation-name: logoSpin;
+    animation-duration: 10s;
+    /* animation-delay: 2s; */
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    /* transition: all .2s ease-in-out */
+}
+
+@keyframes logoSpin {
+    50% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotateY(360deg);
+    }
 }
 
 .navTitle {
@@ -170,7 +195,7 @@
 }
 
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 900px) {
 
     .standardMenu {
         display: none !important
