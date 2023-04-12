@@ -32,9 +32,9 @@ const Navbar = () => {
     }
     return (
         <div className="navbarContainer">
-            <div className="titleContainer">
+            <div className="titleContainer" onClick={() => navigate("/")}>
                 <img className="titleLogo" src={logo} height={"64"} />
-                <h1 className="navTitle" onClick={() => navigate("/")}>
+                <h1 className="navTitle" >
                     <span className="firstLetter">C</span>rypto <span className="firstLetter">E</span>agle
                 </h1>
             </div>
