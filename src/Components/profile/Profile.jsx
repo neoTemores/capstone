@@ -46,7 +46,7 @@ const Profile = () => {
     return (
         <div className='profilePageContainer'>
             <h1 className='profilePageHeader'>
-                {currentUser?.user?.username === username ?
+                {currentUser.username === username ?
                     <><span className='profileFirstLetter'>Y</span>our </> :
                     <><span style={{ fontSize: "2rem" }}> @ </span>{userProfile?.user?.username}'s </>
                 }
