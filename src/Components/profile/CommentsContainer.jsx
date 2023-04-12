@@ -31,7 +31,7 @@ const CommentsContainer = () => {
             <div className='myProfileCommentsDisplay'>
                 {userProfile?.userComments?.commentList?.length === 0 &&
                     <h3>
-                        {userProfile?.user?.username === currentUser.username ? "You do " : `@${userProfile.username} does `}
+                        {userProfile?.user?.username === currentUser.username ? "You do " : `@${userProfile?.user?.username} does `}
                         not have any Comments!
                     </h3>
 
