@@ -50,6 +50,12 @@ const Comment = ({ comment, location }) => {
             .then(() => dispatch(setLoading(false)))
         handleCancelEdit()
     }
+    const parseDate = (date) => {
+        let splitDate = date.split("-")
+        splitDate[2] = parseInt(splitDate[2]) + 0
+        splitDate.join("-")
+        return new Date(splitDate).toDateString()
+    }
 
     return (
         <div className='comment'>
@@ -59,7 +65,7 @@ const Comment = ({ comment, location }) => {
 
                 @<Link to={`/profile/${comment.username}`}>{comment.username}</Link> - {comment.body}
                 <br />
-                <span className='dateStamp'>{new Date(comment.date).toDateString()}</span>
+                <span className='dateStamp'>{parseDate(comment.date)}</span>
             </p>
             <textarea
                 rows={(editText.length / 100) + 2}

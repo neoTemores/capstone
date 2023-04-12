@@ -20,15 +20,16 @@ const DisplayUserInfo = ({ setEditinguser }) => {
     const [userDate, setUserDate] = useState("")
 
     useEffect(() => {
-        if (userProfile?.date)
+
+        if (userProfile?.user?.date)
             calcDaysOfMembership()
     }, [userProfile])
 
     const calcDaysOfMembership = () => {
-        let splitDate = userProfile?.date.split("-");
+        let splitDate = userProfile.user.date.split("-");
         let todaysDate = new Date().getDate()
-        let memberDay = splitDate[2] > todaysDate ? todaysDate : splitDate[2]
         //handles date being one day forward
+        let memberDay = splitDate[2] > todaysDate ? todaysDate : splitDate[2]
         let userJoinedDate = new Date(splitDate[0], splitDate[1] - 1, memberDay)
 
         setUserDate(userJoinedDate.toDateString())
@@ -79,13 +80,13 @@ const DisplayUserInfo = ({ setEditinguser }) => {
     return (
         <>
             <div><h3>{memberString}</h3></div>
-            <div><span>Username: </span>{userProfile.username}</div>
+            <div><span>Username: </span>{userProfile?.user?.username}</div>
 
-            <div><span>Email: </span>{userProfile.email}</div>
+            <div><span>Email: </span>{userProfile?.user?.email}</div>
 
             <div><span>Member since: </span>{userDate}</div>
 
-            <div><span>Bio: </span>{userProfile.userBio}</div>
+            <div><span>Bio: </span>{userProfile?.user?.bio}</div>
 
             <div className='userDataEditDeleteBtnContainer'>
                 {currentUser?.username == username &&

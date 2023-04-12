@@ -80,6 +80,13 @@ const Post = ({ elem }) => {
             .then(() => dispatch(setLoading(false)))
         handleCancelPostEdit()
     }
+
+    const parseDate = (date) => {
+        let splitDate = date.split("-")
+        splitDate[2] = parseInt(splitDate[2]) + 0
+        splitDate.join("-")
+        return new Date(splitDate).toDateString()
+    }
     return (
         <div key={elem.id} className="individualPostContainer">
             <h3
@@ -92,7 +99,7 @@ const Post = ({ elem }) => {
                 @<Link to={`/profile/${elem.username}`}>
                     {elem.username}
                 </Link>
-                - <span className='dateStamp'>{new Date(elem.date).toDateString()}</span>
+                - <span className='dateStamp'>{parseDate(elem.date)}</span>
             </p>
 
             <input
