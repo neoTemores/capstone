@@ -31,7 +31,7 @@ const Profile = () => {
 
     useEffect(() => {
 
-        if (!fetched.current && username == userProfile.username) {
+        if (!fetched.current && username == userProfile?.user?.username) {
             dispatch(setProfileCoinDetails([]))
             fetched.current = true
             userProfile?.userSavedCoins?.savedCoinsList?.forEach(elem => {
