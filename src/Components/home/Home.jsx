@@ -98,7 +98,7 @@ const Home = () => {
                 <div className="gridHeader">Watching</div>
             </div>
 
-            {filteredCoins.slice(startIndex, lastIndex).map(elem =>
+            {filteredCoins?.slice(startIndex, lastIndex).map(elem =>
                 <div className="individualCoinContainer" key={elem.id}>
                     <div className="imgSymbolCointainer">
                         <img src={getImg(elem.symbol)} height="48" />
@@ -123,7 +123,7 @@ const Home = () => {
             <Pagination
                 startIndex={startIndex}
                 lastIndex={lastIndex}
-                length={filteredCoins.length}
+                length={filteredCoins?.length}
                 updateIndex={updateIndex}
                 itemsPerPage={index}
             />
