@@ -6,9 +6,12 @@ import { fetchIndividualCoinData, setAllCoinData, sortCoinDataBy } from "../../S
 import { fetchUserProfile } from "../../State/profile/userProfile"
 import Pagination from "../templates/Pagination"
 import { getImg, parseMoneyValue } from "../home/helperMethods"
+import { showAll, hideAll, showSpecific } from "../forum/helperMethods"
 import { setLoading } from "../../State/loading"
-import { BsTrash } from "react-icons/bs"
+import { BsTrash, BsFilter } from "react-icons/bs"
 import { BiSortAlt2 } from "react-icons/bi"
+// import { CgSortZa } from "react-icons/cg"
+import "./wallet.css"
 
 
 const Wallet = () => {
@@ -73,13 +76,21 @@ const Wallet = () => {
         setLastIndex(prev => prev + num)
     }
 
-    // const updateIcon = (e) => {
-    //     console.log(e.currentTarget.dataset.name)
-    //     // e.currentTarget.classList.add("hide")
-    // }
+    const updateIcon = (e, col) => {
 
-    const handleSort = (col) => {
-        // updateIcon(e)
+        if (col !== sortedBy.current) {
+            hideAll(".sortIcon")
+            showAll(".unsortedIcon")
+            e.currentTarget.classList.add("hide")
+            document.querySelectorAll(".sortIcon").forEach(elem => elem.classList.add("rotate180"))
+            showSpecific(".sortIcon", col)
+        } else {
+            e.currentTarget.classList.toggle("rotate180")
+        }
+    }
+
+    const handleSort = (e, col) => {
+        updateIcon(e, col)
 
         const sortObj = {
             col: col,
@@ -107,36 +118,60 @@ const Wallet = () => {
     return (
         <div className="allCoinsContainer">
 
-            <div className="coinGridHeaderContainer">
+            <div className="coinGridHeaderContainer wallet">
                 <div className="gridHeader">
                     Currency
-                    <BiSortAlt2 className="sortIcon"
-                        onClick={() => handleSort("id")} />
+                    <BiSortAlt2 className="unsortedIcon"
+                        onClick={(e) => handleSort(e, "id")} />
+                    <BsFilter
+                        data-id="id"
+                        onClick={(e) => handleSort(e, "id")}
+                        className="sortIcon hide rotate180" />
                 </div>
                 <div className="gridHeader">
                     Price
-                    <BiSortAlt2 className="sortIcon"
-                        onClick={() => handleSort("priceUsd")} />
+                    <BiSortAlt2 className="unsortedIcon"
+                        onClick={(e) => handleSort(e, "priceUsd")} />
+                    <BsFilter
+                        data-id="priceUsd"
+                        onClick={(e) => handleSort(e, "priceUsd")}
+                        className="sortIcon hide rotate180" />
                 </div>
                 <div className="gridHeader">
                     Change
-                    <BiSortAlt2 className="sortIcon"
-                        onClick={() => handleSort("changePercent24Hr")} />
+                    <BiSortAlt2 className="unsortedIcon"
+                        onClick={(e) => handleSort(e, "changePercent24Hr")} />
+                    <BsFilter
+                        data-id="changePercent24Hr"
+                        onClick={(e) => handleSort(e, "changePercent24Hr")}
+                        className="sortIcon hide rotate180" />
                 </div>
                 <div className="gridHeader marketCap">
                     Market cap
-                    <BiSortAlt2 className="sortIcon"
-                        onClick={() => handleSort("marketCapUsd")} />
+                    <BiSortAlt2 className="unsortedIcon"
+                        onClick={(e) => handleSort(e, "marketCapUsd")} />
+                    <BsFilter
+                        data-id="marketCapUsd"
+                        onClick={(e) => handleSort(e, "marketCapUsd")}
+                        className="sortIcon hide rotate180" />
                 </div>
                 <div className="gridHeader volume">
                     Volume(24hr)
-                    <BiSortAlt2 className="sortIcon"
-                        onClick={() => handleSort("volumeUsd24Hr")} />
+                    <BiSortAlt2 className="unsortedIcon"
+                        onClick={(e) => handleSort(e, "volumeUsd24Hr")} />
+                    <BsFilter
+                        data-id="volumeUsd24Hr"
+                        onClick={(e) => handleSort(e, "volumeUsd24Hr")}
+                        className="sortIcon hide rotate180" />
                 </div>
                 <div className="gridHeader supply">
                     Supply
-                    <BiSortAlt2 className="sortIcon"
-                        onClick={() => handleSort("supply")} />
+                    <BiSortAlt2 className="unsortedIcon"
+                        onClick={(e) => handleSort(e, "supply")} />
+                    <BsFilter
+                        data-id="supply"
+                        onClick={(e) => handleSort(e, "supply")}
+                        className="sortIcon hide rotate180" />
                 </div>
                 <div className="gridHeader">Watching</div>
             </div>

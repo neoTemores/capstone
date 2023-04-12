@@ -21,7 +21,6 @@ export const allCoinDataSlice = createSlice({
         },
         sortCoinDataBy: ((state, action) => {
             if (state.value.length === 1) return;
-            console.log(action.payload)
 
             if (action.payload.reverse) {
                 state.value = state.value.sort((a, b) =>

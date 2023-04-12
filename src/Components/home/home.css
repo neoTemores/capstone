@@ -36,12 +36,6 @@
     gap: .25rem;
 }
 
-.sortIcon {
-    color: navy;
-    font-size: 1.2rem;
-    cursor: pointer;
-}
-
 .imgSymbolCointainer {
     display: flex;
     gap: .25rem;
