@@ -38,7 +38,7 @@ const PostsContainer = () => {
             {userProfile?.userPosts?.posts?.length === 0 &&
                 <div className="noProfilePostsContainer">
                     <h3>
-                        {userProfile.username === currentUser.username ? "You do " : `@${userProfile.username} does `}
+                        {userProfile?.user?.username === currentUser.username ? "You do " : `@${userProfile.username} does `}
                         not have any Posts!
                     </h3>
 
