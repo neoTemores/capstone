@@ -26,7 +26,11 @@ const DisplayUserInfo = ({ setEditinguser }) => {
 
     const calcDaysOfMembership = () => {
         let splitDate = userProfile?.date.split("-");
-        let userJoinedDate = new Date(splitDate[0], splitDate[1] - 1, splitDate[2])
+        let todaysDate = new Date().getDate()
+        let memberDay = splitDate[2] > todaysDate ? todaysDate : splitDate[2]
+        //handles date being one day forward
+        let userJoinedDate = new Date(splitDate[0], splitDate[1] - 1, memberDay)
+
         setUserDate(userJoinedDate.toDateString())
 
         let diff = new Date(new Date().getTime() - userJoinedDate.getTime())
