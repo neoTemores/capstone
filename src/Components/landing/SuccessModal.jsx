@@ -15,6 +15,7 @@ const SuccessModal = ({ userName }) => {
         if (timer < 0)
             navigate("/login")
     }, [timer])
+
     return ReactDOM.createPortal(
         <div className='modalContainer createAcc'>
 

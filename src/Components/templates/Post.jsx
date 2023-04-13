@@ -82,11 +82,14 @@ const Post = ({ elem }) => {
     }
 
     const parseDate = (date) => {
-        let splitDate = date.split("-")
-        splitDate[2] = parseInt(splitDate[2]) + 0
-        splitDate.join("-")
-        return new Date(splitDate).toDateString()
+        let splitDate = date.replaceAll("-", "/").split("/")
+        let todaysDate = new Date().getDate()
+        //handles date being one day forward
+        splitDate[2] = splitDate[2] > todaysDate ? todaysDate : splitDate[2]
+
+        return new Date(splitDate.join("/")).toDateString()
     }
+
     return (
         <div key={elem.id} className="individualPostContainer">
             <h3

@@ -150,6 +150,6 @@
 }
 
 .modal.createAccSuccess {
-    height: 25%;
+    height: fit-content;
     transform: translatey(-50px);
 }
