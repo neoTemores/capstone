@@ -1,19 +1,11 @@
 import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useParams, useNavigate } from 'react-router-dom'
-import { setSavedCoins } from '../../State/wallet/savedCoins'
-import { setLoggedIn } from '../../State/user/loggedIn'
-import { setCurrentUser } from '../../State/user/currentUser'
-import { setUserProfile } from '../../State/profile/userProfile'
-import { USER_URL } from '../../State/url'
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import { BiEdit } from "react-icons/bi"
-import { CgUserRemove } from "react-icons/cg"
 import { IoPersonRemoveOutline } from "react-icons/io5"
 
-const DisplayUserInfo = ({ setEditinguser }) => {
+const DisplayUserInfo = ({ setEditinguser, setShowDeleteProfileModal }) => {
     const { username } = useParams()
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
     const currentUser = useSelector(state => state.currentUser.value)
     const userProfile = useSelector(state => state.userProfile.value)
     const [memberString, setMemberString] = useState("")
@@ -60,23 +52,6 @@ const DisplayUserInfo = ({ setEditinguser }) => {
 
     }
 
-    const handleDeleteProfile = async () => {
-        if (!window.confirm("WAIT! Deleting your profile is permanent. Continue?")) return;
-
-        const res = await fetch(USER_URL.DELETE + currentUser.id, { method: "DELETE" })
-
-        if (res.status === 202)
-            handleLogOut()
-    }
-    const handleLogOut = () => {
-        localStorage.removeItem('cryptoEagleUser')
-        // dispatch(setSavedCoins([]))
-        // dispatch(setLoggedIn(false))
-        // dispatch(setCurrentUser({}))
-        // dispatch(setUserProfile([]))
-        navigate("/")
-        window.location.reload()
-    }
     return (
         <>
             <div><h3>{memberString}</h3></div>
@@ -99,7 +74,7 @@ const DisplayUserInfo = ({ setEditinguser }) => {
 
                         <button
                             className='editProfileBtn delete'
-                            onClick={handleDeleteProfile}>
+                            onClick={() => setShowDeleteProfileModal(true)}>
                             <IoPersonRemoveOutline className='editProfileIcon' style={{ fontSize: "1.4rem", color: "red" }} /> Delete Profile
                         </button>
                     </>

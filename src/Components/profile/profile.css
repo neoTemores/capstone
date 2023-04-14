@@ -13,6 +13,26 @@
     /* min-height: 80vh; */
 }
 
+.modalContainer.deleteProfile {
+    padding: 1rem;
+}
+
+.modal.deleteProfile {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    padding: 1rem;
+
+}
+
+
+
+.deleteProfileBtnContainer {
+    display: flex;
+    justify-content: space-around;
+}
+
 .profileFirstLetter {
     font-family: inherit;
     font-size: 3rem;

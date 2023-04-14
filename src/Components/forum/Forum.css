@@ -21,7 +21,20 @@
     box-shadow: 5px 5px 5px #111;
     position: relative;
     animation: animate 0.3s;
-    padding: .5rem 0.5rem;
+    padding: .5rem;
+    animation-name: scaleUp;
+    animation-duration: .2s;
+}
+
+@keyframes scaleUp {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
 }
 
 .newPostModalHeader {

@@ -10,6 +10,7 @@ import PostsContainer from './PostsContainer'
 import CommentsContainer from './CommentsContainer'
 import CoinsContainer from './CoinsContainer'
 import "./profile.css"
+import DeleteProfileModal from './DeleteProfileModal'
 
 
 const Profile = () => {
@@ -21,6 +22,8 @@ const Profile = () => {
     const currentUser = useSelector(state => state.currentUser.value)
     const allPosts = useSelector(state => state.allPosts.value)
     const allComments = useSelector(state => state.allComments.value)
+
+    const [showDeleteProfileModal, setShowDeleteProfileModal] = useState(false)
 
     useEffect(() => {
         dispatch(setLoading(true))
@@ -57,10 +60,15 @@ const Profile = () => {
             <div className='userBioContainer'>
                 <h1><span className='profileFirstLetter'>A</span>bout</h1>
                 <div className='userDisplayData'>
+
+                    {showDeleteProfileModal &&
+                        <DeleteProfileModal setShowDeleteProfileModal={setShowDeleteProfileModal} />}
+
                     {editingUser ?
                         <EditUserInfo setEditinguser={setEditinguser} />
                         :
-                        <DisplayUserInfo setEditinguser={setEditinguser} />
+                        <DisplayUserInfo setEditinguser={setEditinguser}
+                            setShowDeleteProfileModal={setShowDeleteProfileModal} />
                     }
                 </div>
             </div>
